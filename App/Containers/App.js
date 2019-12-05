@@ -2,6 +2,7 @@ import '../Config'
 import DebugConfig from '../Config/DebugConfig'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import storybook from '../../storybook'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 
@@ -28,6 +29,8 @@ class App extends Component {
 }
 
 // allow reactotron overlay for fast design in dev mode
-export default DebugConfig.useReactotron
+export default DebugConfig.useStorybook
+  ? storybook
+  : DebugConfig.useReactotron
   ? console.tron.overlay(App)
   : App

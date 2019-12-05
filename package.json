@@ -1,5 +1,5 @@
 {
-  "name": "EatUntilMobile",
+  "name": "eat-until-mobile",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -46,7 +46,8 @@
     "redux-persist": "^5.10.0",
     "redux-saga": "1.0.5",
     "reduxsauce": "1.1.0",
-    "seamless-immutable": "^7.1.4"
+    "seamless-immutable": "^7.1.4",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
