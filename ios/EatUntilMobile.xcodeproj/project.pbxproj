@@ -29,10 +29,10 @@
 		43A20F538616429C84B67D67 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D90368E7FDFC48F3982CC5C4 /* libRNGestureHandler.a */; };
 		4C909DAF4F46441A9000F283 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA10F1C264194187A3408A8B /* Foundation.ttf */; };
 		6C142FF9B47447FE8A8E0374 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DB913D7F5964CA785A8A24B /* FontAwesome5_Brands.ttf */; };
-		6EFD5645C08C8D651BBE694C /* libPods-EatUntilMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7D37CD11A5937A5F5672A4A /* libPods-EatUntilMobile.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8808AD11646A47BCA3C65F57 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C320C7EE7B2400D96D1EBCD /* MaterialCommunityIcons.ttf */; };
 		8A5ACA8A97FA4E34858B9AF0 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 142B73E6303C4C4388D3E044 /* Feather.ttf */; };
+		9B6003A655D0CC938416ADD4 /* libPods-EatUntilMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 470F27AB92A5F6028639ACC0 /* libPods-EatUntilMobile.a */; };
 		AC5B4A8A421242E88F156577 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B64A3FB54134182B2D588A4 /* Ionicons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B5E86853A0CF409DB2B64123 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E282721E9874FB7A82AF7AB /* Entypo.ttf */; };
@@ -362,15 +362,15 @@
 		1C3897F1CDD747F48A8194B0 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		20B05E9468E840C4915BB0A1 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		32FF62DBE9C7DED4E61C3002 /* Pods-EatUntilMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUntilMobile.release.xcconfig"; path = "Target Support Files/Pods-EatUntilMobile/Pods-EatUntilMobile.release.xcconfig"; sourceTree = "<group>"; };
+		470F27AB92A5F6028639ACC0 /* libPods-EatUntilMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EatUntilMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BB56FE010E46D08C33DCF6 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6C6A60D5849BD312E3ACD32E /* Pods-EatUntilMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUntilMobile.debug.xcconfig"; path = "Target Support Files/Pods-EatUntilMobile/Pods-EatUntilMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7E282721E9874FB7A82AF7AB /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		80A904642D3D4DDE8084200A /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		896CC23FD43940DCAE9D67E3 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		8BDE5634AB1AEE8E2634F348 /* Pods-EatUntilMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUntilMobile.debug.xcconfig"; path = "Target Support Files/Pods-EatUntilMobile/Pods-EatUntilMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		98E71A484F9342BAB9F9487C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		AA10F1C264194187A3408A8B /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -378,8 +378,8 @@
 		C1686A93A0644E1C925526ED /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; };
 		C963A351D86643DE88F1E16B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CA0DC08D7F3A480490E19655 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		D7D37CD11A5937A5F5672A4A /* libPods-EatUntilMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EatUntilMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D90368E7FDFC48F3982CC5C4 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
+		E9D7AD3F5B3957B8D0259FA5 /* Pods-EatUntilMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUntilMobile.release.xcconfig"; path = "Target Support Files/Pods-EatUntilMobile/Pods-EatUntilMobile.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F5AB955CD9C54C079CA8BE03 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				43A20F538616429C84B67D67 /* libRNGestureHandler.a in Frameworks */,
 				31A548AF89FF41E18C2E9EA1 /* libRNVectorIcons.a in Frameworks */,
-				6EFD5645C08C8D651BBE694C /* libPods-EatUntilMobile.a in Frameworks */,
+				9B6003A655D0CC938416ADD4 /* libPods-EatUntilMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +557,7 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				D7D37CD11A5937A5F5672A4A /* libPods-EatUntilMobile.a */,
+				470F27AB92A5F6028639ACC0 /* libPods-EatUntilMobile.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -676,8 +676,8 @@
 		B2BA6F8326952E1AA407BD2E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8BDE5634AB1AEE8E2634F348 /* Pods-EatUntilMobile.debug.xcconfig */,
-				32FF62DBE9C7DED4E61C3002 /* Pods-EatUntilMobile.release.xcconfig */,
+				6C6A60D5849BD312E3ACD32E /* Pods-EatUntilMobile.debug.xcconfig */,
+				E9D7AD3F5B3957B8D0259FA5 /* Pods-EatUntilMobile.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -689,7 +689,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EatUntilMobile" */;
 			buildPhases = (
-				ED576F7B712B5B6952E82F96 /* [CP] Check Pods Manifest.lock */,
+				9484DECA1A19D885B1E0C48E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -1127,7 +1127,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		ED576F7B712B5B6952E82F96 /* [CP] Check Pods Manifest.lock */ = {
+		9484DECA1A19D885B1E0C48E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1178,7 +1178,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BDE5634AB1AEE8E2634F348 /* Pods-EatUntilMobile.debug.xcconfig */;
+			baseConfigurationReference = 6C6A60D5849BD312E3ACD32E /* Pods-EatUntilMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1204,7 +1204,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32FF62DBE9C7DED4E61C3002 /* Pods-EatUntilMobile.release.xcconfig */;
+			baseConfigurationReference = E9D7AD3F5B3957B8D0259FA5 /* Pods-EatUntilMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
