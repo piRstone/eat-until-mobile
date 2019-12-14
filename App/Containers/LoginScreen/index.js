@@ -1,16 +1,20 @@
 import React, { useState, useRef } from 'react'
+import { ActivityIndicator } from 'react-native'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 
+import UserActions from '../../Redux/UserRedux'
 import TextInput from '../../Components/TextInput'
 import { Colors } from '../../Themes'
 
-function LoginScreen () {
+export function LoginScreen ({ isLoading, login }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const passwordFieldRef = useRef()
 
-  const login = () => {
-    console.warn(email, password)
+  const onSubmit = () => {
+    login(email, password)
   }
 
   return (
@@ -40,18 +44,37 @@ function LoginScreen () {
             secureTextEntry: true,
             placeholder: '********',
             returnKeyType: 'done',
-            onSubmitEditing: login
+            onSubmitEditing: onSubmit
           }}
         />
       </Body>
-      <StyledButton disabled={!email || !password} onPress={login}>
-        <ButtonText>Connexion</ButtonText>
+      <StyledButton
+        disabled={!email || !password || isLoading}
+        onPress={onSubmit}>
+        {isLoading ? (
+          <ActivityIndicator color={Colors.black} />
+        ) : (
+          <ButtonText>Connexion</ButtonText>
+        )}
       </StyledButton>
     </Wrapper>
   )
 }
 
-export default LoginScreen
+LoginScreen.propTypes = {
+  isLoading: PropTypes.bool,
+  login: PropTypes.func
+}
+
+const mapStateToProps = state => ({
+  isLoading: state.user.isLoading
+})
+
+const mapDispatchToProps = dispatch => ({
+  login: (email, password) => dispatch(UserActions.login(email, password))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
 
 const Wrapper = styled.SafeAreaView`
   align-items: center;

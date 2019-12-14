@@ -37,7 +37,7 @@ export const UserSelectors = {
 
 export const login = (state, { username, password }) =>
   state.merge({
-    fetching: true
+    isLoading: true
   })
 
 export const logout = state =>
@@ -49,7 +49,7 @@ export const logout = state =>
 
 export const setAccessToken = (state, { accessToken }) =>
   state.merge({
-    fetching: false,
+    isLoading: false,
     accessToken,
     isConnected: true
   })
