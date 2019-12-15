@@ -30,14 +30,16 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const UserSelectors = {
-  selectUser: state => state.user.data
+  user: state => state.user.data,
+  accessToken: state => state.user.accessToken
 }
 
 /* ------------- Reducers ------------- */
 
-export const login = (state, { username, password }) =>
+export const login = state =>
   state.merge({
-    isLoading: true
+    isLoading: true,
+    error: undefined
   })
 
 export const logout = state =>

@@ -11,7 +11,7 @@ import { UserTypes } from '../Redux/UserRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { login } from './UserSagas'
+import { login, logout } from './UserSagas'
 
 /* ------------- API ------------- */
 
@@ -22,6 +22,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(UserTypes.LOGIN, login, api)
+    takeLatest(UserTypes.LOGIN, login, api),
+    takeLatest(UserTypes.LOGOUT, logout, api)
   ])
 }

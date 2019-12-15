@@ -1,4 +1,5 @@
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
+
 import LoginScreen from '../Containers/LoginScreen'
 import HomeScreen from '../Containers/HomeScreen'
 
@@ -19,7 +20,7 @@ const RootStack = createSwitchNavigator(
   {
     // Default config for all screens
     headerMode: 'none',
-    initialRouteName: 'LoginScreen'
+    initialRouteName: 'Main'
   }
 )
 

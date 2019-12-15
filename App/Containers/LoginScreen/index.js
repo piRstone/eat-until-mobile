@@ -8,13 +8,15 @@ import UserActions from '../../Redux/UserRedux'
 import TextInput from '../../Components/TextInput'
 import { Colors } from '../../Themes'
 
-export function LoginScreen ({ isLoading, login }) {
+export function LoginScreen ({ isLoading, login, error }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const passwordFieldRef = useRef()
 
   const onSubmit = () => {
-    login(email, password)
+    if (email.length && password.length) {
+      login(email, password)
+    }
   }
 
   return (
@@ -57,17 +59,22 @@ export function LoginScreen ({ isLoading, login }) {
           <ButtonText>Connexion</ButtonText>
         )}
       </StyledButton>
+      {error && (
+        <ErrorMessage>{JSON.stringify(error)}</ErrorMessage>
+      )}
     </Wrapper>
   )
 }
 
 LoginScreen.propTypes = {
   isLoading: PropTypes.bool,
-  login: PropTypes.func
+  login: PropTypes.func,
+  error: PropTypes.object
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.user.isLoading
+  isLoading: state.user.isLoading,
+  error: state.user.error
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -113,4 +120,14 @@ const ButtonText = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: ${Colors.white};
+`
+
+const ErrorMessage = styled.Text`
+  width: 90%;
+  font-size: 12px;
+  color: ${Colors.white};
+  background-color: ${Colors.red};
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 20px;
 `
