@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
+import styled from 'styled-components/native'
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
@@ -15,10 +16,10 @@ class RootContainer extends Component {
 
   render () {
     return (
-      <View>
+      <Wrapper>
         <StatusBar barStyle='dark-content' />
         <ReduxNavigation />
-      </View>
+      </Wrapper>
     )
   }
 }
@@ -29,3 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(null, mapDispatchToProps)(RootContainer)
+
+const Wrapper = styled.View`
+  flex: 1;
+`
