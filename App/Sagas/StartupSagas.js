@@ -3,10 +3,11 @@ import { NavigationActions } from 'react-navigation'
 
 import { UserSelectors } from '../Redux/UserRedux'
 
-export function * startup (action) {
+export function * startup (api) {
   const accessToken = yield select(UserSelectors.accessToken)
-  console.warn('accessToken', accessToken)
+
   if (!accessToken) {
+    api.setAccessToken(accessToken)
     yield put(NavigationActions.navigate({ routeName: 'LoginScreen' }))
   }
 }

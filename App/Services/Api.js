@@ -14,7 +14,13 @@ const create = (baseURL = 'http://localhost:8001/api') => {
   })
 
   return {
-    login: (data) => api.post('/auth/login', data)
+    setAccessToken: (accessToken) => api.setHeader('Authorization', 'Bearer ' + accessToken),
+    removeAccessToken: () => api.deleteHeader('Authorization'),
+    login: (data) => api.post('/auth/login', data),
+    getLists: (token) => {
+      api.setHeader('Authorization', 'Bearer ' + token)
+      return api.get('/lists')
+    }
   }
 }
 

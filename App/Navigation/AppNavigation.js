@@ -15,7 +15,7 @@ const MainStack = createStackNavigator(
 const RootStack = createSwitchNavigator(
   {
     LoginScreen: { screen: LoginScreen },
-    Main: { screen: MainStack }
+    Main: { screen: HomeScreen }
   },
   {
     // Default config for all screens

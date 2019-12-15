@@ -8,9 +8,9 @@ export function * login (api, action) {
   const { email, password } = action
   const response = yield call(api.login, { email, password })
 
-  console.warn(response.data)
   if (response.ok) {
-    const accessToken = path(['access_token'], response)
+    const accessToken = path(['data', 'access_token'], response)
+    api.setAccessToken(accessToken)
     yield put(UserActions.setAccessToken(accessToken))
     yield put(NavigationActions.navigate({ routeName: 'Main' }))
   } else {
@@ -18,6 +18,7 @@ export function * login (api, action) {
   }
 }
 
-export function * logout (api, action) {
+export function * logout (api) {
+  api.removeAccessToken()
   yield put(NavigationActions.navigate({ routeName: 'LoginScreen' }))
 }

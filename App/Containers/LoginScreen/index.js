@@ -51,7 +51,7 @@ export function LoginScreen ({ isLoading, login, error }) {
         />
       </Body>
       <StyledButton
-        disabled={!email || !password || isLoading}
+        disabled={!email || !password}
         onPress={onSubmit}>
         {isLoading ? (
           <ActivityIndicator color={Colors.black} />
