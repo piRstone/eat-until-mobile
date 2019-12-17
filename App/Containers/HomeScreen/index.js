@@ -16,6 +16,10 @@ export function HomeScreen ({ navigation, logout, lists, getLists, isLoading }) 
     }, 10)
   }, [])
 
+  const handleListPress = list => {
+    navigation.navigate('ProductsScreen', { list })
+  }
+
   return (
     <Wrapper>
       <Header>
@@ -28,7 +32,7 @@ export function HomeScreen ({ navigation, logout, lists, getLists, isLoading }) 
       {lists.map(list => (
         <List
           key={list.id}
-          onPress={() => navigation.navigate('LoginScreen')}>
+          onPress={() => handleListPress(list)}>
           <ListName>{list.name}</ListName>
           <Icon name='chevron-right' size={16} color={Colors.grey1} />
         </List>

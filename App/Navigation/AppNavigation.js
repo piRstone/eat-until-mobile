@@ -2,9 +2,11 @@ import { createStackNavigator, createSwitchNavigator, createAppContainer } from 
 
 import LoginScreen from '../Containers/LoginScreen'
 import HomeScreen from '../Containers/HomeScreen'
+import ProductsScreen from '../Containers/ProductsScreen'
 
 const MainStack = createStackNavigator({
-  HomeScreen: { screen: HomeScreen }
+  HomeScreen: { screen: HomeScreen },
+  ProductsScreen: { screen: ProductsScreen }
 }, {
   initialRouteName: 'HomeScreen',
   headerMode: 'none'
