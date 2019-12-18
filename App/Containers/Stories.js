@@ -1,3 +1,3 @@
 import './LoginScreen/stories'
-import './HomeScreen/stories'
+import './ListsScreen/stories'
 import './ProductsScreen/stories'

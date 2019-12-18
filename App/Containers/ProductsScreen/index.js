@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/Feather'
 import { path } from 'ramda'
 
+import AddButton from '../../Components/AddButton'
 import { Colors } from '../../Themes'
 
 export function ProductsScreen ({ navigation }) {
@@ -21,9 +22,7 @@ export function ProductsScreen ({ navigation }) {
           <Icon name='chevron-left' size={24} color={Colors.black} />
         </BackButton>
         <Title>{listName}</Title>
-        <AddButton onPress={() => {}}>
-          <AddButtonContent>+</AddButtonContent>
-        </AddButton>
+        <AddButton onPress={() => {}} />
       </Header>
     </Wrapper>
   )
@@ -57,20 +56,4 @@ const BackButton = styled.TouchableOpacity`
 const Title = styled.Text`
   font-size: 16px;
   font-weight: 600;
-`
-
-const AddButton = styled.TouchableOpacity`
-  height: 24px;
-  width: 24px;
-  border-radius: 20px;
-  background-color: ${Colors.blue};
-  align-items: center;
-  justify-content: center;
-`
-
-const AddButtonContent = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${Colors.white};
-  line-height: 23px;
 `

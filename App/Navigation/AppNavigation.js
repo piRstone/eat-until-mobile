@@ -1,14 +1,14 @@
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
 
 import LoginScreen from '../Containers/LoginScreen'
-import HomeScreen from '../Containers/HomeScreen'
+import ListsScreen from '../Containers/ListsScreen'
 import ProductsScreen from '../Containers/ProductsScreen'
 
 const MainStack = createStackNavigator({
-  HomeScreen: { screen: HomeScreen },
+  ListsScreen: { screen: ListsScreen },
   ProductsScreen: { screen: ProductsScreen }
 }, {
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ListsScreen',
   headerMode: 'none'
 })
 

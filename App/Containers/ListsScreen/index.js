@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
-import { Button, ActivityIndicator } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import UserActions from '../../Redux/UserRedux'
 import ListsActions from '../../Redux/ListsRedux'
+import AddButton from '../../Components/AddButton'
 import { Colors } from '../../Themes'
 
-export function HomeScreen ({ navigation, logout, lists, getLists, isLoading }) {
+export function ListsScreen ({ navigation, logout, lists, getLists, isLoading }) {
   useEffect(() => {
     setTimeout(() => {
       getLists()
@@ -23,10 +24,10 @@ export function HomeScreen ({ navigation, logout, lists, getLists, isLoading }) 
   return (
     <Wrapper>
       <Header>
-        <UserPic>
-          <Icon name='user' size={20} color={Colors.black} />
+        <UserPic onPress={logout}>
+          <Icon name='sign-out' size={20} color={Colors.black} />
         </UserPic>
-        <Button title='Logout' onPress={logout} />
+        <AddButton onPress={() => {}} />
       </Header>
       <Title>Mes listes</Title>
       {lists.map(list => (
@@ -42,7 +43,7 @@ export function HomeScreen ({ navigation, logout, lists, getLists, isLoading }) 
   )
 }
 
-HomeScreen.propTypes = {
+ListsScreen.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object),
   logout: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -59,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
   getLists: () => dispatch(ListsActions.request())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ListsScreen)
 
 const Wrapper = styled.SafeAreaView`
   margin: 40px 20px;
@@ -67,12 +68,13 @@ const Wrapper = styled.SafeAreaView`
 
 const Header = styled.View`
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   width: 100%;
 `
 
-const UserPic = styled.View`
+const UserPic = styled.TouchableOpacity`
   height: 40px;
   width: 40px;
   border-radius: 20px;
