@@ -14,3 +14,14 @@ export function * retrieveLists (api) {
     yield put(ListsActions.failure(response.data))
   }
 }
+
+export function * createList (api, { name }) {
+  const accessToken = yield select(UserSelectors.accessToken)
+  const response = yield call(api.createList, accessToken, name)
+
+  if (response.ok) {
+    yield put(ListsActions.createSuccess(response.data.data))
+  } else {
+    yield put(ListsActions.createFailure(response.data))
+  }
+}

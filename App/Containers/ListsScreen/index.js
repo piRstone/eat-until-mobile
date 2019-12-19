@@ -1,16 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
-import { ActivityIndicator } from 'react-native'
+import {
+  ActivityIndicator,
+  Keyboard,
+  KeyboardAvoidingView,
+  ScrollView
+} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import UserActions from '../../Redux/UserRedux'
 import ListsActions from '../../Redux/ListsRedux'
 import AddButton from '../../Components/AddButton'
+import ListForm from '../../Components/ListForm'
 import { Colors } from '../../Themes'
 
-export function ListsScreen ({ navigation, logout, lists, getLists, isLoading }) {
+export function ListsScreen ({
+  navigation,
+  logout,
+  lists,
+  isLoading,
+  isCreateLoading,
+  getLists,
+  createList
+}) {
+  const [showForm, setShowForm] = useState(false)
+
   useEffect(() => {
     setTimeout(() => {
       getLists()
@@ -21,24 +37,36 @@ export function ListsScreen ({ navigation, logout, lists, getLists, isLoading })
     navigation.navigate('ProductsScreen', { list })
   }
 
+  const handleSubmit = value => {
+    if (value !== '') {
+      createList(value)
+      Keyboard.dismiss()
+    }
+  }
+
   return (
     <Wrapper>
       <Header>
         <UserPic onPress={logout}>
           <Icon name='sign-out' size={20} color={Colors.black} />
         </UserPic>
-        <AddButton onPress={() => {}} />
+        <AddButton onPress={() => setShowForm(!showForm)} />
       </Header>
       <Title>Mes listes</Title>
-      {lists.map(list => (
-        <List
-          key={list.id}
-          onPress={() => handleListPress(list)}>
-          <ListName>{list.name}</ListName>
-          <Icon name='chevron-right' size={16} color={Colors.grey1} />
-        </List>
-      ))}
-      {isLoading && <ActivityIndicator color={Colors.black} />}
+      <KeyboardAvoidingView behavior='height' enabled={showForm}>
+        <ScrollView>
+          {lists.map(list => (
+            <List key={list.id} onPress={() => handleListPress(list)}>
+              <ListName>{list.name}</ListName>
+              <Icon name='chevron-right' size={16} color={Colors.grey1} />
+            </List>
+          ))}
+          {showForm && (
+            <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
+          )}
+          {isLoading && <ActivityIndicator color={Colors.black} />}
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Wrapper>
   )
 }
@@ -47,17 +75,21 @@ ListsScreen.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object),
   logout: PropTypes.func,
   isLoading: PropTypes.bool,
-  getLists: PropTypes.func
+  isCreateLoading: PropTypes.bool,
+  getLists: PropTypes.func,
+  createList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
   lists: state.lists.data,
-  isLoading: state.lists.isLoading
+  isLoading: state.lists.isLoading,
+  isCreateLoading: state.lists.isCreateLoading
 })
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(UserActions.logout()),
-  getLists: () => dispatch(ListsActions.request())
+  getLists: () => dispatch(ListsActions.request()),
+  createList: name => dispatch(ListsActions.create(name))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListsScreen)
@@ -96,6 +128,7 @@ const List = styled.TouchableOpacity`
   border-radius: 10px;
   padding: 30px 10px;
   background-color: #fafafa;
+  margin-bottom: 5px;
 `
 
 const ListName = styled.Text`

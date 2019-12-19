@@ -13,7 +13,7 @@ import { ListsTypes } from '../Redux/ListsRedux'
 
 import { startup } from './StartupSagas'
 import { login, logout } from './UserSagas'
-import { retrieveLists } from './ListsSagas'
+import { retrieveLists, createList } from './ListsSagas'
 
 /* ------------- API ------------- */
 
@@ -26,6 +26,7 @@ export default function * root () {
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(UserTypes.LOGIN, login, api),
     takeLatest(UserTypes.LOGOUT, logout, api),
-    takeLatest(ListsTypes.REQUEST, retrieveLists, api)
+    takeLatest(ListsTypes.REQUEST, retrieveLists, api),
+    takeLatest(ListsTypes.CREATE, createList, api)
   ])
 }
