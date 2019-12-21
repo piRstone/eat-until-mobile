@@ -8,12 +8,14 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { UserTypes } from '../Redux/UserRedux'
 import { ListsTypes } from '../Redux/ListsRedux'
+import { ProductsTypes } from '../Redux/ProductsRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { login, logout } from './UserSagas'
 import { retrieveLists, createList } from './ListsSagas'
+import { retrieveProducts, createProduct } from './ProductsSagas'
 
 /* ------------- API ------------- */
 
@@ -27,6 +29,8 @@ export default function * root () {
     takeLatest(UserTypes.LOGIN, login, api),
     takeLatest(UserTypes.LOGOUT, logout, api),
     takeLatest(ListsTypes.REQUEST, retrieveLists, api),
-    takeLatest(ListsTypes.CREATE, createList, api)
+    takeLatest(ListsTypes.CREATE, createList, api),
+    takeLatest(ProductsTypes.REQUEST, retrieveProducts, api),
+    takeLatest(ProductsTypes.CREATE, createProduct, api)
   ])
 }
