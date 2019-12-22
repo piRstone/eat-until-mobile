@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, ScrollView, View } from 'react-native'
+import { ActivityIndicator, FlatList, View } from 'react-native'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
@@ -52,7 +52,7 @@ export function ProductsScreen ({
       {showForm && (
         <ProductForm onSubmit={handleSubmit} />
       )}
-      {isLoading ? (
+      {isLoading && !products.length ? (
         <EmptyWrapper>
           <EmptyState>Récupération des produits...</EmptyState>
           <ActivityIndicator color={Colors.grey1} />
@@ -60,11 +60,13 @@ export function ProductsScreen ({
       ) : (
         <View style={{ flex: 1, marginTop: 10, padding: 10 }}>
           {products.length ? (
-            <ScrollView>
-              {products.map(product => (
-                <Product key={product.id} data={product} />
-              ))}
-            </ScrollView>
+            <FlatList
+              data={products}
+              refreshing={isLoading}
+              onRefresh={() => getProducts(list.id)}
+              renderItem={({ item }) => <Product data={item} />}
+              keyExtractor={item => item.id.toString()}
+            />
           ) : (
             <EmptyWrapper>
               <EmptyState>Il n'y a aucun produit dans votre liste.</EmptyState>

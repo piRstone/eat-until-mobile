@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import DatePicker from 'react-native-datepicker'
@@ -101,9 +100,9 @@ const ProductForm = ({ onSubmit }) => {
         </DayCol>
       </Row2>
       <ButtonWrapper>
-        <TouchableOpacity onPress={handleSubmit}>
-          <AddButton>Ajouter</AddButton>
-        </TouchableOpacity>
+        <AddButton onPress={handleSubmit}>
+          <AddButtonText>Ajouter</AddButtonText>
+        </AddButton>
       </ButtonWrapper>
     </Wrapper>
   )
@@ -169,8 +168,14 @@ const ButtonWrapper = styled.View`
   margin-top: 10px;
 `
 
-const AddButton = styled.Text`
+const AddButton = styled.TouchableOpacity`
+  background-color: ${Colors.blue};
+  border-radius: 20px;
+  padding: 3px 10px;
+`
+
+const AddButtonText = styled.Text`
   font-size: 16px;
-  font-weight: bold;
-  color: ${Colors.blue};
+  font-weight: 600;
+  color: ${Colors.white};
 `

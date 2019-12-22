@@ -26,7 +26,7 @@ export function Product ({ data }) {
           {moment(data.expires_at, 'YYYY-MM-DD').format('DD/MM/YYYY')}
         </Date>
       </View>
-      <Days style={dayClass}>{remainingDays}d</Days>
+      <Days style={dayClass}>{remainingDays} j</Days>
     </Wrapper>
   )
 }
