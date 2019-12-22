@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react'
 import { TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
+import DatePicker from 'react-native-datepicker'
+import moment from 'moment'
 
 import { Colors } from '../../Themes'
 
@@ -9,7 +11,7 @@ const ProductForm = ({ onSubmit }) => {
   const dateInputRef = useRef(null)
   const dayInputRef = useRef(null)
   const [name, setName] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(moment().format('DD/MM/YYYY'))
   const [day, setDay] = useState('2')
 
   const handleSubmit = () => {
@@ -40,21 +42,58 @@ const ProductForm = ({ onSubmit }) => {
       <Row2>
         <Col>
           <Label>Se périme le</Label>
-          <Input
-            ref={dateInputRef}
-            onChangeText={e => setDate(e)}
+          <DatePicker
+            date={date}
+            mode='date'
             placeholder='00/00/0000'
-            returnKeyType='next'
-            value={date}
-            onSubmitEditing={() => dayInputRef.current.focus()}
+            format='DD/MM/YYYY'
+            minDate={moment().format('DD/MM/YYYY')}
+            confirmBtnText='OK'
+            cancelBtnText='Annuler'
+            onDateChange={date => setDate(date)}
+            showIcon={false}
+            customStyles={{
+              placeholderText: {
+                fontSize: 18,
+                fontWeight: 'bold'
+              },
+              dateText: {
+                fontSize: 18,
+                fontWeight: 'bold'
+              },
+              dateTouchBody: {
+                width: '100%',
+                padding: 10,
+                height: 35,
+                backgroundColor: Colors.white,
+                borderRadius: 5
+              },
+              dateInput: {
+                width: '100%',
+                borderWidth: 0,
+                padding: 0,
+                margin: 0
+              },
+              btnTextCancel: {
+                color: Colors.blue
+              },
+              btnTextConfirm: {
+                fontWeight: 'bold',
+                color: Colors.blue
+              },
+              disabled: {
+                backgroundColor: 'transparent'
+              }
+            }}
           />
         </Col>
         <DayCol>
-          <Label>Notif (jour)</Label>
+          <Label>Notification (jours)</Label>
           <DayInput
             ref={dayInputRef}
             onChangeText={e => setDay(e)}
-            placeholder='2'
+            keyboardType='number-pad'
+            placeholder='J-2'
             returnKeyType='done'
             value={day}
             onSubmitEditing={onSubmit}
@@ -121,7 +160,7 @@ const DayCol = styled.View`
 `
 
 const DayInput = styled(Input)`
-  width: 100px;
+  width: 150px;
 `
 
 const ButtonWrapper = styled.View`

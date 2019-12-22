@@ -5,10 +5,10 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions(
   {
-    request: null,
+    request: ['listId'],
     success: ['products'],
     failure: ['error'],
-    create: ['name'],
+    create: ['product'],
     createSuccess: ['product'],
     createFailure: ['error']
   },
