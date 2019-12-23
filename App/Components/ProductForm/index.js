@@ -7,19 +7,34 @@ import moment from 'moment'
 import { Colors } from '../../Themes'
 
 const ProductForm = ({ onSubmit }) => {
+  const initialDate = moment().add(2, 'd').format('DD/MM/YYYY')
   const dateInputRef = useRef(null)
   const dayInputRef = useRef(null)
   const [name, setName] = useState('')
-  const [date, setDate] = useState(moment().format('DD/MM/YYYY'))
+  const [date, setDate] = useState(initialDate)
   const [day, setDay] = useState('2')
+  const [inputErrors, setInputErrors] = useState({})
 
   const handleSubmit = () => {
     if (name !== '' && date !== '' && day !== '') {
+      setInputErrors({})
       onSubmit({
         name,
         expiresAt: date,
         notifyBefore: day
       })
+      setName('')
+      setDate(initialDate)
+      setDay('2')
+    } else {
+      let errors = {}
+      if (name === '') {
+        errors.name = true
+      }
+      if (day === '') {
+        errors.day = true
+      }
+      setInputErrors(errors)
     }
   }
 
@@ -34,7 +49,8 @@ const ProductForm = ({ onSubmit }) => {
             autoFocus
             returnKeyType='next'
             value={name}
-            onSubmitEditing={() => dateInputRef.current.focus()}
+            invalid={inputErrors.name}
+            onSubmitEditing={() => dateInputRef.current.onPressDate()}
           />
         </Col>
       </Row>
@@ -42,6 +58,7 @@ const ProductForm = ({ onSubmit }) => {
         <Col>
           <Label>Se périme le</Label>
           <DatePicker
+            ref={dateInputRef}
             date={date}
             mode='date'
             placeholder='00/00/0000'
@@ -95,6 +112,7 @@ const ProductForm = ({ onSubmit }) => {
             placeholder='J-2'
             returnKeyType='done'
             value={day}
+            invalid={inputErrors.day}
             onSubmitEditing={onSubmit}
           />
         </DayCol>
@@ -151,6 +169,7 @@ const Input = styled.TextInput`
   border-radius: 5px;
   background-color: ${Colors.white};
   padding: 10px;
+  border: ${props => props.invalid ? `1px solid ${Colors.red}` : `1px solid ${Colors.white}`};
 `
 
 const DayCol = styled.View`

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, FlatList, View } from 'react-native'
+import { Alert, ActivityIndicator, FlatList, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components/native'
@@ -42,6 +42,21 @@ export function ProductsScreen ({
     createProduct(product)
   }
 
+  const onDeleteListRequest = () => {
+    Alert.alert(
+      'Supprimer la liste',
+      "Si vous supprimer cette liste, tous les produits qu'elle contient seront supprimés eux aussi.",
+      [
+        { text: 'Annuler' },
+        {
+          text: 'Supprimer',
+          onPress: () => removeList(list.id),
+          style: 'destructive'
+        }
+      ]
+    )
+  }
+
   return (
     <Wrapper>
       <Header>
@@ -76,8 +91,8 @@ export function ProductsScreen ({
           )}
         </View>
       )}
-      <DangerButton onPress={() => removeList(list.id)}>
-        <DangerButtonText>Supprimer</DangerButtonText>
+      <DangerButton onPress={onDeleteListRequest}>
+        <DangerButtonText>Supprimer la liste</DangerButtonText>
       </DangerButton>
     </Wrapper>
   )
