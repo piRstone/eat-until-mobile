@@ -25,6 +25,10 @@ const create = (baseURL = 'http://localhost:8001/api') => {
       api.setHeader('Authorization', 'Bearer ' + token)
       return api.post('/lists', { name })
     },
+    updateListName: (token, id, name) => {
+      api.setHeader('Authorization', 'Bearer ' + token)
+      return api.patch(`/lists/${id}`, { name })
+    },
     removeList: (token, id) => {
       api.setHeader('Authorization', 'Bearer ' + token)
       return api.delete(`/lists/${id}`)

@@ -14,7 +14,7 @@ import { ProductsTypes } from '../Redux/ProductsRedux'
 
 import { startup } from './StartupSagas'
 import { login, logout } from './UserSagas'
-import { retrieveLists, createList, removeList } from './ListsSagas'
+import { retrieveLists, createList, removeList, updateName } from './ListsSagas'
 import { retrieveProducts, createProduct } from './ProductsSagas'
 
 /* ------------- API ------------- */
@@ -31,6 +31,7 @@ export default function * root () {
     takeLatest(ListsTypes.REQUEST, retrieveLists, api),
     takeLatest(ListsTypes.CREATE, createList, api),
     takeLatest(ListsTypes.REMOVE, removeList, api),
+    takeLatest(ListsTypes.UPDATE_NAME, updateName, api),
     takeLatest(ProductsTypes.REQUEST, retrieveProducts, api),
     takeLatest(ProductsTypes.CREATE, createProduct, api)
   ])

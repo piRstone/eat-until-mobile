@@ -13,7 +13,10 @@ const { Types, Creators } = createActions(
     createFailure: ['error'],
     remove: ['id'],
     removeSuccess: null,
-    removeFailure: ['error']
+    removeFailure: ['error'],
+    updateName: ['id', 'name'],
+    updateNameSuccess: ['id', 'name'],
+    updateNameFailure: ['error']
   },
   {
     prefix: 'LISTS/'
@@ -29,6 +32,7 @@ export const INITIAL_STATE = Immutable({
   data: [],
   isLoading: false,
   isCreateLoading: false,
+  isNameUpdateLoading: false,
   error: undefined
 })
 
@@ -98,6 +102,30 @@ export const removeFailure = (state, { error }) =>
     error
   })
 
+export const updateName = state =>
+  state.merge({
+    isNameUpdateLoading: true,
+    error: undefined
+  })
+
+export const updateNameSuccess = (state, { id, name }) => {
+  console.tron.warn(`${id} ${name}`)
+  const index = state.data.findIndex(l => l.id === id)
+  const data = [...state.data]
+  data[index].name = name
+  console.tron.warn(name)
+  return state.merge({
+    isNameUpdateLoading: false,
+    data
+  })
+}
+
+export const updateNameFailure = (state, { error }) =>
+  state.merge({
+    isNameUpdateLoading: false,
+    error
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -109,5 +137,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_FAILURE]: createFailure,
   [Types.REMOVE]: remove,
   [Types.REMOVE_SUCCESS]: removeSuccess,
-  [Types.REMOVE_FAILURE]: removeFailure
+  [Types.REMOVE_FAILURE]: removeFailure,
+  [Types.UPDATE_NAME]: updateName,
+  [Types.UPDATE_NAME_SUCCESS]: updateNameSuccess,
+  [Types.UPDATE_NAME_FAILURE]: updateNameFailure
 })

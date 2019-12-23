@@ -33,7 +33,19 @@ export function * removeList (api, { id }) {
   if (response.ok) {
     yield put(ListsActions.removeSuccess(id))
     yield put(NavigationActions.navigate({ routeName: 'ListsScreen' }))
+    yield put(ListsActions.request())
   } else {
     yield put(ListsActions.removeFailure(response.data))
+  }
+}
+
+export function * updateName (api, { id, name }) {
+  const accessToken = yield select(UserSelectors.accessToken)
+  const response = yield call(api.updateListName, accessToken, id, name)
+
+  if (response.ok) {
+    yield put(ListsActions.updateNameSuccess(id, name))
+  } else {
+    yield put(ListsActions.updateNameFailure(response.data))
   }
 }

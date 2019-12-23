@@ -62,7 +62,8 @@ const Input = styled.TextInput`
   color: ${Colors.black};
   border-radius: 5px;
   background-color: ${Colors.white};
-  padding: 10px;
+  padding: 5px 10px;
+  align-items: center;
 `
 
 const SubmitButton = styled.TouchableOpacity`

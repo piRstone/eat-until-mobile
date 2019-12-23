@@ -11,7 +11,7 @@ export function Product ({ data }) {
     'd'
   )
   let dayClass
-  if (remainingDays >= 0 && remainingDays < 3) {
+  if (remainingDays < 3) {
     dayClass = 'danger'
   } else if (remainingDays > 2 && remainingDays < 5) {
     dayClass = 'warning'

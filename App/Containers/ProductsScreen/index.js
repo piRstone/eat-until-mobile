@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, ActivityIndicator, FlatList, View } from 'react-native'
+import {
+  Alert,
+  ActivityIndicator,
+  FlatList,
+  Keyboard,
+  View
+} from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components/native'
@@ -8,6 +14,7 @@ import { path } from 'ramda'
 
 import ListsActions from '../../Redux/ListsRedux'
 import ProductsActions from '../../Redux/ProductsRedux'
+import ListTitle from '../../Components/ListTitle'
 import Product from '../../Components/Product'
 import AddButton from '../../Components/AddButton'
 import ProductForm from '../../Components/ProductForm'
@@ -19,7 +26,8 @@ export function ProductsScreen ({
   products,
   isLoading,
   createProduct,
-  removeList
+  removeList,
+  updateListName
 }) {
   const [list, setList] = useState({})
   const [showForm, setShowForm] = useState(false)
@@ -38,8 +46,8 @@ export function ProductsScreen ({
 
   const handleSubmit = product => {
     product.listId = list.id
-    console.tron.log(product)
     createProduct(product)
+    Keyboard.dismiss()
   }
 
   const onDeleteListRequest = () => {
@@ -57,18 +65,20 @@ export function ProductsScreen ({
     )
   }
 
+  const onUpdateName = name => {
+    updateListName(list.id, name)
+  }
+
   return (
     <Wrapper>
       <Header>
         <BackButton onPress={() => navigation.goBack()}>
           <Icon name='chevron-left' size={24} color={Colors.black} />
         </BackButton>
-        <Title>{list.name}</Title>
+        <ListTitle title={list.name} onSubmit={onUpdateName} />
         <AddButton onPress={() => setShowForm(!showForm)} />
       </Header>
-      {showForm && (
-        <ProductForm onSubmit={handleSubmit} />
-      )}
+      {showForm && <ProductForm onSubmit={handleSubmit} />}
       {isLoading && !products.length ? (
         <EmptyWrapper>
           <EmptyState>Récupération des produits...</EmptyState>
@@ -104,7 +114,8 @@ ProductsScreen.propTypes = {
   isLoading: PropTypes.bool,
   getProducts: PropTypes.func,
   createProduct: PropTypes.func,
-  removeList: PropTypes.func
+  removeList: PropTypes.func,
+  updateListName: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -115,7 +126,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: listId => dispatch(ProductsActions.request(listId)),
   createProduct: product => dispatch(ProductsActions.create(product)),
-  removeList: id => dispatch(ListsActions.remove(id))
+  removeList: id => dispatch(ListsActions.remove(id)),
+  updateListName: (id, name) => dispatch(ListsActions.updateName(id, name))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsScreen)
@@ -138,11 +150,6 @@ const BackButton = styled.TouchableOpacity`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-`
-
-const Title = styled.Text`
-  font-size: 16px;
-  font-weight: 600;
 `
 
 const EmptyWrapper = styled.View`

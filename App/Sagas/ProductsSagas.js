@@ -1,5 +1,4 @@
 import { call, put, select } from 'redux-saga/effects'
-import moment from 'moment'
 
 import { UserSelectors } from '../Redux/UserRedux'
 import ProductsActions from '../Redux/ProductsRedux'
@@ -22,7 +21,7 @@ export function * createProduct (api, action) {
   const product = {
     name,
     description: 'Produit',
-    expires_at: moment(expiresAt, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+    expires_at: expiresAt,
     notify_before: parseInt(notifyBefore, 10),
     list_id: listId,
     code_value: '0000000000000', // TODO: set dynamic code
