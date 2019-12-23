@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, View } from 'react-native'
 import PropTypes from 'prop-types'
-import styled from 'styled-components/native'
 import { connect } from 'react-redux'
+import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/Feather'
 import { path } from 'ramda'
 
+import ListsActions from '../../Redux/ListsRedux'
 import ProductsActions from '../../Redux/ProductsRedux'
 import Product from '../../Components/Product'
 import AddButton from '../../Components/AddButton'
@@ -17,7 +18,8 @@ export function ProductsScreen ({
   getProducts,
   products,
   isLoading,
-  createProduct
+  createProduct,
+  removeList
 }) {
   const [list, setList] = useState({})
   const [showForm, setShowForm] = useState(false)
@@ -74,6 +76,9 @@ export function ProductsScreen ({
           )}
         </View>
       )}
+      <DangerButton onPress={() => removeList(list.id)}>
+        <DangerButtonText>Supprimer</DangerButtonText>
+      </DangerButton>
     </Wrapper>
   )
 }
@@ -83,7 +88,8 @@ ProductsScreen.propTypes = {
   products: PropTypes.array,
   isLoading: PropTypes.bool,
   getProducts: PropTypes.func,
-  createProduct: PropTypes.func
+  createProduct: PropTypes.func,
+  removeList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -93,7 +99,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: listId => dispatch(ProductsActions.request(listId)),
-  createProduct: product => dispatch(ProductsActions.create(product))
+  createProduct: product => dispatch(ProductsActions.create(product)),
+  removeList: id => dispatch(ListsActions.remove(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsScreen)
@@ -134,4 +141,18 @@ const EmptyState = styled.Text`
   font-size: 16px;
   color: ${Colors.grey1};
   margin-bottom: 10px;
+`
+
+const DangerButton = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 20px;
+`
+
+const DangerButtonText = styled.Text`
+  font-size: 14px;
+  color: ${Colors.red};
 `
