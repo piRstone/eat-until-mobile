@@ -112,7 +112,7 @@ const UserPic = styled.TouchableOpacity`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-  background-color: #fafafa;
+  background-color: ${Colors.lightgrey};
 `
 
 const Title = styled.Text`
@@ -127,7 +127,7 @@ const List = styled.TouchableOpacity`
   justify-content: space-between;
   border-radius: 10px;
   padding: 30px 10px;
-  background-color: #fafafa;
+  background-color: ${Colors.lightgrey};
   margin-bottom: 5px;
 `
 

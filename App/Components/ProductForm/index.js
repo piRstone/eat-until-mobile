@@ -109,7 +109,7 @@ const Wrapper = styled.View`
   justify-content: space-between;
   width: 100%;
   padding: 15px 10px;
-  background-color: #fafafa;
+  background-color: ${Colors.lightgrey};
   border-radius: 10px;
   margin-top: 20px;
 `

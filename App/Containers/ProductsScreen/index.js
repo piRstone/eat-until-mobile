@@ -53,7 +53,7 @@ export function ProductsScreen ({
   const onDeleteListRequest = () => {
     Alert.alert(
       'Supprimer la liste',
-      "Si vous supprimer cette liste, tous les produits qu'elle contient seront supprimés eux aussi.",
+      "Si vous supprimez cette liste, tous les produits qu'elle contient seront supprimés eux aussi.",
       [
         { text: 'Annuler' },
         {
@@ -168,7 +168,7 @@ const EmptyState = styled.Text`
 const DangerButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  background-color: #fafafa;
+  background-color: ${Colors.lightgrey};
   border-radius: 5px;
   margin-top: 10px;
   padding: 10px 20px;

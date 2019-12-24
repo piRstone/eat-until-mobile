@@ -50,7 +50,7 @@ const Wrapper = styled.View`
   width: 100%;
   border-radius: 10px;
   padding: 15px 10px;
-  background-color: #fafafa;
+  background-color: ${Colors.lightgrey};
   margin-top: 20px;
 `
 
