@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
-  ScrollView
+  FlatList
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -50,22 +50,28 @@ export function ListsScreen ({
         <UserPic onPress={logout}>
           <Icon name='sign-out' size={20} color={Colors.black} />
         </UserPic>
-        <AddButton onPress={() => setShowForm(!showForm)} />
+        <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
       </Header>
       <Title>Mes listes</Title>
-      <KeyboardAvoidingView behavior='height' enabled={showForm}>
-        <ScrollView>
-          {lists.map(list => (
-            <List key={list.id} onPress={() => handleListPress(list)}>
-              <ListName>{list.name}</ListName>
+      <KeyboardAvoidingView
+        behavior='height'
+        enabled={showForm}
+      >
+        {showForm && (
+          <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
+        )}
+        <FlatList
+          data={lists}
+          refreshing={isLoading}
+          onRefresh={() => getLists()}
+          renderItem={({ item }) => (
+            <List key={item.id} onPress={() => handleListPress(item)}>
+              <ListName>{item.name}</ListName>
               <Icon name='chevron-right' size={16} color={Colors.grey1} />
             </List>
-          ))}
-          {showForm && (
-            <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
           )}
-          {isLoading && <ActivityIndicator color={Colors.black} />}
-        </ScrollView>
+          keyExtractor={item => item.id.toString()}
+        />
       </KeyboardAvoidingView>
     </Wrapper>
   )

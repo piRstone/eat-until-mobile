@@ -76,7 +76,7 @@ export function ProductsScreen ({
           <Icon name='chevron-left' size={24} color={Colors.black} />
         </BackButton>
         <ListTitle title={list.name} onSubmit={onUpdateName} />
-        <AddButton onPress={() => setShowForm(!showForm)} />
+        <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
       </Header>
       {showForm && <ProductForm onSubmit={handleSubmit} />}
       {isLoading && !products.length ? (

@@ -51,7 +51,7 @@ const Wrapper = styled.View`
   border-radius: 10px;
   padding: 15px 10px;
   background-color: ${Colors.lightgrey};
-  margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 const Input = styled.TextInput`

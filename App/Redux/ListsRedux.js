@@ -109,7 +109,6 @@ export const updateName = state =>
   })
 
 export const updateNameSuccess = (state, { id, name }) => {
-  console.tron.warn(`${id} ${name}`)
   const index = state.data.findIndex(l => l.id === id)
   const data = [...state.data]
   data[index].name = name
