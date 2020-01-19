@@ -6,6 +6,8 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - React (0.59.9):
+    - React/Core (= 0.59.9)
   - React/ART (0.59.9):
     - React/Core
   - React/Core (0.59.9):
@@ -66,6 +68,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - ReactNativeDarkMode (0.2.1):
+    - React
   - yoga (0.59.9.React)
 
 DEPENDENCIES:
@@ -89,6 +93,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - ReactNativeDarkMode (from `../node_modules/react-native-dark-mode`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
 
 SPEC REPOS:
@@ -104,6 +109,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  ReactNativeDarkMode:
+    :path: "../node_modules/react-native-dark-mode"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/Yoga.podspec"
 
@@ -113,8 +120,9 @@ SPEC CHECKSUMS:
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   React: a86b92f00edbe1873a63e4a212c29b7a7ad5224f
+  ReactNativeDarkMode: 0e6e7bdbd387eb949fa7ff238a48f6d6431a428d
   yoga: 03ff42a6f223fb88deeaed60249020d80c3091ee
 
-PODFILE CHECKSUM: 3a7ee93a38fe47d9573e3e11d63fa84b6ff39bd4
+PODFILE CHECKSUM: a2f5f0b2de84cada2849f8e1d1b99a3017611de8
 
 COCOAPODS: 1.8.4

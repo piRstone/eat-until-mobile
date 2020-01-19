@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
 import {
-  ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
   FlatList
@@ -46,33 +45,35 @@ export function ListsScreen ({
 
   return (
     <Wrapper>
-      <Header>
-        <UserPic onPress={logout}>
-          <Icon name='sign-out' size={20} color={Colors.black} />
-        </UserPic>
-        <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
-      </Header>
-      <Title>Mes listes</Title>
-      <KeyboardAvoidingView
-        behavior='height'
-        enabled={showForm}
-      >
-        {showForm && (
-          <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
-        )}
-        <FlatList
-          data={lists}
-          refreshing={isLoading}
-          onRefresh={() => getLists()}
-          renderItem={({ item }) => (
-            <List key={item.id} onPress={() => handleListPress(item)}>
-              <ListName>{item.name}</ListName>
-              <Icon name='chevron-right' size={16} color={Colors.grey1} />
-            </List>
+      <InnerWrapper>
+        <Header>
+          <UserPic onPress={logout}>
+            <Icon name='sign-out' size={20} color={Colors.black} />
+          </UserPic>
+          <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
+        </Header>
+        <Title>Mes listes</Title>
+        <KeyboardAvoidingView
+          behavior='height'
+          enabled={showForm}
+        >
+          {showForm && (
+            <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
           )}
-          keyExtractor={item => item.id.toString()}
-        />
-      </KeyboardAvoidingView>
+          <FlatList
+            data={lists}
+            refreshing={isLoading}
+            onRefresh={() => getLists()}
+            renderItem={({ item }) => (
+              <List key={item.id} onPress={() => handleListPress(item)}>
+                <ListName>{item.name}</ListName>
+                <Icon name='chevron-right' size={16} color={Colors.grey1} />
+              </List>
+            )}
+            keyExtractor={item => item.id.toString()}
+          />
+        </KeyboardAvoidingView>
+      </InnerWrapper>
     </Wrapper>
   )
 }
@@ -100,7 +101,12 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListsScreen)
 
-const Wrapper = styled.SafeAreaView`
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: ${Colors.lightgrey};
+`
+
+const InnerWrapper = styled.SafeAreaView`
   margin: 40px 20px;
 `
 
@@ -118,11 +124,11 @@ const UserPic = styled.TouchableOpacity`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-  background-color: ${Colors.lightgrey};
+  background-color: ${Colors.white};
 `
 
 const Title = styled.Text`
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   color: ${Colors.black};
   margin-bottom: 20px;
@@ -133,8 +139,8 @@ const List = styled.TouchableOpacity`
   justify-content: space-between;
   border-radius: 10px;
   padding: 30px 10px;
-  background-color: ${Colors.lightgrey};
-  margin-bottom: 5px;
+  background-color: ${Colors.white};
+  margin-bottom: 20px;
 `
 
 const ListName = styled.Text`
