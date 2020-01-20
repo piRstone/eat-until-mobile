@@ -13,7 +13,6 @@ import UserActions from '../../Redux/UserRedux'
 import ListsActions from '../../Redux/ListsRedux'
 import AddButton from '../../Components/AddButton'
 import ListForm from '../../Components/ListForm'
-import { Colors } from '../../Themes'
 
 export function ListsScreen ({
   navigation,
@@ -48,7 +47,7 @@ export function ListsScreen ({
       <InnerWrapper>
         <Header>
           <UserPic onPress={logout}>
-            <Icon name='sign-out' size={20} color={Colors.black} />
+            <UserPicIcon name='sign-out' size={20} />
           </UserPic>
           <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
@@ -67,7 +66,7 @@ export function ListsScreen ({
             renderItem={({ item }) => (
               <List key={item.id} onPress={() => handleListPress(item)}>
                 <ListName>{item.name}</ListName>
-                <Icon name='chevron-right' size={16} color={Colors.grey1} />
+                <ChevronIcon name='chevron-right' size={16} />
               </List>
             )}
             keyExtractor={item => item.id.toString()}
@@ -103,7 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ListsScreen)
 
 const Wrapper = styled.View`
   flex: 1;
-  background-color: ${Colors.lightgrey};
+  background-color: ${props => props.theme.backgroundColor};
 `
 
 const InnerWrapper = styled.SafeAreaView`
@@ -124,13 +123,17 @@ const UserPic = styled.TouchableOpacity`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-  background-color: ${Colors.white};
+  background-color: ${props => props.theme.whiteBackground};
+`
+
+const UserPicIcon = styled(Icon)`
+  color: ${props => props.theme.black};
 `
 
 const Title = styled.Text`
   font-size: 30px;
   font-weight: bold;
-  color: ${Colors.black};
+  color: ${props => props.theme.black};
   margin-bottom: 20px;
 `
 
@@ -139,11 +142,16 @@ const List = styled.TouchableOpacity`
   justify-content: space-between;
   border-radius: 10px;
   padding: 30px 10px;
-  background-color: ${Colors.white};
+  background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 20px;
 `
 
 const ListName = styled.Text`
   font-size: 18px;
   font-weight: bold;
+  color: ${props => props.theme.black};
+`
+
+const ChevronIcon = styled(Icon)`
+  color: ${props => props.theme.grey1};
 `

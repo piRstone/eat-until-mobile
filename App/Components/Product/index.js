@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import moment from 'moment'
-import { Colors } from '../../Themes'
 
 export function Product ({ data }) {
   const remainingDays = moment(data.expires_at, 'YYYY-MM-DD').diff(
@@ -43,22 +42,28 @@ const Wrapper = styled.View`
   justify-content: space-between;
   border-radius: 10px;
   padding: 15px 10px;
-  background-color: ${Colors.lightgrey};
+  background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 5px;
 `
 
 const Name = styled.Text`
   font-size: 18px;
+  color: ${props => props.theme.black};
 `
 
 const Date = styled.Text`
   font-size: 14px;
-  color: ${Colors.grey1};
+  color: ${props => props.theme.grey1};
   margin-top: 5px;
 `
 
 const Days = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  color: ${props => props.style === 'danger' ? Colors.red : props.style === 'warning' ? Colors.orange : Colors.green};
+  color: ${props =>
+    props.style === 'danger'
+      ? props.theme.red
+      : props.style === 'warning'
+      ? props.theme.orange
+      : props.theme.green};
 `

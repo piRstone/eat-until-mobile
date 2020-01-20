@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
-import styled from 'styled-components/native'
+import styled, { ThemeProvider } from 'styled-components/native'
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import { useDarkMode } from 'react-native-dark-mode'
+
+import { Colors } from '../Themes'
 
 function RootContainer ({ startup }) {
   const isDarkMode = useDarkMode()
@@ -17,15 +19,13 @@ function RootContainer ({ startup }) {
     }
   }, [])
 
-  useEffect(() => {
-    console.warn('isDarkMode', isDarkMode)
-  }, [isDarkMode])
-
   return (
-    <Wrapper>
-      <StatusBar barStyle='dark-content' />
-      <ReduxNavigation />
-    </Wrapper>
+    <ThemeProvider theme={Colors(isDarkMode)}>
+      <Wrapper>
+        <StatusBar barStyle='dark-content' />
+        <ReduxNavigation />
+      </Wrapper>
+    </ThemeProvider>
   )
 }
 

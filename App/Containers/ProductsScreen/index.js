@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
   Alert,
-  ActivityIndicator,
   FlatList,
   Keyboard,
   View
@@ -18,7 +17,6 @@ import ListTitle from '../../Components/ListTitle'
 import Product from '../../Components/Product'
 import AddButton from '../../Components/AddButton'
 import ProductForm from '../../Components/ProductForm'
-import { Colors } from '../../Themes'
 
 export function ProductsScreen ({
   navigation,
@@ -71,39 +69,41 @@ export function ProductsScreen ({
 
   return (
     <Wrapper>
-      <Header>
-        <BackButton onPress={() => navigation.goBack()}>
-          <Icon name='chevron-left' size={24} color={Colors.black} />
-        </BackButton>
-        <ListTitle title={list.name} onSubmit={onUpdateName} />
-        <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
-      </Header>
-      {showForm && <ProductForm onSubmit={handleSubmit} />}
-      {isLoading && !products.length ? (
-        <EmptyWrapper>
-          <EmptyState>Récupération des produits...</EmptyState>
-          <ActivityIndicator color={Colors.grey1} />
-        </EmptyWrapper>
-      ) : (
-        <View style={{ flex: 1, marginTop: 10, padding: 10 }}>
-          {products.length ? (
-            <FlatList
-              data={products}
-              refreshing={isLoading}
-              onRefresh={() => getProducts(list.id)}
-              renderItem={({ item }) => <Product data={item} />}
-              keyExtractor={item => item.id.toString()}
-            />
-          ) : (
-            <EmptyWrapper>
-              <EmptyState>Il n'y a aucun produit dans votre liste.</EmptyState>
-            </EmptyWrapper>
-          )}
-        </View>
-      )}
-      <DangerButton onPress={onDeleteListRequest}>
-        <DangerButtonText>Supprimer la liste</DangerButtonText>
-      </DangerButton>
+      <InnerWrapper>
+        <Header>
+          <BackButton onPress={() => navigation.goBack()}>
+            <StyledBackIcon name='chevron-left' size={24} />
+          </BackButton>
+          <ListTitle title={list.name} onSubmit={onUpdateName} />
+          <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
+        </Header>
+        {showForm && <ProductForm onSubmit={handleSubmit} />}
+        {isLoading && !products.length ? (
+          <EmptyWrapper>
+            <EmptyState>Récupération des produits...</EmptyState>
+            <StyledActivityIndicator />
+          </EmptyWrapper>
+        ) : (
+          <View style={{ flex: 1, marginTop: 10, padding: 10 }}>
+            {products.length ? (
+              <FlatList
+                data={products}
+                refreshing={isLoading}
+                onRefresh={() => getProducts(list.id)}
+                renderItem={({ item }) => <Product data={item} />}
+                keyExtractor={item => item.id.toString()}
+              />
+            ) : (
+              <EmptyWrapper>
+                <EmptyState>Il n'y a aucun produit dans votre liste.</EmptyState>
+              </EmptyWrapper>
+            )}
+          </View>
+        )}
+        <DangerButton onPress={onDeleteListRequest}>
+          <DangerButtonText>Supprimer la liste</DangerButtonText>
+        </DangerButton>
+      </InnerWrapper>
     </Wrapper>
   )
 }
@@ -132,9 +132,14 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsScreen)
 
-const Wrapper = styled.SafeAreaView`
+const Wrapper = styled.View`
   flex: 1;
-  padding: 0 10px;
+  background-color: ${props => props.theme.backgroundColor};
+`
+
+const InnerWrapper = styled.SafeAreaView`
+  margin: 0 10px;
+  flex: 1;
 `
 
 const Header = styled.View`
@@ -152,6 +157,14 @@ const BackButton = styled.TouchableOpacity`
   justify-content: center;
 `
 
+const StyledBackIcon = styled(Icon)`
+  color: ${props => props.theme.black};
+`
+
+const StyledActivityIndicator = styled.ActivityIndicator`
+  color: ${props => props.theme.grey1};
+`
+
 const EmptyWrapper = styled.View`
   flex-direction: column;
   padding-top: 300px;
@@ -161,14 +174,14 @@ const EmptyWrapper = styled.View`
 
 const EmptyState = styled.Text`
   font-size: 16px;
-  color: ${Colors.grey1};
+  color: ${props => props.theme.grey1};
   margin-bottom: 10px;
 `
 
 const DangerButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  background-color: ${Colors.lightgrey};
+  background-color: ${props => props.theme.whiteBackground};
   border-radius: 5px;
   margin-top: 10px;
   padding: 10px 20px;
@@ -176,5 +189,5 @@ const DangerButton = styled.TouchableOpacity`
 
 const DangerButtonText = styled.Text`
   font-size: 14px;
-  color: ${Colors.red};
+  color: ${props => props.theme.red};
 `

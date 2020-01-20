@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { ActivityIndicator } from 'react-native'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/Feather'
-
-import { Colors } from '../../Themes'
 
 function ListForm ({ isLoading, onSubmit }) {
   const [value, setValue] = useState('')
@@ -28,9 +25,9 @@ function ListForm ({ isLoading, onSubmit }) {
       />
       <SubmitButton onPress={handleSubmit}>
         {isLoading ? (
-          <ActivityIndicator color={Colors.blue} />
+          <StyledActivityIndicator />
         ) : (
-          <Icon name='check' size={20} color={Colors.blue} />
+          <StyledIcon name='check' size={20} />
         )}
       </SubmitButton>
     </Wrapper>
@@ -50,8 +47,12 @@ const Wrapper = styled.View`
   width: 100%;
   border-radius: 10px;
   padding: 15px 10px;
-  background-color: ${Colors.white};
+  background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 20px;
+`
+
+const StyledActivityIndicator = styled.ActivityIndicator`
+  color: ${props => props.theme.blue};
 `
 
 const Input = styled.TextInput`
@@ -59,9 +60,9 @@ const Input = styled.TextInput`
   height: 35px;
   font-size: 18px;
   font-weight: 600;
-  color: ${Colors.black};
+  color: ${props => props.theme.black};
   border-radius: 5px;
-  background-color: ${Colors.lightgrey};
+  background-color: ${props => props.theme.backgroundColor};
   padding: 5px 10px;
   align-items: center;
 `
@@ -72,6 +73,10 @@ const SubmitButton = styled.TouchableOpacity`
   height: 35px;
   width: 35px;
   border-radius: 5px;
-  background-color: ${Colors.lightblue};
+  background-color: ${props => props.theme.lightblue};
   margin-left: 10px;
+`
+
+const StyledIcon = styled(Icon)`
+  color: ${props => props.theme.blue};
 `

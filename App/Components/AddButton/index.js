@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import { Colors } from '../../Themes'
-
 function AddButton ({ onPress, opened }) {
   const spinValue = new Animated.Value(0)
 
@@ -25,7 +23,7 @@ function AddButton ({ onPress, opened }) {
   return (
     <Wrapper onPress={onPress}>
       <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <Icon name='plus' size={17} color={Colors.white} />
+        <StyledIcon name='plus' size={17} />
       </Animated.View>
     </Wrapper>
   )
@@ -41,7 +39,11 @@ const Wrapper = styled.TouchableHighlight`
   height: 30px;
   width: 30px;
   border-radius: 20px;
-  background-color: ${Colors.blue};
+  background-color: ${props => props.theme.blue};
   align-items: center;
   justify-content: center;
+`
+
+const StyledIcon = styled(Icon)`
+  color: ${props => props.theme.white};
 `

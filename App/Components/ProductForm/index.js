@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import moment from 'moment'
 
-import { Colors } from '../../Themes'
-
 const ProductForm = ({ onSubmit }) => {
   const expireDaysInputRef = useRef(null)
   const notifyDaysInputRef = useRef(null)
@@ -109,7 +107,7 @@ const Wrapper = styled.View`
   justify-content: space-between;
   width: 100%;
   padding: 15px 10px;
-  background-color: ${Colors.lightgrey};
+  background-color: ${props => props.theme.whiteBackground};
   border-radius: 10px;
   margin-top: 20px;
 `
@@ -130,7 +128,7 @@ const Col = styled.View`
 
 const Label = styled.Text`
   font-size: 12px;
-  color: ${Colors.black};
+  color: ${props => props.theme.black};
   margin-bottom: 5px;
 `
 
@@ -138,18 +136,19 @@ const Input = styled.TextInput`
   height: 35px;
   font-size: 18px;
   font-weight: 600;
-  color: ${Colors.black};
+  color: ${props => props.theme.black};
   border-radius: 5px;
-  background-color: ${Colors.white};
+  background-color: ${props => props.theme.white};
   padding: 5px 10px;
-  border: ${props => props.invalid ? `1px solid ${Colors.red}` : `1px solid ${Colors.white}`};
+  border: ${props =>
+    props.invalid ? `1px solid ${props.theme.red}` : `1px solid ${props.theme.white}`};
   align-items: center;
 `
 
 const BigText = styled.Text`
   font-size: 18px;
   font-weight: 600;
-  color: ${Colors.black};
+  color: ${props => props.theme.black};
 `
 
 const DayCol = styled.View`
@@ -174,7 +173,7 @@ const ButtonWrapper = styled.View`
 `
 
 const AddButton = styled.TouchableOpacity`
-  background-color: ${Colors.blue};
+  background-color: ${props => props.theme.blue};
   border-radius: 20px;
   padding: 3px 10px;
 `
@@ -182,5 +181,5 @@ const AddButton = styled.TouchableOpacity`
 const AddButtonText = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: ${Colors.white};
+  color: ${props => props.theme.white};
 `
