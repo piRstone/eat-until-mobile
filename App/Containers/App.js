@@ -6,6 +6,12 @@ import storybook from '../../storybook'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import FeatherIcon from 'react-native-vector-icons/Feather'
+
+FontAwesomeIcon.loadFont()
+FeatherIcon.loadFont()
+
 // create our store
 const store = createStore()
 
