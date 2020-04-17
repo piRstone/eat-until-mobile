@@ -10,7 +10,7 @@ const colors = isDark => ({
   lightblue: '#e5efff',
   red: '#ea0000',
   green: '#3AC10A',
-  orange: '#F4B511'
-})
+  orange: '#F4B511',
+});
 
-export default colors
+export default colors;

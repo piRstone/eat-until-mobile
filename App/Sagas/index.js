@@ -1,29 +1,34 @@
-import { takeLatest, all } from 'redux-saga/effects'
-import API from '../Services/Api'
-import FixtureAPI from '../Services/FixtureApi'
-import DebugConfig from '../Config/DebugConfig'
+import { takeLatest, all } from 'redux-saga/effects';
+import API from '../Services/Api';
+import FixtureAPI from '../Services/FixtureApi';
+import DebugConfig from '../Config/DebugConfig';
 
 /* ------------- Types ------------- */
 
-import { StartupTypes } from '../Redux/StartupRedux'
-import { UserTypes } from '../Redux/UserRedux'
-import { ListsTypes } from '../Redux/ListsRedux'
-import { ProductsTypes } from '../Redux/ProductsRedux'
+import { StartupTypes } from '../Redux/StartupRedux';
+import { UserTypes } from '../Redux/UserRedux';
+import { ListsTypes } from '../Redux/ListsRedux';
+import { ProductsTypes } from '../Redux/ProductsRedux';
 
 /* ------------- Sagas ------------- */
 
-import { startup } from './StartupSagas'
-import { login, logout } from './UserSagas'
-import { retrieveLists, createList, removeList, updateName } from './ListsSagas'
-import { retrieveProducts, createProduct } from './ProductsSagas'
+import { startup } from './StartupSagas';
+import { login, logout } from './UserSagas';
+import {
+  retrieveLists,
+  createList,
+  removeList,
+  updateName,
+} from './ListsSagas';
+import { retrieveProducts, createProduct } from './ProductsSagas';
 
 /* ------------- API ------------- */
 
-const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
+const api = DebugConfig.useFixtures ? FixtureAPI : API.create();
 
 /* ------------- Connect Types To Sagas ------------- */
 
-export default function * root () {
+export default function* root() {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(UserTypes.LOGIN, login, api),
@@ -33,6 +38,6 @@ export default function * root () {
     takeLatest(ListsTypes.REMOVE, removeList, api),
     takeLatest(ListsTypes.UPDATE_NAME, updateName, api),
     takeLatest(ProductsTypes.REQUEST, retrieveProducts, api),
-    takeLatest(ProductsTypes.CREATE, createProduct, api)
-  ])
+    takeLatest(ProductsTypes.CREATE, createProduct, api),
+  ]);
 }

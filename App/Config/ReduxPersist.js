@@ -1,5 +1,5 @@
-import immutablePersistenceTransform from '../Services/ImmutablePersistenceTransform'
-import { AsyncStorage } from 'react-native'
+import immutablePersistenceTransform from '../Services/ImmutablePersistenceTransform';
+import { AsyncStorage } from 'react-native';
 
 // More info here:  https://shift.infinite.red/shipping-persistant-reducers-7341691232b1
 const REDUX_PERSIST = {
@@ -9,8 +9,8 @@ const REDUX_PERSIST = {
     key: 'primary',
     storage: AsyncStorage,
     whitelist: ['user', 'lists'],
-    transforms: [immutablePersistenceTransform]
-  }
-}
+    transforms: [immutablePersistenceTransform],
+  },
+};
 
-export default REDUX_PERSIST
+export default REDUX_PERSIST;

@@ -1,21 +1,24 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
-  login: ['email', 'password'],
-  logout: null,
-  setAccessToken: ['accessToken'],
-  request: null,
-  success: ['user'],
-  failure: ['error']
-}, {
-  prefix: 'USER/'
-})
+const { Types, Creators } = createActions(
+  {
+    login: ['email', 'password'],
+    logout: null,
+    setAccessToken: ['accessToken'],
+    request: null,
+    success: ['user'],
+    failure: ['error'],
+  },
+  {
+    prefix: 'USER/',
+  },
+);
 
-export const UserTypes = Types
-export default Creators
+export const UserTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------- */
 
@@ -24,55 +27,55 @@ export const INITIAL_STATE = Immutable({
   accessToken: undefined,
   isConnected: false,
   isLoading: false,
-  error: undefined
-})
+  error: undefined,
+});
 
 /* ------------- Selectors ------------- */
 
 export const UserSelectors = {
   user: state => state.user.data,
-  accessToken: state => state.user.accessToken
-}
+  accessToken: state => state.user.accessToken,
+};
 
 /* ------------- Reducers ------------- */
 
 export const login = state =>
   state.merge({
     isLoading: true,
-    error: undefined
-  })
+    error: undefined,
+  });
 
 export const logout = state =>
   state.merge({
     data: {},
     isConnected: false,
-    accessToken: undefined
-  })
+    accessToken: undefined,
+  });
 
 export const setAccessToken = (state, { accessToken }) =>
   state.merge({
     isLoading: false,
     accessToken,
-    isConnected: true
-  })
+    isConnected: true,
+  });
 
 export const request = state =>
   state.merge({
     isLoading: true,
-    error: undefined
-  })
+    error: undefined,
+  });
 
 export const success = (state, { user }) =>
   state.merge({
     isLoading: false,
-    data: user
-  })
+    data: user,
+  });
 
 export const failure = (state, { error }) =>
   state.merge({
     isLoading: false,
-    error
-  })
+    error,
+  });
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -82,5 +85,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_ACCESS_TOKEN]: setAccessToken,
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
-  [Types.FAILURE]: failure
-})
+  [Types.FAILURE]: failure,
+});

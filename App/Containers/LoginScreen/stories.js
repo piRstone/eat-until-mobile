@@ -1,8 +1,6 @@
-import React from 'react'
-import { storiesOf } from '@storybook/react-native'
+import React from 'react';
+import { storiesOf } from '@storybook/react-native';
 
-import { LoginScreen } from '.'
+import { LoginScreen } from '.';
 
-storiesOf('Containers/LoginScreen').add('Default', () => (
-  <LoginScreen />
-))
+storiesOf('Containers/LoginScreen').add('Default', () => <LoginScreen />);

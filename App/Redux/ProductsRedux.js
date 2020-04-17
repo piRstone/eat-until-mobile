@@ -1,5 +1,5 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -10,15 +10,15 @@ const { Types, Creators } = createActions(
     failure: ['error'],
     create: ['product'],
     createSuccess: ['product'],
-    createFailure: ['error']
+    createFailure: ['error'],
   },
   {
-    prefix: 'PRODUCTS/'
-  }
-)
+    prefix: 'PRODUCTS/',
+  },
+);
 
-export const ProductsTypes = Types
-export default Creators
+export const ProductsTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------- */
 
@@ -26,8 +26,8 @@ export const INITIAL_STATE = Immutable({
   data: [],
   isLoading: false,
   isCreateLoading: false,
-  error: undefined
-})
+  error: undefined,
+});
 
 /* ------------- Selectors ------------- */
 
@@ -40,38 +40,38 @@ export const INITIAL_STATE = Immutable({
 export const request = state =>
   state.merge({
     isLoading: true,
-    error: undefined
-  })
+    error: undefined,
+  });
 
 export const success = (state, { products }) =>
   state.merge({
     isLoading: false,
-    data: products
-  })
+    data: products,
+  });
 
 export const failure = (state, { error }) =>
   state.merge({
     isLoading: false,
-    error
-  })
+    error,
+  });
 
 export const create = state =>
   state.merge({
     isCreateLoading: true,
-    error: undefined
-  })
+    error: undefined,
+  });
 
 export const createSuccess = (state, { product }) =>
   state.merge({
     isCreateLoading: false,
-    data: [...state.data, product]
-  })
+    data: [...state.data, product],
+  });
 
 export const createFailure = (state, { error }) =>
   state.merge({
     isCreateLoading: false,
-    error
-  })
+    error,
+  });
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -81,5 +81,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FAILURE]: failure,
   [Types.CREATE]: create,
   [Types.CREATE_SUCCESS]: createSuccess,
-  [Types.CREATE_FAILURE]: createFailure
-})
+  [Types.CREATE_FAILURE]: createFailure,
+});

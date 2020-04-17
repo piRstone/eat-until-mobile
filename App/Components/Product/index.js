@@ -1,21 +1,21 @@
-import React from 'react'
-import { View } from 'react-native'
-import PropTypes from 'prop-types'
-import styled from 'styled-components/native'
-import moment from 'moment'
+import React from 'react';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import moment from 'moment';
 
-export function Product ({ data }) {
+export function Product({ data }) {
   const remainingDays = moment(data.expires_at, 'YYYY-MM-DD').diff(
     moment(),
-    'd'
-  )
-  let dayClass
+    'd',
+  );
+  let dayClass;
   if (remainingDays < 3) {
-    dayClass = 'danger'
+    dayClass = 'danger';
   } else if (remainingDays > 2 && remainingDays < 5) {
-    dayClass = 'warning'
+    dayClass = 'warning';
   } else {
-    dayClass = 'success'
+    dayClass = 'success';
   }
   return (
     <Wrapper>
@@ -27,14 +27,14 @@ export function Product ({ data }) {
       </View>
       <Days style={dayClass}>{remainingDays} j</Days>
     </Wrapper>
-  )
+  );
 }
 
 Product.propTypes = {
-  data: PropTypes.object.isRequired
-}
+  data: PropTypes.object.isRequired,
+};
 
-export default Product
+export default Product;
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -44,18 +44,18 @@ const Wrapper = styled.View`
   padding: 15px 10px;
   background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 5px;
-`
+`;
 
 const Name = styled.Text`
   font-size: 18px;
   color: ${props => props.theme.black};
-`
+`;
 
 const Date = styled.Text`
   font-size: 14px;
   color: ${props => props.theme.grey1};
   margin-top: 5px;
-`
+`;
 
 const Days = styled.Text`
   font-size: 22px;
@@ -66,4 +66,4 @@ const Days = styled.Text`
       : props.style === 'warning'
       ? props.theme.orange
       : props.theme.green};
-`
+`;

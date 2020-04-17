@@ -1,61 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components/native'
-import { connect } from 'react-redux'
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  FlatList
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
+import { connect } from 'react-redux';
+import { Keyboard, KeyboardAvoidingView, FlatList } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import UserActions from '../../Redux/UserRedux'
-import ListsActions from '../../Redux/ListsRedux'
-import AddButton from '../../Components/AddButton'
-import ListForm from '../../Components/ListForm'
+import UserActions from '../../Redux/UserRedux';
+import ListsActions from '../../Redux/ListsRedux';
+import AddButton from '../../Components/AddButton';
+import ListForm from '../../Components/ListForm';
 
-export function ListsScreen ({
+export function ListsScreen({
   navigation,
   logout,
   lists,
   isLoading,
   isCreateLoading,
   getLists,
-  createList
+  createList,
 }) {
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      getLists()
-    }, 10)
-  }, [])
+      getLists();
+    }, 10);
+  }, []);
 
   const handleListPress = list => {
-    navigation.navigate('ProductsScreen', { list })
-  }
+    navigation.navigate('ProductsScreen', { list });
+  };
 
   const handleSubmit = value => {
     if (value !== '') {
-      createList(value)
-      Keyboard.dismiss()
+      createList(value);
+      Keyboard.dismiss();
     }
-  }
+  };
 
   return (
     <Wrapper>
       <InnerWrapper>
         <Header>
           <UserPic onPress={logout}>
-            <UserPicIcon name='sign-out' size={20} />
+            <UserPicIcon name="sign-out" size={20} />
           </UserPic>
           <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
         <Title>Mes listes</Title>
-        <KeyboardAvoidingView
-          behavior='height'
-          enabled={showForm}
-        >
+        <KeyboardAvoidingView behavior="height" enabled={showForm}>
           {showForm && (
             <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
           )}
@@ -66,7 +59,7 @@ export function ListsScreen ({
             renderItem={({ item }) => (
               <List key={item.id} onPress={() => handleListPress(item)}>
                 <ListName>{item.name}</ListName>
-                <ChevronIcon name='chevron-right' size={16} />
+                <ChevronIcon name="chevron-right" size={16} />
               </List>
             )}
             keyExtractor={item => item.id.toString()}
@@ -74,7 +67,7 @@ export function ListsScreen ({
         </KeyboardAvoidingView>
       </InnerWrapper>
     </Wrapper>
-  )
+  );
 }
 
 ListsScreen.propTypes = {
@@ -83,31 +76,34 @@ ListsScreen.propTypes = {
   isLoading: PropTypes.bool,
   isCreateLoading: PropTypes.bool,
   getLists: PropTypes.func,
-  createList: PropTypes.func
-}
+  createList: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
   lists: state.lists.data,
   isLoading: state.lists.isLoading,
-  isCreateLoading: state.lists.isCreateLoading
-})
+  isCreateLoading: state.lists.isCreateLoading,
+});
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(UserActions.logout()),
   getLists: () => dispatch(ListsActions.request()),
-  createList: name => dispatch(ListsActions.create(name))
-})
+  createList: name => dispatch(ListsActions.create(name)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListsScreen)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ListsScreen);
 
 const Wrapper = styled.View`
   flex: 1;
   background-color: ${props => props.theme.backgroundColor};
-`
+`;
 
 const InnerWrapper = styled.SafeAreaView`
   margin: 40px 20px;
-`
+`;
 
 const Header = styled.View`
   flex-direction: row;
@@ -115,7 +111,7 @@ const Header = styled.View`
   justify-content: space-between;
   margin-bottom: 20px;
   width: 100%;
-`
+`;
 
 const UserPic = styled.TouchableOpacity`
   height: 40px;
@@ -124,18 +120,18 @@ const UserPic = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.whiteBackground};
-`
+`;
 
 const UserPicIcon = styled(Icon)`
   color: ${props => props.theme.black};
-`
+`;
 
 const Title = styled.Text`
   font-size: 30px;
   font-weight: bold;
   color: ${props => props.theme.black};
   margin-bottom: 20px;
-`
+`;
 
 const List = styled.TouchableOpacity`
   flex-direction: row;
@@ -144,14 +140,14 @@ const List = styled.TouchableOpacity`
   padding: 30px 10px;
   background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 20px;
-`
+`;
 
 const ListName = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: ${props => props.theme.black};
-`
+`;
 
 const ChevronIcon = styled(Icon)`
   color: ${props => props.theme.grey1};
-`
+`;
