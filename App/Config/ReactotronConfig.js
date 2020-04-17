@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Config from '../Config/DebugConfig';
 import Immutable from 'seamless-immutable';
 import Reactotron from 'reactotron-react-native';

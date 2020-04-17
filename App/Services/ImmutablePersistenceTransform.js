@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import R from 'ramda';
 import Immutable from 'seamless-immutable';
 

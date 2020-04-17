@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NavigationActions } from 'react-navigation';
 
 // gets the current screen from navigation state
