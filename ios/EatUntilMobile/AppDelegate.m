@@ -15,6 +15,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  for (NSString* family in [UIFont familyNames])
+  {
+    NSLog(@"%@", family);
+    for (NSString* name in [UIFont fontNamesForFamilyName: family])
+    {
+      NSLog(@" %@", name);
+    }
+  }
+
+  
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"EatUntilMobile"

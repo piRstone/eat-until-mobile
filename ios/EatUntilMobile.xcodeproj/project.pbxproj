@@ -12,6 +12,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		5ACD7A6C56E942044B50CB86 /* Pods_EatUntilMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD67CE937060E299B367C031 /* Pods_EatUntilMobile.framework */; };
+		816C3737244B831B00FD28DC /* SofiaProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 816C3736244B831B00FD28DC /* SofiaProRegular.otf */; };
+		816C3739244B832400FD28DC /* SofiaPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 816C3738244B832400FD28DC /* SofiaPro-Bold.otf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -301,6 +303,8 @@
 		3FE8369AAF87AE27D85DF39C /* Pods-EatUntilMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUntilMobile.debug.xcconfig"; path = "Target Support Files/Pods-EatUntilMobile/Pods-EatUntilMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		816C3736244B831B00FD28DC /* SofiaProRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SofiaProRegular.otf; sourceTree = "<group>"; };
+		816C3738244B832400FD28DC /* SofiaPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SofiaPro-Bold.otf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BD67CE937060E299B367C031 /* Pods_EatUntilMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUntilMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +484,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		816C372F244B7CE200FD28DC /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				816C3736244B831B00FD28DC /* SofiaProRegular.otf */,
+				816C3738244B832400FD28DC /* SofiaPro-Bold.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +524,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				816C372F244B7CE200FD28DC /* fonts */,
 				13B07FAE1A68108700A75B9A /* EatUntilMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* EatUntilMobileTests */,
@@ -925,6 +939,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				816C3737244B831B00FD28DC /* SofiaProRegular.otf in Resources */,
+				816C3739244B832400FD28DC /* SofiaPro-Bold.otf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
