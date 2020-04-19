@@ -1,0 +1,8 @@
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQHRlc3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbkB0ZXN0LmNvbSIsImV4cCI6MTU4NzQwMjY4OSwib3JpZ19pYXQiOjE1ODczMTYyODl9.lQqGShOzyeU0XW0j_-QdRqpFT-XI_XDqa_RJFEeKi-c",
+  "user": {
+    "id": 1,
+    "email": "admin@test.com",
+    "avatar_thumbnail_url": null
+  }
+}

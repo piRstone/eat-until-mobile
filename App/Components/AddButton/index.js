@@ -39,7 +39,7 @@ const Wrapper = styled.TouchableHighlight`
   height: 30px;
   width: 30px;
   border-radius: 20px;
-  background-color: ${props => props.theme.blue};
+  background-color: ${props => props.theme.primary};
   align-items: center;
   justify-content: center;
 `;

@@ -17,26 +17,26 @@ const create = (baseURL = 'http://localhost:8001/api') => {
     setAccessToken: accessToken =>
       api.setHeader('Authorization', `Bearer ${accessToken}`),
     removeAccessToken: () => api.deleteHeader('Authorization'),
-    login: data => api.post('/auth/login', data),
+    login: data => api.post('/token-auth', data),
     getLists: token => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.get('/lists');
+      return api.get('/inventories');
     },
     createList: (token, name) => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.post('/lists', { name });
+      return api.post('/inventories', { name });
     },
     updateListName: (token, id, name) => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.patch(`/lists/${id}`, { name });
+      return api.patch(`/inventories/${id}`, { name });
     },
     removeList: (token, id) => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.delete(`/lists/${id}`);
+      return api.delete(`/inventories/${id}`);
     },
-    getProducts: (token, listId) => {
+    getProducts: (token, inventoryId) => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.get(`/products/?list_id=${listId}`);
+      return api.get(`/products/?inventory_id=${inventoryId}`);
     },
     createProduct: (token, product) => {
       api.setHeader('Authorization', `Bearer ${token}`);

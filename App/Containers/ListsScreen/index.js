@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import UserActions from '../../Redux/UserRedux';
 import ListsActions from '../../Redux/ListsRedux';
-import AddButton from '../../Components/AddButton';
 import ListForm from '../../Components/ListForm';
 
 export function ListsScreen({
@@ -42,12 +41,11 @@ export function ListsScreen({
     <Wrapper>
       <InnerWrapper>
         <Header>
+          <Title>Mes listes</Title>
           <UserPic onPress={logout}>
             <UserPicIcon name="sign-out" size={20} />
           </UserPic>
-          <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
-        <Title>Mes listes</Title>
         <KeyboardAvoidingView behavior="height" enabled={showForm}>
           {showForm && (
             <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
@@ -66,6 +64,9 @@ export function ListsScreen({
           />
         </KeyboardAvoidingView>
       </InnerWrapper>
+      <CreateListButton onPress={() => setShowForm(!showForm)}>
+        <CreateListButtonText>Créer une liste</CreateListButtonText>
+      </CreateListButton>
     </Wrapper>
   );
 }
@@ -102,7 +103,8 @@ const Wrapper = styled.View`
 `;
 
 const InnerWrapper = styled.SafeAreaView`
-  margin: 40px 20px;
+  flex: 1;
+  margin: 50px 20px 40px 20px;
 `;
 
 const Header = styled.View`
@@ -130,14 +132,14 @@ const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 30px;
   color: ${props => props.theme.black};
-  margin-bottom: 20px;
+  padding-top: 10px;
 `;
 
 const List = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   border-radius: 10px;
-  padding: 30px 10px;
+  padding: 30px 10px 20px 10px;
   background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 20px;
 `;
@@ -150,4 +152,23 @@ const ListName = styled.Text`
 
 const ChevronIcon = styled(Icon)`
   color: ${props => props.theme.grey1};
+`;
+
+const CreateListButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 50px;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.primary};
+  padding-top: 5px;
+`;
+
+const CreateListButtonText = styled.Text`
+  font-family: 'SofiaPro-Bold';
+  font-size: 16px;
+  color: ${props => props.theme.white};
 `;
