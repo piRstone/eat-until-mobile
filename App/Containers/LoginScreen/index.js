@@ -97,8 +97,8 @@ const StyledActivityIndicator = styled.ActivityIndicator`
 `;
 
 const Title = styled.Text`
+  font-family: 'SofiaPro-Bold';
   font-size: 40px;
-  font-weight: bold;
   color: ${props => props.theme.black};
   margin-top: 30px;
   margin-bottom: 30px;
@@ -127,8 +127,8 @@ const StyledButton = styled.TouchableOpacity`
 `;
 
 const ButtonText = styled.Text`
+  font-family: 'SofiaPro-Bold';
   font-size: 18px;
-  font-weight: bold;
   color: ${props => props.theme.white};
 `;
 

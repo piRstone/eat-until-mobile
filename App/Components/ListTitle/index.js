@@ -39,6 +39,7 @@ ListTitle.propTypes = {
 export default ListTitle;
 
 const Title = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 16px;
   font-weight: 600;
   margin: 5px 0;

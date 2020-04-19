@@ -127,8 +127,8 @@ const UserPicIcon = styled(Icon)`
 `;
 
 const Title = styled.Text`
+  font-family: 'SofiaPro-Bold';
   font-size: 30px;
-  font-weight: bold;
   color: ${props => props.theme.black};
   margin-bottom: 20px;
 `;
@@ -143,8 +143,8 @@ const List = styled.TouchableOpacity`
 `;
 
 const ListName = styled.Text`
+  font-family: 'SofiaPro-Bold';
   font-size: 18px;
-  font-weight: bold;
   color: ${props => props.theme.black};
 `;
 

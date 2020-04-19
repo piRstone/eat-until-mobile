@@ -14,5 +14,6 @@ Button.propTypes = {
 export default Button;
 
 const StyledButton = styled.Button`
+  font-family: 'SofiaProRegular';
   color: #445764;
 `;

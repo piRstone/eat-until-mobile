@@ -47,19 +47,21 @@ const Wrapper = styled.View`
 `;
 
 const Name = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 18px;
   color: ${props => props.theme.black};
 `;
 
 const Date = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.grey1};
   margin-top: 5px;
 `;
 
 const Days = styled.Text`
+  font-family: 'SofiaPro-Bold';
   font-size: 22px;
-  font-weight: bold;
   color: ${props =>
     props.style === 'danger'
       ? props.theme.red

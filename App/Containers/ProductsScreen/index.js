@@ -175,6 +175,7 @@ const EmptyWrapper = styled.View`
 `;
 
 const EmptyState = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 16px;
   color: ${props => props.theme.grey1};
   margin-bottom: 10px;
@@ -190,6 +191,7 @@ const DangerButton = styled.TouchableOpacity`
 `;
 
 const DangerButtonText = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.red};
 `;

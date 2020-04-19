@@ -57,6 +57,7 @@ const StyledActivityIndicator = styled.ActivityIndicator`
 
 const Input = styled.TextInput`
   flex: 1;
+  font-family: 'SofiaProRegular';
   height: 35px;
   font-size: 18px;
   font-weight: 600;

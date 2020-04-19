@@ -12,6 +12,12 @@ import { Colors } from '../Themes';
 function RootContainer({ startup }) {
   const isDarkMode = useDarkMode();
 
+  const themeColors = Colors(isDarkMode);
+  const theme = {
+    ...themeColors,
+    fontFamily: 'SofiaProRegular',
+  };
+
   useEffect(() => {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
@@ -20,7 +26,7 @@ function RootContainer({ startup }) {
   }, []);
 
   return (
-    <ThemeProvider theme={Colors(isDarkMode)}>
+    <ThemeProvider theme={theme}>
       <Wrapper>
         <StatusBar barStyle="dark-content" />
         <ReduxNavigation />

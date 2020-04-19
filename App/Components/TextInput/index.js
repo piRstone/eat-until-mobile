@@ -27,6 +27,7 @@ const Wrapper = styled.View`
 `;
 
 const Label = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 12px;
   color: ${props => props.theme.grey1};
   margin: 0;
@@ -34,6 +35,7 @@ const Label = styled.Text`
 `;
 
 const StyledInput = styled.TextInput`
+  font-family: 'SofiaProRegular';
   font-size: 20px;
   color: ${props => props.theme.black};
 `;

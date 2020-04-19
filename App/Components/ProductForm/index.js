@@ -129,12 +129,14 @@ const Col = styled.View`
 `;
 
 const Label = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 12px;
   color: ${props => props.theme.black};
   margin-bottom: 5px;
 `;
 
 const Input = styled.TextInput`
+  font-family: 'SofiaProRegular';
   height: 35px;
   font-size: 18px;
   font-weight: 600;
@@ -150,6 +152,7 @@ const Input = styled.TextInput`
 `;
 
 const BigText = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 18px;
   font-weight: 600;
   color: ${props => props.theme.black};
@@ -161,12 +164,14 @@ const DayCol = styled.View`
 `;
 
 const NotifyDaysInput = styled(Input)`
+  font-family: 'SofiaProRegular';
   width: 70px;
   margin-right: 10px;
   text-align: center;
 `;
 
 const DayInput = styled(Input)`
+  font-family: 'SofiaProRegular';
   width: 100px;
 `;
 
@@ -183,6 +188,7 @@ const AddButton = styled.TouchableOpacity`
 `;
 
 const AddButtonText = styled.Text`
+  font-family: 'SofiaProRegular';
   font-size: 16px;
   font-weight: 600;
   color: ${props => props.theme.white};
