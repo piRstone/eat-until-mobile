@@ -122,7 +122,7 @@ const StyledButton = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 10px;
   background-color: ${props =>
-    props.disabled ? props.theme.grey2 : props.theme.blue};
+    props.disabled ? props.theme.grey2 : props.theme.primary};
   margin-top: 20px;
 `;
 

@@ -10,7 +10,7 @@ const colors = isDark => ({
   blue: '#0063F6',
   lightblue: '#e5efff',
   red: '#ea0000',
-  green: '#3AC10A',
+  green: '#18D873',
   orange: '#F4B511',
 });
 

@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import { Keyboard, KeyboardAvoidingView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import UserActions from '../../Redux/UserRedux';
 import ListsActions from '../../Redux/ListsRedux';
@@ -54,10 +55,11 @@ export function ListsScreen({
             data={lists}
             refreshing={isLoading}
             onRefresh={() => getLists()}
+            style={{ height: '80%' }}
             renderItem={({ item }) => (
               <List key={item.id} onPress={() => handleListPress(item)}>
                 <ListName>{item.name}</ListName>
-                <ChevronIcon name="chevron-right" size={16} />
+                <ChevronIcon name="chevron-right" size={20} />
               </List>
             )}
             keyExtractor={item => item.id.toString()}
@@ -150,7 +152,7 @@ const ListName = styled.Text`
   color: ${props => props.theme.black};
 `;
 
-const ChevronIcon = styled(Icon)`
+const ChevronIcon = styled(FeatherIcon)`
   color: ${props => props.theme.grey1};
 `;
 

@@ -36,7 +36,7 @@ const create = (baseURL = 'http://localhost:8001/api') => {
     },
     getProducts: (token, inventoryId) => {
       api.setHeader('Authorization', `Bearer ${token}`);
-      return api.get(`/products/?inventory_id=${inventoryId}`);
+      return api.get(`/products?inventory_id=${inventoryId}`);
     },
     createProduct: (token, product) => {
       api.setHeader('Authorization', `Bearer ${token}`);
