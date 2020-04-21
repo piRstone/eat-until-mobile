@@ -7,7 +7,6 @@ export function* login(api, action) {
   const { email, password } = action;
   const response = yield call(api.login, { email, password });
 
-  console.log('response', response);
   if (response.ok) {
     const { token, user } = response.data;
     api.setAccessToken(token);
@@ -22,4 +21,14 @@ export function* login(api, action) {
 export function* logout(api) {
   api.removeAccessToken();
   yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
+}
+
+export function* forgotPassword(api, { email }) {
+  const response = yield call(api.forgotPassword, email);
+
+  if (response.ok) {
+    yield put(UserActions.forgotPasswordSuccess());
+  } else {
+    yield put(UserActions.forgotPasswordFailure());
+  }
 }

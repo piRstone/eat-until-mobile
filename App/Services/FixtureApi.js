@@ -4,4 +4,7 @@ export default {
     ok: true,
     data: require('../Fixtures/login.json'),
   }),
+  forgotPassword: () => ({
+    ok: true,
+  }),
 };

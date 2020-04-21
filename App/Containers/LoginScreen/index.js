@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import { Keyboard, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -20,53 +21,55 @@ export function LoginScreen({ navigation, isLoading, login, error }) {
 
   return (
     <Wrapper>
-      <InnerWrapper>
-        <Title>Eat Until</Title>
-        <LogoImage source={logo} />
-        <Body>
-          <TextInput
-            label="Email"
-            onChangeText={setEmail}
-            inputProps={{
-              value: email,
-              autoCorrect: false,
-              autoCapitalize: 'none',
-              keyboardType: 'email-address',
-              placeholder: 'email@domaine.fr',
-              autoFocus: true,
-              returnKeyType: 'next',
-              onSubmitEditing: () => passwordFieldRef.current.focus(),
-            }}
-          />
-          <TextInput
-            label="Mot de passe"
-            onChangeText={setPassword}
-            noBorderBottom
-            inputProps={{
-              ref: passwordFieldRef,
-              value: password,
-              secureTextEntry: true,
-              placeholder: '********',
-              returnKeyType: 'done',
-              onSubmitEditing: onSubmit,
-            }}
-          />
-        </Body>
-        <ForgotPasswordWrapper
-          onPress={() =>
-            navigation.navigate('ForgotPasswordScreen', { email })
-          }>
-          <SmallLink>Mot de passe oublié</SmallLink>
-        </ForgotPasswordWrapper>
-        <StyledButton disabled={!email || !password} onPress={onSubmit}>
-          {isLoading ? (
-            <StyledActivityIndicator />
-          ) : (
-            <ButtonText>Connexion</ButtonText>
-          )}
-        </StyledButton>
-        {error && <ErrorMessage>{JSON.stringify(error)}</ErrorMessage>}
-      </InnerWrapper>
+      <ScrollView onScroll={() => Keyboard.dismiss()}>
+        <InnerWrapper>
+          <Title>Eat Until</Title>
+          <LogoImage source={logo} />
+          <Body>
+            <TextInput
+              label="Email"
+              onChangeText={setEmail}
+              inputProps={{
+                value: email,
+                autoCorrect: false,
+                autoCapitalize: 'none',
+                keyboardType: 'email-address',
+                placeholder: 'email@domaine.fr',
+                autoFocus: true,
+                returnKeyType: 'next',
+                onSubmitEditing: () => passwordFieldRef.current.focus(),
+              }}
+            />
+            <TextInput
+              label="Mot de passe"
+              onChangeText={setPassword}
+              noBorderBottom
+              inputProps={{
+                ref: passwordFieldRef,
+                value: password,
+                secureTextEntry: true,
+                placeholder: '********',
+                returnKeyType: 'done',
+                onSubmitEditing: onSubmit,
+              }}
+            />
+          </Body>
+          <ForgotPasswordWrapper
+            onPress={() =>
+              navigation.navigate('ForgotPasswordScreen', { email })
+            }>
+            <SmallLink>Mot de passe oublié</SmallLink>
+          </ForgotPasswordWrapper>
+          <StyledButton disabled={!email || !password} onPress={onSubmit}>
+            {isLoading ? (
+              <StyledActivityIndicator />
+            ) : (
+              <ButtonText>Connexion</ButtonText>
+            )}
+          </StyledButton>
+          {error && <ErrorMessage>{JSON.stringify(error)}</ErrorMessage>}
+        </InnerWrapper>
+      </ScrollView>
     </Wrapper>
   );
 }
@@ -97,7 +100,7 @@ const Wrapper = styled.SafeAreaView`
   background-color: ${props => props.theme.backgroundColor};
 `;
 
-const InnerWrapper = styled.SafeAreaView`
+const InnerWrapper = styled.View`
   align-items: center;
   justify-content: center;
 `;

@@ -18,6 +18,7 @@ const create = (baseURL = 'http://localhost:8001/api') => {
       api.setHeader('Authorization', `Bearer ${accessToken}`),
     removeAccessToken: () => api.deleteHeader('Authorization'),
     login: data => api.post('/token-auth', data),
+    forgotPassword: email => api.post('/users/forgot-password', { email }),
     getLists: token => {
       api.setHeader('Authorization', `Bearer ${token}`);
       return api.get('/inventories');

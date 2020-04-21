@@ -8,6 +8,9 @@ const { Types, Creators } = createActions(
     login: ['email', 'password'],
     logout: null,
     setAccessToken: ['accessToken'],
+    forgotPassword: ['email'],
+    forgotPasswordSuccess: null,
+    forgotPasswordFailure: null,
     request: null,
     success: ['user'],
     failure: ['error'],
@@ -28,6 +31,7 @@ export const INITIAL_STATE = Immutable({
   isConnected: false,
   isLoading: false,
   error: undefined,
+  resetPasswordState: undefined,
 });
 
 /* ------------- Selectors ------------- */
@@ -59,6 +63,24 @@ export const setAccessToken = (state, { accessToken }) =>
     isConnected: true,
   });
 
+export const forgotPassword = state =>
+  state.merge({
+    isLoading: true,
+    resetPasswordState: undefined,
+  });
+
+export const forgotPasswordSuccess = state =>
+  state.merge({
+    isLoading: false,
+    resetPasswordState: true,
+  });
+
+export const forgotPasswordFailure = state =>
+  state.merge({
+    isLoading: false,
+    resetPasswordState: false,
+  });
+
 export const request = state =>
   state.merge({
     isLoading: true,
@@ -83,6 +105,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN]: login,
   [Types.LOGOUT]: logout,
   [Types.SET_ACCESS_TOKEN]: setAccessToken,
+  [Types.FORGOT_PASSWORD]: forgotPassword,
+  [Types.FORGOT_PASSWORD_SUCCESS]: forgotPasswordSuccess,
+  [Types.FORGOT_PASSWORD_FAILURE]: forgotPasswordFailure,
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,
