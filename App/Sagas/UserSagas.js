@@ -21,5 +21,5 @@ export function* login(api, action) {
 
 export function* logout(api) {
   api.removeAccessToken();
-  yield put(NavigationActions.navigate({ routeName: 'LoginScreen' }));
+  yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
 }

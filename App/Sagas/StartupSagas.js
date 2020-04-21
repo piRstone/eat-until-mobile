@@ -8,6 +8,6 @@ export function* startup(api) {
 
   if (!accessToken) {
     api.setAccessToken(accessToken);
-    yield put(NavigationActions.navigate({ routeName: 'LoginScreen' }));
+    yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
   }
 }

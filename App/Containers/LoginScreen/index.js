@@ -5,8 +5,9 @@ import styled from 'styled-components/native';
 
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
+const logo = require('../../Images/logo.png');
 
-export function LoginScreen({ isLoading, login, error }) {
+export function LoginScreen({ navigation, isLoading, login, error }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordFieldRef = useRef();
@@ -21,6 +22,7 @@ export function LoginScreen({ isLoading, login, error }) {
     <Wrapper>
       <InnerWrapper>
         <Title>Eat Until</Title>
+        <LogoImage source={logo} />
         <Body>
           <TextInput
             label="Email"
@@ -39,6 +41,7 @@ export function LoginScreen({ isLoading, login, error }) {
           <TextInput
             label="Mot de passe"
             onChangeText={setPassword}
+            noBorderBottom
             inputProps={{
               ref: passwordFieldRef,
               value: password,
@@ -49,6 +52,12 @@ export function LoginScreen({ isLoading, login, error }) {
             }}
           />
         </Body>
+        <ForgotPasswordWrapper
+          onPress={() =>
+            navigation.navigate('ForgotPasswordScreen', { email })
+          }>
+          <SmallLink>Mot de passe oublié</SmallLink>
+        </ForgotPasswordWrapper>
         <StyledButton disabled={!email || !password} onPress={onSubmit}>
           {isLoading ? (
             <StyledActivityIndicator />
@@ -63,6 +72,7 @@ export function LoginScreen({ isLoading, login, error }) {
 }
 
 LoginScreen.propTypes = {
+  navigation: PropTypes.object,
   isLoading: PropTypes.bool,
   login: PropTypes.func,
   error: PropTypes.object,
@@ -101,15 +111,18 @@ const Title = styled.Text`
   font-size: 40px;
   color: ${props => props.theme.black};
   margin-top: 30px;
-  margin-bottom: 30px;
   text-align: center;
+`;
+
+const LogoImage = styled.Image`
+  height: 130px;
+  width: 130px;
+  margin-bottom: 30px;
 `;
 
 const Body = styled.View`
   width: 90%;
   flex-direction: column;
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #fff;
   overflow: hidden;
@@ -124,6 +137,7 @@ const StyledButton = styled.TouchableOpacity`
   background-color: ${props =>
     props.disabled ? props.theme.grey2 : props.theme.primary};
   margin-top: 20px;
+  padding-top: 7px;
 `;
 
 const ButtonText = styled.Text`
@@ -140,4 +154,18 @@ const ErrorMessage = styled.Text`
   padding: 2px 5px;
   border-radius: 3px;
   margin-top: 20px;
+`;
+
+const ForgotPasswordWrapper = styled.TouchableOpacity`
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 10px;
+  padding: 0 20px;
+`;
+
+const SmallLink = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 14px;
+  color: ${props => props.theme.primary};
 `;

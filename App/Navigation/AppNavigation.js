@@ -7,6 +7,7 @@ import {
 import LoginScreen from '../Containers/LoginScreen';
 import ListsScreen from '../Containers/ListsScreen';
 import ProductsScreen from '../Containers/ProductsScreen';
+import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen';
 
 const MainStack = createStackNavigator(
   {
@@ -19,9 +20,20 @@ const MainStack = createStackNavigator(
   },
 );
 
-const RootStack = createSwitchNavigator(
+const AuthenticationStack = createStackNavigator(
   {
     LoginScreen: { screen: LoginScreen },
+    ForgotPasswordScreen: { screen: ForgotPasswordScreen },
+  },
+  {
+    initialRouteName: 'LoginScreen',
+    headerMode: 'none',
+  },
+);
+
+const RootStack = createSwitchNavigator(
+  {
+    AuthStack: { screen: AuthenticationStack },
     Main: { screen: MainStack },
   },
   {
