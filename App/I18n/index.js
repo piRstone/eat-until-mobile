@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import DebugConfig from '../Config/DebugConfig';
 
 i18n.use(initReactI18next).init({
-  lng: 'en',
+  lng: 'fr',
   debug: DebugConfig.debugI18next,
   resources: {
     fr: {
