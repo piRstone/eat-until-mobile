@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Alert, FlatList, Keyboard, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { path } from 'ramda';
+import { withTranslation } from 'react-i18next';
 
 import ListsActions from '../../Redux/ListsRedux';
 import ProductsActions from '../../Redux/ProductsRedux';
@@ -14,6 +16,7 @@ import AddButton from '../../Components/AddButton';
 import ProductForm from '../../Components/ProductForm';
 
 export function ProductsScreen({
+  t,
   navigation,
   getProducts,
   products,
@@ -46,18 +49,14 @@ export function ProductsScreen({
   };
 
   const onDeleteListRequest = () => {
-    Alert.alert(
-      'Supprimer la liste',
-      "Si vous supprimez cette liste, tous les produits qu'elle contient seront supprimés eux aussi.",
-      [
-        { text: 'Annuler' },
-        {
-          text: 'Supprimer',
-          onPress: () => removeList(list.id),
-          style: 'destructive',
-        },
-      ],
-    );
+    Alert.alert(t('products:deleteList'), t('products:deleteListText'), [
+      { text: t('products:cancel') },
+      {
+        text: t('products:delete'),
+        onPress: () => removeList(list.id),
+        style: 'destructive',
+      },
+    ]);
   };
 
   const onUpdateName = name => {
@@ -77,7 +76,7 @@ export function ProductsScreen({
         {showForm && <ProductForm onSubmit={handleSubmit} />}
         {isLoading && !products.length ? (
           <EmptyWrapper>
-            <EmptyState>Récupération des produits...</EmptyState>
+            <EmptyState>{t('products:productsRetrieval')}</EmptyState>
             <StyledActivityIndicator />
           </EmptyWrapper>
         ) : (
@@ -92,15 +91,13 @@ export function ProductsScreen({
               />
             ) : (
               <EmptyWrapper>
-                <EmptyState>
-                  Il n'y a aucun produit dans votre liste.
-                </EmptyState>
+                <EmptyState>{t('products:noProducts')}</EmptyState>
               </EmptyWrapper>
             )}
           </View>
         )}
         <DangerButton onPress={onDeleteListRequest}>
-          <DangerButtonText>Supprimer la liste</DangerButtonText>
+          <DangerButtonText>{t('products:deleteList')}</DangerButtonText>
         </DangerButton>
       </InnerWrapper>
     </Wrapper>
@@ -108,6 +105,7 @@ export function ProductsScreen({
 }
 
 ProductsScreen.propTypes = {
+  t: PropTypes.func,
   navigation: PropTypes.object.isRequired,
   products: PropTypes.array,
   isLoading: PropTypes.bool,
@@ -129,9 +127,14 @@ const mapDispatchToProps = dispatch => ({
   updateListName: (id, name) => dispatch(ListsActions.updateName(id, name)),
 });
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  withTranslation(),
 )(ProductsScreen);
 
 const Wrapper = styled.View`

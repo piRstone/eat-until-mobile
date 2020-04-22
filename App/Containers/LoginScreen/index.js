@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
 const logo = require('../../Images/logo.png');
 
-export function LoginScreen({ navigation, isLoading, login, error }) {
+export function LoginScreen({ t, navigation, isLoading, login, error }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordFieldRef = useRef();
@@ -36,14 +38,14 @@ export function LoginScreen({ navigation, isLoading, login, error }) {
                 autoCorrect: false,
                 autoCapitalize: 'none',
                 keyboardType: 'email-address',
-                placeholder: 'email@domaine.fr',
+                placeholder: t('login:emailPlaceholder'),
                 autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: () => passwordFieldRef.current.focus(),
               }}
             />
             <TextInput
-              label="Mot de passe"
+              label={t('login:password')}
               onChangeText={setPassword}
               noBorderBottom
               inputProps={{
@@ -60,13 +62,13 @@ export function LoginScreen({ navigation, isLoading, login, error }) {
             onPress={() =>
               navigation.navigate('ForgotPasswordScreen', { email })
             }>
-            <SmallLink>Mot de passe oublié</SmallLink>
+            <SmallLink>{t('login:forgotPassword')}</SmallLink>
           </ForgotPasswordWrapper>
           <StyledButton disabled={!email || !password} onPress={onSubmit}>
             {isLoading ? (
               <StyledActivityIndicator />
             ) : (
-              <ButtonText>Connexion</ButtonText>
+              <ButtonText>{t('login:signIn')}</ButtonText>
             )}
           </StyledButton>
           {error && <ErrorMessage>{JSON.stringify(error)}</ErrorMessage>}
@@ -92,9 +94,14 @@ const mapDispatchToProps = dispatch => ({
   login: (email, password) => dispatch(UserActions.login(email, password)),
 });
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  withTranslation(),
 )(LoginScreen);
 
 const Wrapper = styled.SafeAreaView`

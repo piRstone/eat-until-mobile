@@ -1,0 +1,8 @@
+{
+  "productsRetrieval": "Products retrieval...",
+  "noProducts": "There is no products in your list.",
+  "deleteList": "Delete list",
+  "deleteListText": "If you delete this list, all the products will be deleted too.",
+  "cancel": "Cancel",
+  "delete": "Delete"
+}

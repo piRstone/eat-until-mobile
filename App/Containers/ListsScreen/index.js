@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Keyboard, KeyboardAvoidingView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
 import ListsActions from '../../Redux/ListsRedux';
 import ListForm from '../../Components/ListForm';
 
 export function ListsScreen({
+  t,
   navigation,
   logout,
   lists,
@@ -42,7 +45,7 @@ export function ListsScreen({
     <Wrapper>
       <InnerWrapper>
         <Header>
-          <Title>Mes listes</Title>
+          <Title>{t('lists:title')}</Title>
           <UserPic onPress={logout}>
             <UserPicIcon name="sign-out" size={20} />
           </UserPic>
@@ -67,13 +70,14 @@ export function ListsScreen({
         </KeyboardAvoidingView>
       </InnerWrapper>
       <CreateListButton onPress={() => setShowForm(!showForm)}>
-        <CreateListButtonText>Créer une liste</CreateListButtonText>
+        <CreateListButtonText>{t('lists:create')}</CreateListButtonText>
       </CreateListButton>
     </Wrapper>
   );
 }
 
 ListsScreen.propTypes = {
+  t: PropTypes.func,
   lists: PropTypes.arrayOf(PropTypes.object),
   logout: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -94,9 +98,14 @@ const mapDispatchToProps = dispatch => ({
   createList: name => dispatch(ListsActions.create(name)),
 });
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  withTranslation(),
 )(ListsScreen);
 
 const Wrapper = styled.View`

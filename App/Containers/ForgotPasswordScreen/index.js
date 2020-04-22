@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { path } from 'ramda';
 import Icon from 'react-native-vector-icons/Feather';
+import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
@@ -12,19 +14,13 @@ import TextInput from '../../Components/TextInput';
 const illustration = require('../../Images/blob_and_key.png');
 
 export function ForgotPasswordScreen({
+  t,
   navigation,
   isLoading,
   resetPasswordState,
   submitRequest,
 }) {
   const [userEmail, setUserEmail] = useState('');
-
-  const text =
-    'Saisissez votre adresse email pour recevoir les instructions pour réinitialiser votre mot de passe';
-  const successText =
-    'Un email a été envoyé à cette adresse si un compte y est associé.';
-  const failureText =
-    'Une erreur est survenue. Veuillez réessayer ultérieurement.';
 
   useEffect(() => {
     const email = path(['state', 'params', 'email'], navigation);
@@ -49,10 +45,10 @@ export function ForgotPasswordScreen({
             <StyledBackButton onPress={() => navigation.goBack()}>
               <StyledChevron name="chevron-left" size={35} />
             </StyledBackButton>
-            <Title>Mot de passe oublié</Title>
+            <Title>{t('forgotPassword:title')}</Title>
           </TitleWrapper>
           <StyledIllu source={illustration} resizeMode="contain" />
-          <Text>{text}</Text>
+          <Text>{t('forgotPassword:explanationText')}</Text>
           <Form>
             <TextInput
               label="Email"
@@ -63,7 +59,7 @@ export function ForgotPasswordScreen({
                 autoCorrect: false,
                 autoCapitalize: 'none',
                 keyboardType: 'email-address',
-                placeholder: 'email@domaine.fr',
+                placeholder: t('forgotPassword:emailPlaceholder'),
                 autoFocus: true,
                 returnKeyType: 'done',
                 onSubmitEditing: onSubmit,
@@ -74,12 +70,14 @@ export function ForgotPasswordScreen({
             {isLoading ? (
               <StyledActivityIndicator />
             ) : (
-              <ButtonText>Réinitialiser</ButtonText>
+              <ButtonText>{t('forgotPassword:reset')}</ButtonText>
             )}
           </StyledButton>
           {resetPasswordState !== undefined && (
             <StatusMessage isOk={resetPasswordState}>
-              {resetPasswordState ? successText : failureText}
+              {resetPasswordState
+                ? t('forgotPassword:successText')
+                : t('forgotPassword:failureText')}
             </StatusMessage>
           )}
         </InnerWrapper>
@@ -89,6 +87,7 @@ export function ForgotPasswordScreen({
 }
 
 ForgotPasswordScreen.propTypes = {
+  t: PropTypes.func,
   navigation: PropTypes.object,
   isLoading: PropTypes.bool,
   resetPasswordState: PropTypes.bool,
@@ -104,9 +103,14 @@ const mapDispatchToProps = dispatch => ({
   submitRequest: email => dispatch(UserActions.forgotPassword(email)),
 });
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  withTranslation(),
 )(ForgotPasswordScreen);
 
 const Wrapper = styled.SafeAreaView`

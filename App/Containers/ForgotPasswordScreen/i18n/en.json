@@ -1,0 +1,8 @@
+{
+  "title": "Forgotten password",
+  "explanationText": "Fill in your email address to receive the instructions to reset your password.",
+  "emailPlaceholder": "email@domain.com",
+  "reset": "Reset",
+  "successText": "An email has been sent at this address if an account is associated.",
+  "failureText": "An error occurred. Please retry later."
+}

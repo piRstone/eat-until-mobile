@@ -1,0 +1,8 @@
+{
+  "title": "Mot de passe oublié",
+  "explanationText": "Saisissez votre adresse email pour recevoir les instructions pour réinitialiser votre mot de passe.",
+  "emailPlaceholder": "email@domaine.fr",
+  "reset": "Réinitialiser",
+  "successText": "Un email a été envoyé à cette adresse si un compte y est associé.",
+  "failureText": "Une erreur est survenue. Veuillez réessayer ultérieurement."
+}
