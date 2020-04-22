@@ -12,7 +12,7 @@ const { Types, Creators } = createActions(
     createSuccess: ['list'],
     createFailure: ['error'],
     remove: ['id'],
-    removeSuccess: null,
+    removeSuccess: ['id'],
     removeFailure: ['error'],
     updateName: ['id', 'name'],
     updateNameSuccess: ['id', 'name'],
@@ -87,12 +87,12 @@ export const remove = state =>
   });
 
 export const removeSuccess = (state, { id }) => {
-  const list = [...state.data];
+  const lists = [...state.data];
   const i = state.data.findIndex(l => l.id === id);
-  if (i > -1) list.splice(i, 1);
+  if (i > -1) lists.splice(i, 1);
   return state.merge({
     isCreateLoading: false,
-    data: list,
+    data: lists,
   });
 };
 
@@ -111,11 +111,12 @@ export const updateName = state =>
 export const updateNameSuccess = (state, { id, name }) => {
   const index = state.data.findIndex(l => l.id === id);
   const data = [...state.data];
-  data[index].name = name;
-  console.tron.warn(name);
+  const list = data[index];
+  const updatedList = Immutable.set(list, 'name', name);
+  const newData = Immutable.set(data, index, updatedList);
   return state.merge({
     isNameUpdateLoading: false,
-    data,
+    data: newData,
   });
 };
 

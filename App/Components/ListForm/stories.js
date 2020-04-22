@@ -4,6 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import ListForm from '.';
 
-storiesOf('Components/ListForm')
+storiesOf('Components/ListForm', module)
   .add('Default', () => <ListForm onSubmit={action('submitted')} />)
   .add('Loading', () => <ListForm onSubmit={action('submitted')} isLoading />);

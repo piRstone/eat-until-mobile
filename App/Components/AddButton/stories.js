@@ -13,6 +13,6 @@ const Wrapper = s => (
 
 addDecorator(Wrapper);
 
-storiesOf('Components/AddButton')
+storiesOf('Components/AddButton', module)
   .add('Default', () => <AddButton onPress={action('pressed')} />)
   .add('Opened', () => <AddButton opened onPress={action('pressed')} />);

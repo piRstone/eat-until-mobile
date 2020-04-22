@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { ProductsScreen } from '.';
 
-storiesOf('Containers/ProductsScreen')
+storiesOf('Containers/ProductsScreen', module)
   .add('Default', () => (
     <ProductsScreen {...requiredProps} products={products} />
   ))

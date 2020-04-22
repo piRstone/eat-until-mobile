@@ -4,6 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import ProductForm from '.';
 
-storiesOf('Components/ProductForm').add('Default', () => (
+storiesOf('Components/ProductForm', module).add('Default', () => (
   <ProductForm onSubmit={() => action('onSubmit')} />
 ));

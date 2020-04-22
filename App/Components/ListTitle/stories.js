@@ -4,6 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import ListTitle from '.';
 
-storiesOf('Components/ListTitle').add('Default', () => (
+storiesOf('Components/ListTitle', module).add('Default', () => (
   <ListTitle title="Ma liste" onSubmit={action('onSubmit')} />
 ));

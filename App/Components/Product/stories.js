@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import Product from '.';
 
-storiesOf('Components/Product')
+storiesOf('Components/Product', module)
   .add('Default', () => <Product data={product} />)
   .add('Warning', () => <Product data={productWarning} />)
   .add('Danger', () => <Product data={productDanger} />);

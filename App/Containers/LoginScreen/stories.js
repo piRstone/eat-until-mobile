@@ -3,4 +3,6 @@ import { storiesOf } from '@storybook/react-native';
 
 import { LoginScreen } from '.';
 
-storiesOf('Containers/LoginScreen').add('Default', () => <LoginScreen />);
+storiesOf('Containers/LoginScreen', module).add('Default', () => (
+  <LoginScreen />
+));

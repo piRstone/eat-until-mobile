@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/AddButton Default 1`] = `null`;
+
+exports[`Storyshots Components/AddButton Opened 1`] = `null`;
+
+exports[`Storyshots Components/Button Default 1`] = `null`;
+
+exports[`Storyshots Components/ListForm Default 1`] = `null`;
+
+exports[`Storyshots Components/ListForm Loading 1`] = `null`;
+
+exports[`Storyshots Components/ListTitle Default 1`] = `null`;
+
+exports[`Storyshots Components/Product Danger 1`] = `null`;
+
+exports[`Storyshots Components/Product Default 1`] = `null`;
+
+exports[`Storyshots Components/Product Warning 1`] = `null`;
+
+exports[`Storyshots Components/ProductForm Default 1`] = `null`;
+
+exports[`Storyshots Components/TextInput Default 1`] = `null`;
+
+exports[`Storyshots Containers/ListsScreen Default 1`] = `null`;
+
+exports[`Storyshots Containers/LoginScreen Default 1`] = `null`;
+
+exports[`Storyshots Containers/ProductsScreen Default 1`] = `null`;
+
+exports[`Storyshots Containers/ProductsScreen Empty 1`] = `null`;
+
+exports[`Storyshots Containers/ProductsScreen Loading 1`] = `null`;

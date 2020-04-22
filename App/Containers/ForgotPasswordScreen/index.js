@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Keyboard, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { path } from 'ramda';
 import Icon from 'react-native-vector-icons/Feather';
@@ -41,7 +41,9 @@ export function ForgotPasswordScreen({
 
   return (
     <Wrapper>
-      <ScrollView onScroll={() => Keyboard.dismiss()}>
+      <ScrollView
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="always">
         <InnerWrapper>
           <TitleWrapper>
             <StyledBackButton onPress={() => navigation.goBack()}>

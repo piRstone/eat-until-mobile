@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { Keyboard, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
@@ -21,7 +21,9 @@ export function LoginScreen({ navigation, isLoading, login, error }) {
 
   return (
     <Wrapper>
-      <ScrollView onScroll={() => Keyboard.dismiss()}>
+      <ScrollView
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps="always">
         <InnerWrapper>
           <Title>Eat Until</Title>
           <LogoImage source={logo} />

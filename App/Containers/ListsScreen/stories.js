@@ -4,6 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import { ListsScreen } from '.';
 
-storiesOf('Containers/ListsScreen').add('Default', () => (
+storiesOf('Containers/ListsScreen', module).add('Default', () => (
   <ListsScreen logout={action('logout')} />
 ));

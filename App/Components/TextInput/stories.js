@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import TextInput from '.';
 
-storiesOf('Components/TextInput').add('Default', () => (
+storiesOf('Components/TextInput', module).add('Default', () => (
   <TextInput
     label="Identifiant"
     onChangeText={action('onChangeText')}

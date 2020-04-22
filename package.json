@@ -97,7 +97,6 @@
   "jest": {
     "preset": "react-native",
     "testMatch": [
-      "<rootDir>/Tests/**/*.js",
       "**/?(*.)(spec|test).js?(x)"
     ],
     "testPathIgnorePatterns": [
@@ -114,20 +113,5 @@
       "<rootDir>/Tests/Setup"
     ]
   },
-  "config": {},
-  "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "describe",
-      "test",
-      "jest",
-      "expect",
-      "fetch",
-      "navigator",
-      "__DEV__",
-      "XMLHttpRequest",
-      "FormData",
-      "React$Element"
-    ]
-  }
+  "config": {}
 }
