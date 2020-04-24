@@ -2,5 +2,7 @@
   "emailPlaceholder": "email@domain.com",
   "password": "Password",
   "forgotPassword": "Forgot password",
-  "signIn": "Sign in"
+  "signIn": "Sign in",
+  "wrongEmailOrPassword": "Wrong email or password",
+  "anErrorOccurred": "An error occurred"
 }

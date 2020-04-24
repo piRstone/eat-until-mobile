@@ -71,7 +71,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
               <ButtonText>{t('login:signIn')}</ButtonText>
             )}
           </StyledButton>
-          {error && <ErrorMessage>{JSON.stringify(error)}</ErrorMessage>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
         </InnerWrapper>
       </ScrollView>
     </Wrapper>
@@ -82,7 +82,7 @@ LoginScreen.propTypes = {
   navigation: PropTypes.object,
   isLoading: PropTypes.bool,
   login: PropTypes.func,
-  error: PropTypes.object,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
@@ -159,13 +159,16 @@ const ButtonText = styled.Text`
 `;
 
 const ErrorMessage = styled.Text`
+  font-family: 'SofiaPro-Bold';
+  text-align: center;
   width: 90%;
-  font-size: 12px;
+  font-size: 14px;
   color: ${props => props.theme.white};
   background-color: ${props => props.theme.red};
-  padding: 2px 5px;
-  border-radius: 3px;
+  padding: 7px 5px 0;
+  border-radius: 4px;
   margin-top: 20px;
+  overflow: hidden;
 `;
 
 const ForgotPasswordWrapper = styled.TouchableOpacity`

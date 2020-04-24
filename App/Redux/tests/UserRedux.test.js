@@ -1,3 +1,5 @@
+import Immutable from 'seamless-immutable';
+
 import Actions, { reducer, INITIAL_STATE } from '../UserRedux';
 
 describe('UserRedux', () => {
@@ -70,5 +72,16 @@ describe('UserRedux', () => {
 
     expect(state.error).toEqual(error);
     expect(state.isLoading).toBeFalsy();
+  });
+
+  test('clearErrors', () => {
+    const initialState = Immutable({
+      error: 'An error occurred',
+      resetPasswordState: false,
+    });
+    const state = reducer(initialState, Actions.clearErrors());
+
+    expect(state.error).toBeUndefined();
+    expect(state.resetPasswordState).toBeUndefined();
   });
 });

@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
+import i18n from 'i18next';
 
 import UserActions from '../Redux/UserRedux';
 
@@ -14,7 +15,11 @@ export function* login(api, action) {
     yield put(UserActions.success(user));
     yield put(NavigationActions.navigate({ routeName: 'Main' }));
   } else {
-    yield put(UserActions.failure(response.data));
+    let errorMessage = i18n.t('login:anErrorOccurred');
+    if (response.status === 400) {
+      errorMessage = i18n.t('login:wrongEmailOrPassword');
+    }
+    yield put(UserActions.failure(errorMessage));
   }
 }
 

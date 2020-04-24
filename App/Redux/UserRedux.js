@@ -14,6 +14,7 @@ const { Types, Creators } = createActions(
     request: null,
     success: ['user'],
     failure: ['error'],
+    clearErrors: null,
   },
   {
     prefix: 'USER/',
@@ -99,6 +100,12 @@ export const failure = (state, { error }) =>
     error,
   });
 
+export const clearErrors = state =>
+  state.merge({
+    error: undefined,
+    resetPasswordState: undefined,
+  });
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -111,4 +118,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,
+  [Types.CLEAR_ERRORS]: clearErrors,
 });
