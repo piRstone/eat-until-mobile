@@ -16,16 +16,16 @@ describe('UserRedux', () => {
     const state = reducer(INITIAL_STATE, Actions.logout());
 
     expect(state.data).toEqual({});
-    expect(state.accessToken).toBeUndefined();
+    expect(state.token).toBeUndefined();
     expect(state.isConnected).toBeFalsy();
   });
 
-  test('setAccessToken', () => {
+  test('setToken', () => {
     const token = 'dlkfhselfkjdsflskfjhdkf';
-    const state = reducer(INITIAL_STATE, Actions.setAccessToken(token));
+    const state = reducer(INITIAL_STATE, Actions.setToken(token));
 
     expect(state.isLoading).toBeFalsy();
-    expect(state.accessToken).toEqual(token);
+    expect(state.token).toEqual(token);
     expect(state.isConnected).toBeTruthy();
   });
 

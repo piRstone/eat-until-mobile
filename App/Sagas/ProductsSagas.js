@@ -4,8 +4,7 @@ import { UserSelectors } from '../Redux/UserRedux';
 import ProductsActions from '../Redux/ProductsRedux';
 
 export function* retrieveProducts(api, { listId }) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.getProducts, accessToken, listId);
+  const response = yield call(api.getProducts, listId);
 
   if (response.ok) {
     yield put(ProductsActions.success(response.data));
@@ -15,8 +14,6 @@ export function* retrieveProducts(api, { listId }) {
 }
 
 export function* createProduct(api, action) {
-  const accessToken = yield select(UserSelectors.accessToken);
-
   const { name, expiresAt, notifyBefore, listId } = action.product;
   const product = {
     name,
@@ -27,7 +24,7 @@ export function* createProduct(api, action) {
     code_value: '0000000000000', // TODO: set dynamic code
     code_type: 'ean13', // TODO: set dynamic code type
   };
-  const response = yield call(api.createProduct, accessToken, product);
+  const response = yield call(api.createProduct, product);
 
   if (response.ok) {
     yield put(ProductsActions.createSuccess(response.data.data));
@@ -37,8 +34,7 @@ export function* createProduct(api, action) {
 }
 
 export function* removeProduct(api, { id }) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.removeProduct, accessToken, id);
+  const response = yield call(api.removeProduct, id);
 
   if (response.ok) {
     yield put(ProductsActions.removeSuccess(id));

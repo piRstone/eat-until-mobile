@@ -10,8 +10,8 @@ export function* login(api, action) {
 
   if (response.ok) {
     const { token, user } = response.data;
-    api.setAccessToken(token);
-    yield put(UserActions.setAccessToken(token));
+    yield call(api.setToken, token);
+    yield put(UserActions.setToken(token));
     yield put(UserActions.success(user));
     yield put(NavigationActions.navigate({ routeName: 'Main' }));
   } else {
@@ -24,7 +24,7 @@ export function* login(api, action) {
 }
 
 export function* logout(api) {
-  api.removeAccessToken();
+  api.removeToken();
   yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
 }
 

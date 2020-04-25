@@ -5,8 +5,7 @@ import { UserSelectors } from '../Redux/UserRedux';
 import ListsActions from '../Redux/ListsRedux';
 
 export function* retrieveLists(api) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.getLists, accessToken);
+  const response = yield call(api.getLists);
 
   if (response.ok) {
     yield put(ListsActions.success(response.data));
@@ -16,8 +15,7 @@ export function* retrieveLists(api) {
 }
 
 export function* createList(api, { name }) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.createList, accessToken, name);
+  const response = yield call(api.createList, name);
 
   if (response.ok) {
     yield put(ListsActions.createSuccess(response.data.data));
@@ -27,8 +25,7 @@ export function* createList(api, { name }) {
 }
 
 export function* removeList(api, { id }) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.removeList, accessToken, id);
+  const response = yield call(api.removeList, id);
 
   if (response.ok) {
     yield put(ListsActions.removeSuccess(id));
@@ -40,8 +37,7 @@ export function* removeList(api, { id }) {
 }
 
 export function* updateName(api, { id, name }) {
-  const accessToken = yield select(UserSelectors.accessToken);
-  const response = yield call(api.updateListName, accessToken, id, name);
+  const response = yield call(api.updateListName, id, name);
 
   if (response.ok) {
     yield put(ListsActions.updateNameSuccess(id, name));

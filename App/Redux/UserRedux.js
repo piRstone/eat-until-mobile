@@ -7,7 +7,7 @@ const { Types, Creators } = createActions(
   {
     login: ['email', 'password'],
     logout: null,
-    setAccessToken: ['accessToken'],
+    setToken: ['token'],
     forgotPassword: ['email'],
     forgotPasswordSuccess: null,
     forgotPasswordFailure: null,
@@ -28,7 +28,7 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   data: {},
-  accessToken: undefined,
+  token: undefined,
   isConnected: false,
   isLoading: false,
   error: undefined,
@@ -39,7 +39,7 @@ export const INITIAL_STATE = Immutable({
 
 export const UserSelectors = {
   user: state => state.user.data,
-  accessToken: state => state.user.accessToken,
+  token: state => state.user.token,
 };
 
 /* ------------- Reducers ------------- */
@@ -54,13 +54,13 @@ export const logout = state =>
   state.merge({
     data: {},
     isConnected: false,
-    accessToken: undefined,
+    token: undefined,
   });
 
-export const setAccessToken = (state, { accessToken }) =>
+export const setToken = (state, { token }) =>
   state.merge({
     isLoading: false,
-    accessToken,
+    token,
     isConnected: true,
   });
 
@@ -111,7 +111,7 @@ export const clearErrors = state =>
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN]: login,
   [Types.LOGOUT]: logout,
-  [Types.SET_ACCESS_TOKEN]: setAccessToken,
+  [Types.SET_TOKEN]: setToken,
   [Types.FORGOT_PASSWORD]: forgotPassword,
   [Types.FORGOT_PASSWORD_SUCCESS]: forgotPasswordSuccess,
   [Types.FORGOT_PASSWORD_FAILURE]: forgotPasswordFailure,

@@ -14,42 +14,23 @@ const create = (baseURL = 'http://localhost:8001/api') => {
   });
 
   return {
-    setAccessToken: accessToken =>
-      api.setHeader('Authorization', `Bearer ${accessToken}`),
-    removeAccessToken: () => api.deleteHeader('Authorization'),
+    setToken: token => api.setHeader('Authorization', `Bearer ${token}`),
+    removeToken: () => api.deleteHeader('Authorization'),
+    verifyToken: token => api.post('/token-verify', { token }),
+    refreshToken: token => api.post('/token-refresh', { token }),
     login: data => api.post('/token-auth', data),
     forgotPassword: email => {
       api.deleteHeader('Authorization');
       return api.post('/users/forgot-password', { email });
     },
-    getLists: token => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.get('/inventories');
-    },
-    createList: (token, name) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.post('/inventories', { name });
-    },
-    updateListName: (token, id, name) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.patch(`/inventories/${id}`, { name });
-    },
-    removeList: (token, id) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.delete(`/inventories/${id}`);
-    },
-    getProducts: (token, inventoryId) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.get(`/products?inventory_id=${inventoryId}`);
-    },
-    createProduct: (token, product) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.post('/products', product);
-    },
-    removeProduct: (token, id) => {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      return api.delete(`/products/${id}`);
-    },
+    getLists: () => api.get('/inventories'),
+    createList: name => api.post('/inventories', { name }),
+    updateListName: (id, name) => api.patch(`/inventories/${id}`, { name }),
+    removeList: id => api.delete(`/inventories/${id}`),
+    getProducts: inventoryId =>
+      api.get(`/products?inventory_id=${inventoryId}`),
+    createProduct: product => api.post('/products', product),
+    removeProduct: id => api.delete(`/products/${id}`),
   };
 };
 
