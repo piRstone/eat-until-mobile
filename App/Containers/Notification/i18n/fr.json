@@ -1,0 +1,5 @@
+{
+  "logoutSuccess": "Déconnecté(e) avec succès",
+  "forceLogout": "Une erreur s'est produite. Merci de vous reconnecter.",
+  "serverError": "Une erreur serveur est survenue. Merci de réessayer dans quelques instants."
+}

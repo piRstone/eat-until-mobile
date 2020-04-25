@@ -9485,10 +9485,10 @@ react-native-datepicker@^1.7.2:
   dependencies:
     moment "^2.22.0"
 
-react-native-device-info@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.2.2.tgz#777388b8cff4594c8db2ea3a53f2f1f9e2c611a1"
-  integrity sha512-2b0TycUJbW/9T7L070L6q4+ce8guD4c0c8mWWjiVNuvCrZVf7VNomvNk1BqIVXcnYbZO43V0SVN6z1fvp2HTyg==
+react-native-device-info@5.5.6:
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.5.6.tgz#139466e6e995e512bb03d5bdeef59bd4cfe21dcf"
+  integrity sha512-3slUaygctIs1UqsTeZIMpskOWm1FC9SouBxyX7rp6PbOmokZiSCO/c5noUx+ihGNRfUDTbyjZDrJBYEfRNXoZg==
 
 react-native-gesture-handler@1.5.0:
   version "1.5.0"

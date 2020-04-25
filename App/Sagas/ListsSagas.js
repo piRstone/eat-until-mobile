@@ -1,7 +1,9 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
+import i18n from 'i18next';
 
-import { UserSelectors } from '../Redux/UserRedux';
+import NotificationActions from '../Redux/NotificationRedux';
+import { types } from '../Containers/Notification';
 import ListsActions from '../Redux/ListsRedux';
 
 export function* retrieveLists(api) {
@@ -11,6 +13,12 @@ export function* retrieveLists(api) {
     yield put(ListsActions.success(response.data));
   } else {
     yield put(ListsActions.failure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }
 
@@ -21,6 +29,12 @@ export function* createList(api, { name }) {
     yield put(ListsActions.createSuccess(response.data.data));
   } else {
     yield put(ListsActions.createFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }
 
@@ -33,6 +47,12 @@ export function* removeList(api, { id }) {
     yield put(ListsActions.request());
   } else {
     yield put(ListsActions.removeFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }
 
@@ -43,5 +63,11 @@ export function* updateName(api, { id, name }) {
     yield put(ListsActions.updateNameSuccess(id, name));
   } else {
     yield put(ListsActions.updateNameFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }

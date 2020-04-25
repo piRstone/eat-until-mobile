@@ -1,6 +1,8 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
+import i18n from 'i18next';
 
-import { UserSelectors } from '../Redux/UserRedux';
+import NotificationActions from '../Redux/NotificationRedux';
+import { types } from '../Containers/Notification';
 import ProductsActions from '../Redux/ProductsRedux';
 
 export function* retrieveProducts(api, { listId }) {
@@ -10,6 +12,12 @@ export function* retrieveProducts(api, { listId }) {
     yield put(ProductsActions.success(response.data));
   } else {
     yield put(ProductsActions.failure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }
 
@@ -30,6 +38,12 @@ export function* createProduct(api, action) {
     yield put(ProductsActions.createSuccess(response.data.data));
   } else {
     yield put(ProductsActions.createFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }
 
@@ -41,5 +55,11 @@ export function* removeProduct(api, { id }) {
     yield put(ProductsActions.request());
   } else {
     yield put(ProductsActions.removeFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
   }
 }

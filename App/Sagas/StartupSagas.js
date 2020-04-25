@@ -21,8 +21,6 @@ export function* startup(api) {
         // Token expired: redirect to LoginScreen
         yield call(api.removeToken);
         yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
-      } else {
-        console.tron.warn('Token refreshed');
       }
     }
   }

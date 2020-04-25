@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { Keyboard, KeyboardAvoidingView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import DeviceInfo from 'react-native-device-info';
 import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
@@ -78,6 +79,7 @@ export function ListsScreen({
 
 ListsScreen.propTypes = {
   t: PropTypes.func,
+  navigation: PropTypes.object,
   lists: PropTypes.arrayOf(PropTypes.object),
   logout: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -116,6 +118,7 @@ const Wrapper = styled.View`
 const InnerWrapper = styled.SafeAreaView`
   flex: 1;
   margin: 50px 20px 40px 20px;
+  margin-top: ${DeviceInfo.hasNotch() ? '50px' : '20px'};
 `;
 
 const Header = styled.View`

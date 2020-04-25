@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { StatusBar } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import ReduxNavigation from '../Navigation/ReduxNavigation';
@@ -7,6 +8,7 @@ import StartupActions from '../Redux/StartupRedux';
 import ReduxPersist from '../Config/ReduxPersist';
 import { useDarkMode } from 'react-native-dark-mode';
 
+import Notification from './Notification';
 import { Colors } from '../Themes';
 
 function RootContainer({ startup }) {
@@ -21,21 +23,25 @@ function RootContainer({ startup }) {
   useEffect(() => {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
-      this.props.startup();
+      startup();
     }
-  }, []);
+  }, [startup]);
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <StatusBar barStyle="dark-content" />
         <ReduxNavigation />
+        <Notification />
       </Wrapper>
     </ThemeProvider>
   );
 }
 
-// wraps dispatch to create nicer functions to call within our component
+RootContainer.propTypes = {
+  startup: PropTypes.func,
+};
+
 const mapDispatchToProps = dispatch => ({
   startup: () => dispatch(StartupActions.startup()),
 });

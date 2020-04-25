@@ -1,0 +1,5 @@
+{
+  "logoutSuccess": "Logout successfull",
+  "forceLogout": "An error occurred. Please sign up again.",
+  "serverError": "An error occurred. Please retry after a while."
+}
