@@ -56,4 +56,33 @@ describe('ListsRedux', () => {
     expect(state.isCreateLoading).toBeFalsy();
     expect(state.error).toBeUndefined();
   });
+
+  test('remove', () => {
+    const state = reducer(INITIAL_STATE, Actions.remove());
+
+    expect(state.isCreateLoading).toBeTruthy();
+    expect(state.error).toBeUndefined();
+  });
+
+  test('removeSuccess', () => {
+    const initialState = Immutable({
+      isCreateLoading: true,
+      data: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+    });
+    const idToRemove = 2;
+    const state = reducer(initialState, Actions.removeSuccess(idToRemove));
+
+    const expectedData = [{ id: 1, name: 'Tomatoes' }];
+
+    expect(state.isCreateLoading).toBeFalsy();
+    expect(state.data).toStrictEqual(expectedData);
+  });
+
+  test('removeFailure', () => {
+    const error = 'error';
+    const state = reducer(INITIAL_STATE, Actions.removeFailure(error));
+
+    expect(state.isCreateLoading).toBeFalsy();
+    expect(state.error).toEqual(error);
+  });
 });

@@ -11,12 +11,14 @@ i18n.use(initReactI18next).init({
       forgotPassword: require('../Containers/ForgotPasswordScreen/i18n/fr.json'),
       lists: require('../Containers/ListsScreen/i18n/fr.json'),
       products: require('../Containers/ProductsScreen/i18n/fr.json'),
+      product: require('../Components/Product/i18n/fr.json'),
     },
     en: {
       login: require('../Containers/LoginScreen/i18n/en.json'),
       forgotPassword: require('../Containers/ForgotPasswordScreen/i18n/en.json'),
       lists: require('../Containers/ListsScreen/i18n/en.json'),
       products: require('../Containers/ProductsScreen/i18n/en.json'),
+      product: require('../Components/Product/i18n/en.json'),
     },
   },
 });

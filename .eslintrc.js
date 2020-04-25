@@ -40,6 +40,7 @@ module.exports = {
         SwitchCase: 1,
       },
     ],
+    "react/prop-types": [2],
     'max-len': 0,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,

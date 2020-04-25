@@ -27,12 +27,23 @@ export function* createProduct(api, action) {
     code_value: '0000000000000', // TODO: set dynamic code
     code_type: 'ean13', // TODO: set dynamic code type
   };
-  console.tron.log('Product saga', product);
   const response = yield call(api.createProduct, accessToken, product);
 
   if (response.ok) {
     yield put(ProductsActions.createSuccess(response.data.data));
   } else {
     yield put(ProductsActions.createFailure(response.data));
+  }
+}
+
+export function* removeProduct(api, { id }) {
+  const accessToken = yield select(UserSelectors.accessToken);
+  const response = yield call(api.removeProduct, accessToken, id);
+
+  if (response.ok) {
+    yield put(ProductsActions.removeSuccess(id));
+    yield put(ProductsActions.request());
+  } else {
+    yield put(ProductsActions.removeFailure(response.data));
   }
 }

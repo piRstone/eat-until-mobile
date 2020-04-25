@@ -3,8 +3,9 @@ import { ActionSheetIOS, Alert, View, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import moment from 'moment';
+import { withTranslation } from 'react-i18next';
 
-export function Product({ data }) {
+export function Product({ t, data, onRemove }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
     moment(),
     'd',
@@ -18,11 +19,33 @@ export function Product({ data }) {
     dayClass = 'success';
   }
 
+  const handleRemove = id => {
+    Alert.alert(
+      t('product:delete'),
+      t('product:deleteText'),
+      [
+        {
+          text: t('product:cancel'),
+        },
+        {
+          text: t('product:delete'),
+          onPress: () => onRemove(id),
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true },
+    );
+  };
+
   const onPressProduct = product => {
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['Modifier', 'Supprimer', 'Annuler'],
+          options: [
+            t('product:edit'),
+            t('product:delete'),
+            t('product:cancel'),
+          ],
           destructiveButtonIndex: 1,
           cancelButtonIndex: 2,
         },
@@ -30,7 +53,7 @@ export function Product({ data }) {
           if (buttonIndex === 0) {
             // TODO: edit action
           } else if (buttonIndex === 1) {
-            // TODO: delete action
+            handleRemove(product.id);
           }
         },
       );
@@ -50,9 +73,7 @@ export function Product({ data }) {
           },
           {
             text: 'Supprimer',
-            onPress: () => {
-              console.tron.log(`Supprimer ${product.name}`);
-            },
+            onPress: () => handleRemove(product.id),
             style: 'destructive',
           },
         ],
@@ -75,10 +96,12 @@ export function Product({ data }) {
 }
 
 Product.propTypes = {
+  t: PropTypes.func,
   data: PropTypes.object.isRequired,
+  onRemove: PropTypes.func,
 };
 
-export default Product;
+export default withTranslation()(Product);
 
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;

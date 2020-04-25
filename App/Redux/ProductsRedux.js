@@ -11,6 +11,9 @@ const { Types, Creators } = createActions(
     create: ['product'],
     createSuccess: ['product'],
     createFailure: ['error'],
+    remove: ['id'],
+    removeSuccess: ['id'],
+    removeFailure: ['error'],
   },
   {
     prefix: 'PRODUCTS/',
@@ -73,6 +76,28 @@ export const createFailure = (state, { error }) =>
     error,
   });
 
+export const remove = (state, { id }) =>
+  state.merge({
+    isCreateLoading: true,
+    error: undefined,
+  });
+
+export const removeSuccess = (state, { id }) => {
+  const products = [...state.data];
+  const i = state.data.findIndex(l => l.id === id);
+  if (i > -1) products.splice(i, 1);
+  return state.merge({
+    isCreateLoading: false,
+    data: products,
+  });
+};
+
+export const removeFailure = (state, { error }) =>
+  state.merge({
+    isCreateLoading: false,
+    error,
+  });
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -82,4 +107,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE]: create,
   [Types.CREATE_SUCCESS]: createSuccess,
   [Types.CREATE_FAILURE]: createFailure,
+  [Types.REMOVE]: remove,
+  [Types.REMOVE_SUCCESS]: removeSuccess,
+  [Types.REMOVE_FAILURE]: removeFailure,
 });

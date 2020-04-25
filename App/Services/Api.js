@@ -46,6 +46,10 @@ const create = (baseURL = 'http://localhost:8001/api') => {
       api.setHeader('Authorization', `Bearer ${token}`);
       return api.post('/products', product);
     },
+    removeProduct: (token, id) => {
+      api.setHeader('Authorization', `Bearer ${token}`);
+      return api.delete(`/products/${id}`);
+    },
   };
 };
 

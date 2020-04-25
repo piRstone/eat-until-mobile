@@ -22,6 +22,7 @@ export function ProductsScreen({
   products,
   isLoading,
   createProduct,
+  removeProduct,
   removeList,
   updateListName,
 }) {
@@ -86,7 +87,9 @@ export function ProductsScreen({
                 data={products}
                 refreshing={isLoading}
                 onRefresh={() => getProducts(list.id)}
-                renderItem={({ item }) => <Product data={item} />}
+                renderItem={({ item }) => (
+                  <Product data={item} onRemove={removeProduct} />
+                )}
                 keyExtractor={item => item.id.toString()}
               />
             ) : (
@@ -111,6 +114,7 @@ ProductsScreen.propTypes = {
   isLoading: PropTypes.bool,
   getProducts: PropTypes.func,
   createProduct: PropTypes.func,
+  removeProduct: PropTypes.func,
   removeList: PropTypes.func,
   updateListName: PropTypes.func,
 };
@@ -123,6 +127,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: listId => dispatch(ProductsActions.request(listId)),
   createProduct: product => dispatch(ProductsActions.create(product)),
+  removeProduct: id => dispatch(ProductsActions.remove(id)),
   removeList: id => dispatch(ListsActions.remove(id)),
   updateListName: (id, name) => dispatch(ListsActions.updateName(id, name)),
 });
