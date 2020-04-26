@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Alert, FlatList, Keyboard, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -33,7 +33,7 @@ export function ProductsScreen({
     if (list.id) {
       getProducts(list.id);
     }
-  }, [list]);
+  }, [list, getProducts]);
 
   // Set list name
   useEffect(() => {
@@ -64,6 +64,13 @@ export function ProductsScreen({
     updateListName(list.id, name);
   };
 
+  const handleRemoveProduct = useCallback(
+    id => {
+      removeProduct(id, list.id);
+    },
+    [list, removeProduct],
+  );
+
   return (
     <Wrapper>
       <InnerWrapper>
@@ -88,7 +95,7 @@ export function ProductsScreen({
                 refreshing={isLoading}
                 onRefresh={() => getProducts(list.id)}
                 renderItem={({ item }) => (
-                  <Product data={item} onRemove={removeProduct} />
+                  <Product data={item} onRemove={handleRemoveProduct} />
                 )}
                 keyExtractor={item => item.id.toString()}
               />
@@ -127,7 +134,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: listId => dispatch(ProductsActions.request(listId)),
   createProduct: product => dispatch(ProductsActions.create(product)),
-  removeProduct: id => dispatch(ProductsActions.remove(id)),
+  removeProduct: (id, inventoryId) =>
+    dispatch(ProductsActions.remove(id, inventoryId)),
   removeList: id => dispatch(ListsActions.remove(id)),
   updateListName: (id, name) => dispatch(ListsActions.updateName(id, name)),
 });

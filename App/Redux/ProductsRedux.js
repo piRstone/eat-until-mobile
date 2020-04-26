@@ -5,13 +5,13 @@ import Immutable from 'seamless-immutable';
 
 const { Types, Creators } = createActions(
   {
-    request: ['listId'],
+    request: ['inventoryId'],
     success: ['products'],
     failure: ['error'],
     create: ['product'],
     createSuccess: ['product'],
     createFailure: ['error'],
-    remove: ['id'],
+    remove: ['id', 'inventoryId'],
     removeSuccess: ['id'],
     removeFailure: ['error'],
   },

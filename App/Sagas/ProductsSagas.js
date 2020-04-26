@@ -5,8 +5,8 @@ import NotificationActions from '../Redux/NotificationRedux';
 import { types } from '../Containers/Notification';
 import ProductsActions from '../Redux/ProductsRedux';
 
-export function* retrieveProducts(api, { listId }) {
-  const response = yield call(api.getProducts, listId);
+export function* retrieveProducts(api, { inventoryId }) {
+  const response = yield call(api.getProducts, inventoryId);
 
   if (response.ok) {
     yield put(ProductsActions.success(response.data));
@@ -22,13 +22,13 @@ export function* retrieveProducts(api, { listId }) {
 }
 
 export function* createProduct(api, action) {
-  const { name, expiresAt, notifyBefore, listId } = action.product;
+  const { name, expiresAt, notifyBefore, inventoryId } = action.product;
   const product = {
     name,
     description: 'Produit',
     expires_at: expiresAt,
     notify_before: parseInt(notifyBefore, 10),
-    list_id: listId,
+    inventory_id: inventoryId,
     code_value: '0000000000000', // TODO: set dynamic code
     code_type: 'ean13', // TODO: set dynamic code type
   };
@@ -47,12 +47,18 @@ export function* createProduct(api, action) {
   }
 }
 
-export function* removeProduct(api, { id }) {
+export function* removeProduct(api, { id, inventoryId }) {
   const response = yield call(api.removeProduct, id);
 
   if (response.ok) {
     yield put(ProductsActions.removeSuccess(id));
-    yield put(ProductsActions.request());
+    yield put(ProductsActions.request(inventoryId));
+    yield put(
+      NotificationActions.display(
+        i18n.t('products:productDeleted'),
+        types.success,
+      ),
+    );
   } else {
     yield put(ProductsActions.removeFailure(response.data));
     yield put(
