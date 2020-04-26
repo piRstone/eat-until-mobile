@@ -203,6 +203,7 @@ const DangerButton = styled.TouchableOpacity`
   background-color: ${props => props.theme.whiteBackground};
   border-radius: 5px;
   margin-top: 10px;
+  margin-bottom: 10px;
   padding: 10px 20px;
 `;
 
@@ -210,4 +211,5 @@ const DangerButtonText = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.red};
+  line-height: 18px;
 `;

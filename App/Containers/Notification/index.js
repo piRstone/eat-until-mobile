@@ -96,7 +96,7 @@ const Wrapper = styled.View`
   border-radius: 8px;
   flex-direction: row;
   align-items: center;
-  background-color: ${props => props.theme.white};
+  background-color: ${props => props.theme.whiteBackground};
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   elevation: 8;
 `;

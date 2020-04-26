@@ -43,6 +43,7 @@ const Title = styled.Text`
   font-size: 16px;
   font-weight: 600;
   margin: 5px 0;
+  color: ${props => props.theme.black};
 `;
 
 const Input = styled.TextInput`

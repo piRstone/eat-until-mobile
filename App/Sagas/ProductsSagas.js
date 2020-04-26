@@ -22,15 +22,14 @@ export function* retrieveProducts(api, { inventoryId }) {
 }
 
 export function* createProduct(api, action) {
-  const { name, expiresAt, notifyBefore, inventoryId } = action.product;
+  const { name, expiresAt, notifyBefore, inventoryId, ean13 } = action.product;
   const product = {
     name,
     description: 'Produit',
-    expires_at: expiresAt,
-    notify_before: parseInt(notifyBefore, 10),
-    inventory_id: inventoryId,
-    code_value: '0000000000000', // TODO: set dynamic code
-    code_type: 'ean13', // TODO: set dynamic code type
+    expiration_date: expiresAt,
+    notification_delay: parseInt(notifyBefore, 10),
+    inventory: inventoryId,
+    ean13: ean13 || null,
   };
   const response = yield call(api.createProduct, product);
 

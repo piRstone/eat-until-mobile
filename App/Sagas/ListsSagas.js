@@ -26,7 +26,7 @@ export function* createList(api, { name }) {
   const response = yield call(api.createList, name);
 
   if (response.ok) {
-    yield put(ListsActions.createSuccess(response.data.data));
+    yield put(ListsActions.createSuccess(response.data));
   } else {
     yield put(ListsActions.createFailure(response.data));
     yield put(
@@ -45,6 +45,9 @@ export function* removeList(api, { id }) {
     yield put(ListsActions.removeSuccess(id));
     yield put(NavigationActions.navigate({ routeName: 'ListsScreen' }));
     yield put(ListsActions.request());
+    yield put(
+      NotificationActions.display(i18n.t('lists:listDeleted'), types.success),
+    );
   } else {
     yield put(ListsActions.removeFailure(response.data));
     yield put(
