@@ -34,7 +34,13 @@ export function* createProduct(api, action) {
   const response = yield call(api.createProduct, product);
 
   if (response.ok) {
-    yield put(ProductsActions.createSuccess(response.data.data));
+    yield put(ProductsActions.createSuccess(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('products:productAdded'),
+        types.success,
+      ),
+    );
   } else {
     yield put(ProductsActions.createFailure(response.data));
     yield put(

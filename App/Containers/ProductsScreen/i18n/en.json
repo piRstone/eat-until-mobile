@@ -5,5 +5,6 @@
   "deleteListText": "If you delete this list, all the products will be deleted too.",
   "cancel": "Cancel",
   "delete": "Delete",
-  "productDeleted": "Product deleted"
+  "productDeleted": "Product deleted",
+  "productAdded": "Product added"
 }

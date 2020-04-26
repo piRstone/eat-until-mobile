@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import moment from 'moment';
+import { withTranslation } from 'react-i18next';
 
-const ProductForm = ({ onSubmit }) => {
+const ProductForm = ({ t, onSubmit, onClose }) => {
   const expireDaysInputRef = useRef(null);
   const notifyDaysInputRef = useRef(null);
   const [name, setName] = useState('');
@@ -43,10 +44,10 @@ const ProductForm = ({ onSubmit }) => {
     <Wrapper>
       <Row>
         <Col>
-          <Label>Nom du produit</Label>
+          <Label>{t('productForm:productName')}</Label>
           <Input
             onChangeText={e => setName(e)}
-            placeholder="Tomates"
+            placeholder={t('productForm:namePlaceholder')}
             autoFocus
             returnKeyType="next"
             value={name}
@@ -57,7 +58,7 @@ const ProductForm = ({ onSubmit }) => {
       </Row>
       <Row2>
         <Col>
-          <Label>Se périme dans</Label>
+          <Label>{t('productForm:endsIn')}</Label>
           <Row>
             <NotifyDaysInput
               ref={expireDaysInputRef}
@@ -69,13 +70,13 @@ const ProductForm = ({ onSubmit }) => {
               invalid={inputErrors.expireDays}
               onSubmitEditing={() => notifyDaysInputRef.current.focus()}
             />
-            <BigText>jours</BigText>
+            <BigText>{t('productForm:days')}</BigText>
           </Row>
         </Col>
         <DayCol>
-          <Label>Notification (jours)</Label>
+          <Label>{t('productForm:notificationDays')}</Label>
           <Row>
-            <BigText>J - </BigText>
+            <BigText>{t('productForm:day')} - </BigText>
             <DayInput
               ref={notifyDaysInputRef}
               onChangeText={e => setNotifyDays(e)}
@@ -89,20 +90,25 @@ const ProductForm = ({ onSubmit }) => {
           </Row>
         </DayCol>
       </Row2>
-      <ButtonWrapper>
-        <AddButton onPress={handleSubmit}>
-          <AddButtonText>Ajouter</AddButtonText>
-        </AddButton>
-      </ButtonWrapper>
+      <BottomRow>
+        <ButtonWrapper>
+          <AddButton onPress={handleSubmit}>
+            <AddButtonText>{t('productForm:add')}</AddButtonText>
+          </AddButton>
+        </ButtonWrapper>
+        <CloseButton onPress={onClose}>{t('productForm:close')}</CloseButton>
+      </BottomRow>
     </Wrapper>
   );
 };
 
 ProductForm.propTypes = {
+  t: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
-export default ProductForm;
+export default withTranslation()(ProductForm);
 
 const Wrapper = styled.View`
   flex-direction: column;
@@ -143,12 +149,13 @@ const Input = styled.TextInput`
   color: ${props => props.theme.black};
   border-radius: 5px;
   background-color: ${props => props.theme.white};
-  padding: 5px 10px;
+  padding: 0;
   border: ${props =>
     props.invalid
       ? `1px solid ${props.theme.red}`
       : `1px solid ${props.theme.white}`};
   align-items: center;
+  line-height: 16px;
 `;
 
 const BigText = styled.Text`
@@ -165,9 +172,9 @@ const DayCol = styled.View`
 
 const NotifyDaysInput = styled(Input)`
   font-family: 'SofiaProRegular';
-  width: 70px;
-  margin-right: 10px;
-  text-align: center;
+  width: 40px;
+  padding-right: 5px;
+  text-align: right;
 `;
 
 const DayInput = styled(Input)`
@@ -181,10 +188,14 @@ const ButtonWrapper = styled.View`
   margin-top: 10px;
 `;
 
+const BottomRow = styled(Row)`
+  justify-content: center;
+`;
+
 const AddButton = styled.TouchableOpacity`
-  background-color: ${props => props.theme.blue};
+  background-color: ${props => props.theme.primary};
   border-radius: 20px;
-  padding: 3px 10px;
+  padding: 5px 10px 0px 10px;
 `;
 
 const AddButtonText = styled.Text`
@@ -192,4 +203,12 @@ const AddButtonText = styled.Text`
   font-size: 16px;
   font-weight: 600;
   color: ${props => props.theme.white};
+`;
+
+const CloseButton = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 16px;
+  color: ${props => props.theme.grey1};
+  margin-top: 16px;
+  margin-left: 10px;
 `;

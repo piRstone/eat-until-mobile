@@ -31,11 +31,12 @@ function AddButton({ onPress, opened }) {
 
 AddButton.propTypes = {
   onPress: PropTypes.func.isRequired,
+  opened: PropTypes.bool,
 };
 
 export default AddButton;
 
-const Wrapper = styled.TouchableHighlight`
+const Wrapper = styled.TouchableOpacity`
   height: 30px;
   width: 30px;
   border-radius: 20px;

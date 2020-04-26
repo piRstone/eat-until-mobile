@@ -30,7 +30,7 @@ function RootContainer({ startup }) {
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <ReduxNavigation />
         <Notification />
       </Wrapper>

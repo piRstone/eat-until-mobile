@@ -44,7 +44,7 @@ export function ProductsScreen({
   }, [navigation]);
 
   const handleSubmit = product => {
-    product.listId = list.id;
+    product.inventoryId = list.id;
     createProduct(product);
     Keyboard.dismiss();
   };
@@ -81,7 +81,12 @@ export function ProductsScreen({
           <ListTitle title={list.name} onSubmit={onUpdateName} />
           <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
-        {showForm && <ProductForm onSubmit={handleSubmit} />}
+        {showForm && (
+          <ProductForm
+            onSubmit={handleSubmit}
+            onClose={() => setShowForm(false)}
+          />
+        )}
         {isLoading && !products.length ? (
           <EmptyWrapper>
             <EmptyState>{t('products:productsRetrieval')}</EmptyState>
