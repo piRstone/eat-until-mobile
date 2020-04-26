@@ -35,6 +35,9 @@ target 'EatUntilMobile' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Pods for EatUntilMobile
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+    'BarcodeDetectorMLKit'
+  ]
 
   use_frameworks!
   use_native_modules!

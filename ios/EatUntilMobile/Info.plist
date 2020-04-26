@@ -71,5 +71,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <key>NSCameraUsageDescription</key>
+  <string>Scannez le code-barre d'un produit pour récupérer ses informations</string>
 </dict>
 </plist>

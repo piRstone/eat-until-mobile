@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+// import { RNCamera } from 'react-native-camera';
 
 import ProductsActions from '../../Redux/ProductsRedux';
 
@@ -15,6 +16,10 @@ export function CameraScreen({ getProductData }) {
     }
   };
 
+  // const handleBarcoreRead = useCallback(e => {
+  //   console.tron.warn(e);
+  // }, []);
+
   return (
     <Wrapper>
       <TextInput
@@ -25,6 +30,7 @@ export function CameraScreen({ getProductData }) {
         value={ean13}
         onSubmitEditing={onSubmit}
       />
+      {/* <RNCamera barCodeTypes={['ean13']} onBarCodeRead={handleBarcoreRead} /> */}
     </Wrapper>
   );
 }
