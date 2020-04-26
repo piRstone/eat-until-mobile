@@ -74,10 +74,10 @@ const SubmitButton = styled.TouchableOpacity`
   height: 35px;
   width: 35px;
   border-radius: 5px;
-  background-color: ${props => props.theme.lightblue};
+  background-color: ${props => props.theme.lightgreen};
   margin-left: 10px;
 `;
 
 const StyledIcon = styled(Icon)`
-  color: ${props => props.theme.blue};
+  color: ${props => props.theme.green};
 `;

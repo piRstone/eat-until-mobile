@@ -37,3 +37,13 @@ export function* forgotPassword(api, { email }) {
     yield put(UserActions.forgotPasswordFailure());
   }
 }
+
+export function* getUser(api) {
+  const response = yield call(api.getUser);
+
+  if (response.ok) {
+    yield put(UserActions.success(response.data));
+  } else {
+    yield put(UserActions.failure());
+  }
+}

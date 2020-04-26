@@ -9,14 +9,12 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import DeviceInfo from 'react-native-device-info';
 import { withTranslation } from 'react-i18next';
 
-import UserActions from '../../Redux/UserRedux';
 import ListsActions from '../../Redux/ListsRedux';
 import ListForm from '../../Components/ListForm';
 
 export function ListsScreen({
   t,
   navigation,
-  logout,
   lists,
   isLoading,
   isCreateLoading,
@@ -47,8 +45,8 @@ export function ListsScreen({
       <InnerWrapper>
         <Header>
           <Title>{t('lists:title')}</Title>
-          <UserPic onPress={logout}>
-            <UserPicIcon name="sign-out" size={20} />
+          <UserPic onPress={() => navigation.navigate('ProfileScreen')}>
+            <UserPicIcon name="user" size={20} />
           </UserPic>
         </Header>
         <KeyboardAvoidingView behavior="height" enabled={showForm}>
@@ -81,7 +79,6 @@ ListsScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object,
   lists: PropTypes.arrayOf(PropTypes.object),
-  logout: PropTypes.func,
   isLoading: PropTypes.bool,
   isCreateLoading: PropTypes.bool,
   getLists: PropTypes.func,
@@ -95,7 +92,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(UserActions.logout()),
   getLists: () => dispatch(ListsActions.request()),
   createList: name => dispatch(ListsActions.create(name)),
 });
