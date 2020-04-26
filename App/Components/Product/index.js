@@ -126,6 +126,7 @@ const Date = styled.Text`
   margin-top: 5px;
 `;
 
+/* eslint-disable indent */
 const Days = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 22px;

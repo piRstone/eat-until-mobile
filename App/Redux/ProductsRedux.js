@@ -14,6 +14,7 @@ const { Types, Creators } = createActions(
     remove: ['id', 'inventoryId'],
     removeSuccess: ['id'],
     removeFailure: ['error'],
+    getOffData: ['ean13'],
   },
   {
     prefix: 'PRODUCTS/',

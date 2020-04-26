@@ -8,11 +8,13 @@ import LoginScreen from '../Containers/LoginScreen';
 import ListsScreen from '../Containers/ListsScreen';
 import ProductsScreen from '../Containers/ProductsScreen';
 import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen';
+import CameraScreen from '../Containers/CameraScreen';
 
 const MainStack = createStackNavigator(
   {
     ListsScreen: { screen: ListsScreen },
     ProductsScreen: { screen: ProductsScreen },
+    CameraScreen: { screen: CameraScreen },
   },
   {
     initialRouteName: 'ListsScreen',

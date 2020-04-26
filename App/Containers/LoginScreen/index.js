@@ -79,6 +79,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
 }
 
 LoginScreen.propTypes = {
+  t: PropTypes.func,
   navigation: PropTypes.object,
   isLoading: PropTypes.bool,
   login: PropTypes.func,

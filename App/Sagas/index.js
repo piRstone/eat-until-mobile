@@ -25,6 +25,7 @@ import {
   createProduct,
   removeProduct,
 } from './ProductsSagas';
+import { getProductData } from './OFFSagas';
 
 /* ------------- API ------------- */
 
@@ -45,5 +46,6 @@ export default function* root() {
     takeLatest(ProductsTypes.REQUEST, retrieveProducts, api),
     takeLatest(ProductsTypes.CREATE, createProduct, api),
     takeLatest(ProductsTypes.REMOVE, removeProduct, api),
+    takeLatest(ProductsTypes.GET_OFF_DATA, getProductData),
   ]);
 }

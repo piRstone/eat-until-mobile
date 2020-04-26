@@ -37,6 +37,10 @@ export function ProductsScreen({
 
   // Set list name
   useEffect(() => {
+    console.tron.display({
+      name: 'Navigation state',
+      value: navigation,
+    });
     const paramStateList = path(['state', 'params', 'list'], navigation);
     if (paramStateList) {
       setList(paramStateList);
@@ -85,6 +89,7 @@ export function ProductsScreen({
           <ProductForm
             onSubmit={handleSubmit}
             onClose={() => setShowForm(false)}
+            navigation={navigation}
           />
         )}
         {isLoading && !products.length ? (

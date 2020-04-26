@@ -35,6 +35,7 @@ class App extends Component {
 }
 
 // allow reactotron overlay for fast design in dev mode
+/* eslint-disable indent */
 export default (DebugConfig.useStorybook
   ? storybook
   : DebugConfig.useReactotron

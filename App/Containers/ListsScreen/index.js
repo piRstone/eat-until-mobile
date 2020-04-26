@@ -29,7 +29,7 @@ export function ListsScreen({
     setTimeout(() => {
       getLists();
     }, 10);
-  }, []);
+  }, [getLists]);
 
   const handleListPress = list => {
     navigation.navigate('ProductsScreen', { list });

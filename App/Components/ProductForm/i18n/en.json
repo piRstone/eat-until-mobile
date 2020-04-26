@@ -6,5 +6,6 @@
   "notificationDays": "Notification (days)",
   "day": "D",
   "add": "Add",
-  "close": "Close"
+  "close": "Close",
+  "clear": "Clear"
 }
