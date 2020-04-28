@@ -6,13 +6,13 @@ import Immutable from 'seamless-immutable';
 const { Types, Creators } = createActions(
   {
     request: ['inventoryId'],
-    success: ['products'],
+    success: ['products', 'inventoryId'],
     failure: ['error'],
     create: ['product'],
-    createSuccess: ['product'],
+    createSuccess: ['product', 'inventoryId'],
     createFailure: ['error'],
     remove: ['id', 'inventoryId'],
-    removeSuccess: ['id'],
+    removeSuccess: ['id', 'inventoryId'],
     removeFailure: ['error'],
     getOffData: ['ean13'],
   },
@@ -27,7 +27,7 @@ export default Creators;
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: [],
+  data: {},
   isLoading: false,
   isCreateLoading: false,
   error: undefined,
@@ -47,11 +47,14 @@ export const request = state =>
     error: undefined,
   });
 
-export const success = (state, { products }) =>
-  state.merge({
+export const success = (state, { products, inventoryId }) => {
+  const data = { ...state.data };
+  data[inventoryId] = products;
+  return state.merge({
     isLoading: false,
-    data: products,
+    data,
   });
+};
 
 export const failure = (state, { error }) =>
   state.merge({
@@ -65,11 +68,16 @@ export const create = state =>
     error: undefined,
   });
 
-export const createSuccess = (state, { product }) =>
-  state.merge({
+export const createSuccess = (state, { product, inventoryId }) => {
+  const data = { ...state.data };
+  const products = data[inventoryId];
+  data[inventoryId] = [...products, product];
+
+  return state.merge({
     isCreateLoading: false,
-    data: [...state.data, product],
+    data,
   });
+};
 
 export const createFailure = (state, { error }) =>
   state.merge({
@@ -83,13 +91,15 @@ export const remove = (state, { id }) =>
     error: undefined,
   });
 
-export const removeSuccess = (state, { id }) => {
-  const products = [...state.data];
-  const i = state.data.findIndex(l => l.id === id);
+export const removeSuccess = (state, { id, inventoryId }) => {
+  const data = { ...state.data };
+  const products = [...data[inventoryId]];
+  const i = products.findIndex(p => p.id === id);
   if (i > -1) products.splice(i, 1);
+  data[inventoryId] = products;
   return state.merge({
     isCreateLoading: false,
-    data: products,
+    data,
   });
 };
 

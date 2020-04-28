@@ -19,7 +19,7 @@ export function ProductsScreen({
   t,
   navigation,
   getProducts,
-  products,
+  allProducts,
   isLoading,
   createProduct,
   removeProduct,
@@ -37,10 +37,6 @@ export function ProductsScreen({
 
   // Set list name
   useEffect(() => {
-    console.tron.display({
-      name: 'Navigation state',
-      value: navigation,
-    });
     const paramStateList = path(['state', 'params', 'list'], navigation);
     if (paramStateList) {
       setList(paramStateList);
@@ -75,6 +71,7 @@ export function ProductsScreen({
     [list, removeProduct],
   );
 
+  const products = list && allProducts[list.id] ? allProducts[list.id] : [];
   return (
     <Wrapper>
       <InnerWrapper>
@@ -137,7 +134,7 @@ ProductsScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  products: state.products.data,
+  allProducts: state.products.data,
   isLoading: state.products.isLoading,
 });
 

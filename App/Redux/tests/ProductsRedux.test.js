@@ -1,8 +1,8 @@
 import Immutable from 'seamless-immutable';
 
-import Actions, { reducer, INITIAL_STATE } from '../ListsRedux';
+import Actions, { reducer, INITIAL_STATE } from '../ProductsRedux';
 
-describe('ListsRedux', () => {
+describe('ProductsRedux', () => {
   test('request', () => {
     const state = reducer(INITIAL_STATE, Actions.request());
 
@@ -11,11 +11,19 @@ describe('ListsRedux', () => {
   });
 
   test('success', () => {
+    const inventoryId = 1;
     const products = [{ id: 1, name: 'Tomatoes' }];
-    const state = reducer(INITIAL_STATE, Actions.success(products));
+    const state = reducer(
+      INITIAL_STATE,
+      Actions.success(products, inventoryId),
+    );
+
+    const expectedData = {
+      [inventoryId]: products,
+    };
 
     expect(state.isLoading).toBeFalsy();
-    expect(state.data).toEqual(products);
+    expect(state.data).toEqual(expectedData);
   });
 
   test('failure', () => {
@@ -34,17 +42,20 @@ describe('ListsRedux', () => {
   });
 
   test('createSuccess', () => {
+    const inventoryId = 1;
     const product = { id: 2, name: 'Bacon' };
     const initialState = Immutable({
-      data: [{ id: 1, name: 'Tomatoes' }],
+      data: { [inventoryId]: [{ id: 1, name: 'Tomatoes' }] },
       isCreateLoading: true,
     });
-    const state = reducer(initialState, Actions.createSuccess(product));
+    const state = reducer(
+      initialState,
+      Actions.createSuccess(product, inventoryId),
+    );
 
-    const expectedData = [
-      { id: 1, name: 'Tomatoes' },
-      { id: 2, name: 'Bacon' },
-    ];
+    const expectedData = {
+      [inventoryId]: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+    };
 
     expect(state.data).toStrictEqual(expectedData);
     expect(state.isCreateLoading).toBeFalsy();
@@ -65,14 +76,20 @@ describe('ListsRedux', () => {
   });
 
   test('removeSuccess', () => {
+    const inventoryId = 1;
     const initialState = Immutable({
       isCreateLoading: true,
-      data: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+      data: {
+        [inventoryId]: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+      },
     });
     const idToRemove = 2;
-    const state = reducer(initialState, Actions.removeSuccess(idToRemove));
+    const state = reducer(
+      initialState,
+      Actions.removeSuccess(idToRemove, inventoryId),
+    );
 
-    const expectedData = [{ id: 1, name: 'Tomatoes' }];
+    const expectedData = { [inventoryId]: [{ id: 1, name: 'Tomatoes' }] };
 
     expect(state.isCreateLoading).toBeFalsy();
     expect(state.data).toStrictEqual(expectedData);

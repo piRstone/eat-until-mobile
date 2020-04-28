@@ -9,7 +9,7 @@ export function* retrieveProducts(api, { inventoryId }) {
   const response = yield call(api.getProducts, inventoryId);
 
   if (response.ok) {
-    yield put(ProductsActions.success(response.data));
+    yield put(ProductsActions.success(response.data, inventoryId));
   } else {
     yield put(ProductsActions.failure(response.data));
     yield put(
@@ -29,12 +29,12 @@ export function* createProduct(api, action) {
     expiration_date: expiresAt,
     notification_delay: parseInt(notifyBefore, 10),
     inventory: inventoryId,
-    ean13: ean13 || null,
+    ean13: ean13 || '',
   };
   const response = yield call(api.createProduct, product);
 
   if (response.ok) {
-    yield put(ProductsActions.createSuccess(response.data));
+    yield put(ProductsActions.createSuccess(response.data, inventoryId));
     yield put(
       NotificationActions.display(
         i18n.t('products:productAdded'),
@@ -56,7 +56,7 @@ export function* removeProduct(api, { id, inventoryId }) {
   const response = yield call(api.removeProduct, id);
 
   if (response.ok) {
-    yield put(ProductsActions.removeSuccess(id));
+    yield put(ProductsActions.removeSuccess(id, inventoryId));
     yield put(ProductsActions.request(inventoryId));
     yield put(
       NotificationActions.display(

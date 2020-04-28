@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import styled from 'styled-components/native';
