@@ -124,7 +124,7 @@ export function ProductsScreen({
 ProductsScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object.isRequired,
-  products: PropTypes.array,
+  allProducts: PropTypes.array,
   isLoading: PropTypes.bool,
   getProducts: PropTypes.func,
   createProduct: PropTypes.func,
