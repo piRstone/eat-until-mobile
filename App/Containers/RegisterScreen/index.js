@@ -11,7 +11,7 @@ import Checkbox from '../../Components/Checkbox';
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
 
-export function RegisterScreen({ t, navigation, register }) {
+export function RegisterScreen({ t, navigation, register, isLoading }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [acceptEULA, setAcceptEULA] = useState(false);
@@ -54,7 +54,7 @@ export function RegisterScreen({ t, navigation, register }) {
               secureTextEntry: true,
               placeholder: '********',
               returnKeyType: 'done',
-              onSubmitEditing: Keyboard.dismiss(),
+              onSubmitEditing: () => Keyboard.dismiss(),
             }}
           />
           <EULAWrapper>
@@ -71,9 +71,16 @@ export function RegisterScreen({ t, navigation, register }) {
             </EULAText>
           </EULAWrapper>
           <StyledButton
-            onPress={() => register(email, password)}
+            onPress={() => {
+              register(email, password);
+              Keyboard.dismiss();
+            }}
             disabled={!email || !password || !acceptEULA}>
-            <ButtonText>{t('register:registration')}</ButtonText>
+            {isLoading ? (
+              <StyledActivityIndicator />
+            ) : (
+              <ButtonText>{t('register:registration')}</ButtonText>
+            )}
           </StyledButton>
           <SmallText>{t('register:privacySentence')}</SmallText>
         </ScrollView>
@@ -86,14 +93,20 @@ RegisterScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object,
   register: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
+const mapStateToProps = state => ({
+  isLoading: state.user.isLoading,
+});
+
 const mapDispatchToProps = dispatch => ({
-  register: email => dispatch(UserActions.register(email)),
+  register: (email, password) =>
+    dispatch(UserActions.register(email, password)),
 });
 
 const withConnect = connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
@@ -178,5 +191,9 @@ const StyledButton = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 18px;
+  color: ${props => props.theme.white};
+`;
+
+const StyledActivityIndicator = styled.ActivityIndicator`
   color: ${props => props.theme.white};
 `;

@@ -3,6 +3,8 @@ import { NavigationActions } from 'react-navigation';
 import i18n from 'i18next';
 
 import UserActions from '../Redux/UserRedux';
+import NotificationActions from '../Redux/NotificationRedux';
+import { types } from '../Containers/Notification';
 
 export function* login(api, action) {
   const { email, password } = action;
@@ -43,7 +45,15 @@ export function* register(api, { email, password }) {
 
   if (response.ok) {
     yield put(UserActions.registerSuccess());
+    yield put(
+      NavigationActions.navigate({ routeName: 'RegisterSuccessScreen' }),
+    );
   } else {
+    if (response.status === 400) {
+      const key = Object.keys(response.data)[0];
+      const error = response.data[key][0];
+      yield put(NotificationActions.display(`${key} : ${error}`, types.danger));
+    }
     yield put(UserActions.registerFailure());
   }
 }

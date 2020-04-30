@@ -9,6 +9,7 @@ i18n.use(initReactI18next).init({
     fr: {
       login: require('../Containers/LoginScreen/i18n/fr.json'),
       register: require('../Containers/RegisterScreen/i18n/fr.json'),
+      registerSuccess: require('../Containers/RegisterSuccessScreen/i18n/fr.json'),
       notification: require('../Containers/Notification/i18n/fr.json'),
       forgotPassword: require('../Containers/ForgotPasswordScreen/i18n/fr.json'),
       lists: require('../Containers/ListsScreen/i18n/fr.json'),
@@ -20,6 +21,7 @@ i18n.use(initReactI18next).init({
     en: {
       login: require('../Containers/LoginScreen/i18n/en.json'),
       register: require('../Containers/RegisterScreen/i18n/en.json'),
+      registerSuccess: require('../Containers/RegisterSuccessScreen/i18n/en.json'),
       notification: require('../Containers/Notification/i18n/en.json'),
       forgotPassword: require('../Containers/ForgotPasswordScreen/i18n/en.json'),
       lists: require('../Containers/ListsScreen/i18n/en.json'),

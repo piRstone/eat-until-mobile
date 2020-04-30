@@ -11,6 +11,7 @@ import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen';
 import CameraScreen from '../Containers/CameraScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
 import RegisterScreen from '../Containers/RegisterScreen';
+import RegisterSuccessScreen from '../Containers/RegisterSuccessScreen';
 import EULAScreen from '../Containers/EULAScreen';
 
 const MainStack = createStackNavigator(
@@ -30,6 +31,10 @@ const AuthenticationStack = createStackNavigator(
   {
     LoginScreen: { screen: LoginScreen },
     RegisterScreen: { screen: RegisterScreen },
+    RegisterSuccessScreen: {
+      screen: RegisterSuccessScreen,
+      navigationOptions: { gesturesEnabled: false },
+    },
     ForgotPasswordScreen: { screen: ForgotPasswordScreen },
     EULAScreen: { screen: EULAScreen },
   },
