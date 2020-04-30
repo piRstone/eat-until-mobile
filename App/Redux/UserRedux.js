@@ -11,6 +11,9 @@ const { Types, Creators } = createActions(
     forgotPassword: ['email'],
     forgotPasswordSuccess: null,
     forgotPasswordFailure: null,
+    register: ['email', 'password'],
+    registerSuccess: null,
+    registerFailure: ['error'],
     request: null,
     success: ['user'],
     failure: ['error'],
@@ -82,6 +85,21 @@ export const forgotPasswordFailure = state =>
     resetPasswordState: false,
   });
 
+export const register = state =>
+  state.merge({
+    isLoading: true,
+  });
+
+export const registerSuccess = state =>
+  state.merge({
+    isLoading: false,
+  });
+
+export const registerFailure = state =>
+  state.merge({
+    isLoading: false,
+  });
+
 export const request = state =>
   state.merge({
     isLoading: true,
@@ -115,6 +133,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FORGOT_PASSWORD]: forgotPassword,
   [Types.FORGOT_PASSWORD_SUCCESS]: forgotPasswordSuccess,
   [Types.FORGOT_PASSWORD_FAILURE]: forgotPasswordFailure,
+  [Types.REGISTER]: register,
+  [Types.REGISTER_SUCCESS]: registerSuccess,
+  [Types.REGISTER_FAILURE]: registerFailure,
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,

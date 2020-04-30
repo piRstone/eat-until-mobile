@@ -51,6 +51,21 @@ describe('UserRedux', () => {
     expect(state.resetPasswordState).toBeFalsy();
   });
 
+  test('register', () => {
+    const state = reducer(INITIAL_STATE, Actions.register());
+    expect(state.isLoading).toBeTruthy();
+  });
+
+  test('registerSuccess', () => {
+    const state = reducer(INITIAL_STATE, Actions.registerSuccess());
+    expect(state.isLoading).toBeFalsy();
+  });
+
+  test('registerFailure', () => {
+    const state = reducer(INITIAL_STATE, Actions.registerFailure());
+    expect(state.isLoading).toBeFalsy();
+  });
+
   test('request', () => {
     const state = reducer(INITIAL_STATE, Actions.request());
 

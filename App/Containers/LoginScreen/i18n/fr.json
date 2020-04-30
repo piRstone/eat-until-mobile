@@ -3,6 +3,7 @@
   "password": "Mot de passe",
   "forgotPassword": "Mot de passe oublié",
   "signIn": "Connexion",
+  "signUp": "S'inscrire",
   "wrongEmailOrPassword": "Mauvais identifiant ou mot de passe",
   "anErrorOccurred": "Une erreur est survenue"
 }

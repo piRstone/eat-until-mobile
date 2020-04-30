@@ -38,6 +38,16 @@ export function* forgotPassword(api, { email }) {
   }
 }
 
+export function* register(api, { email, password }) {
+  const response = yield call(api.register, { email, password });
+
+  if (response.ok) {
+    yield put(UserActions.registerSuccess());
+  } else {
+    yield put(UserActions.registerFailure());
+  }
+}
+
 export function* getUser(api) {
   const response = yield call(api.getUser);
 

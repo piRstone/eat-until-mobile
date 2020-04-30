@@ -3,6 +3,7 @@
   "password": "Password",
   "forgotPassword": "Forgot password",
   "signIn": "Sign in",
+  "signUp": "Sign up",
   "wrongEmailOrPassword": "Wrong email or password",
   "anErrorOccurred": "An error occurred"
 }

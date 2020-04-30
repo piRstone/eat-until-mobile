@@ -7,4 +7,7 @@ export default {
   forgotPassword: () => ({
     ok: true,
   }),
+  register: () => ({
+    ok: true,
+  }),
 };

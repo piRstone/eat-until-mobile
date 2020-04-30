@@ -23,6 +23,7 @@ const create = (baseURL = 'http://localhost:8001/api') => {
       api.deleteHeader('Authorization');
       return api.post('/users/forgot-password', { email });
     },
+    register: data => api.post('/register', data),
     getUser: () => api.get('/me'),
     getLists: () => api.get('/inventories'),
     createList: name => api.post('/inventories', { name }),

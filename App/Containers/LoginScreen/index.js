@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { ScrollView } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
@@ -30,6 +30,13 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
           <Title>Eat Until</Title>
           <LogoImage source={logo} />
           <Body>
+            <LoginRow>
+              <LoginText>{t('login:signIn')}</LoginText>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('RegisterScreen')}>
+                <SmallLink>{t('login:signUp')}</SmallLink>
+              </TouchableOpacity>
+            </LoginRow>
             <TextInput
               label="Email"
               onChangeText={setEmail}
@@ -137,8 +144,21 @@ const Body = styled.View`
   width: 90%;
   flex-direction: column;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: ${props => props.theme.grey2};
   overflow: hidden;
+`;
+
+const LoginRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px 0;
+`;
+
+const LoginText = styled.Text`
+  font-family: 'SofiaPro-Bold';
+  font-size: 16px;
+  color: ${props => props.theme.grey1};
 `;
 
 const StyledButton = styled.TouchableOpacity`
