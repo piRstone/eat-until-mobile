@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "894157143476",
+    "firebase_url": "https://eat-until.firebaseio.com",
+    "project_id": "eat-until",
+    "storage_bucket": "eat-until.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894157143476:android:370db994c09a1069e346e1",
+        "android_client_info": {
+          "package_name": "com.pirstone.eatuntil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894157143476-3mr9ac71nov9olk6si6836fnjf1opkf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzSOaATpbMYWf2g-4QcgjeDYnAuBBnoDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894157143476-3mr9ac71nov9olk6si6836fnjf1opkf9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894157143476-1ilva5kjifs1c0phuje4qs1iks8c3tf2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pirstone.EatUntil"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
