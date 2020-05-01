@@ -19,6 +19,7 @@ import {
   createList,
   removeList,
   updateName,
+  emptyList,
 } from './ListsSagas';
 import {
   retrieveProducts,
@@ -48,5 +49,6 @@ export default function* root() {
     takeLatest(ProductsTypes.CREATE, createProduct, api),
     takeLatest(ProductsTypes.REMOVE, removeProduct, api),
     takeLatest(ProductsTypes.GET_OFF_DATA, getProductData),
+    takeLatest(ProductsTypes.EMPTY, emptyList, api),
   ]);
 }

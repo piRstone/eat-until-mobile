@@ -92,7 +92,7 @@ const InnerWrapper = styled.View`
 
 const Emoji = styled.Text`
   font-size: 60px;
-  margin: 30px 0;
+  margin-bottom: 30px;
 `;
 
 const LoadingMessage = styled.Text`

@@ -102,4 +102,35 @@ describe('ProductsRedux', () => {
     expect(state.isCreateLoading).toBeFalsy();
     expect(state.error).toEqual(error);
   });
+
+  test('empty', () => {
+    const state = reducer(INITIAL_STATE, Actions.empty());
+
+    expect(state.isEmptyLoading).toBeTruthy();
+    expect(state.error).toBeUndefined();
+  });
+
+  test('emptySuccess', () => {
+    const inventoryId = 1;
+    const initialState = Immutable({
+      isEmptyLoading: true,
+      data: {
+        [inventoryId]: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+      },
+    });
+    const state = reducer(initialState, Actions.emptySuccess(inventoryId));
+
+    const expectedData = { [inventoryId]: [] };
+
+    expect(state.isEmptyLoading).toBeFalsy();
+    expect(state.data).toStrictEqual(expectedData);
+  });
+
+  test('emptyFailure', () => {
+    const error = 'error';
+    const state = reducer(INITIAL_STATE, Actions.emptyFailure(error));
+
+    expect(state.isEmptyLoading).toBeFalsy();
+    expect(state.error).toEqual(error);
+  });
 });

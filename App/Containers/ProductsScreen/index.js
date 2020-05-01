@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert, FlatList, Keyboard, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Keyboard,
+  View,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -21,10 +27,12 @@ export function ProductsScreen({
   getProducts,
   allProducts,
   isLoading,
+  isEmptyLoading,
   createProduct,
   removeProduct,
   removeList,
   updateListName,
+  emptyList,
 }) {
   const [list, setList] = useState({});
   const [showForm, setShowForm] = useState(false);
@@ -47,6 +55,17 @@ export function ProductsScreen({
     product.inventoryId = list.id;
     createProduct(product);
     Keyboard.dismiss();
+  };
+
+  const onEmptyListRequest = () => {
+    Alert.alert(t('products:emptyList'), t('products:emptyListText'), [
+      { text: t('products:cancel') },
+      {
+        text: t('products:delete'),
+        onPress: () => emptyList(list.id),
+        style: 'destructive',
+      },
+    ]);
   };
 
   const onDeleteListRequest = () => {
@@ -113,9 +132,22 @@ export function ProductsScreen({
             )}
           </View>
         )}
-        <DangerButton onPress={onDeleteListRequest}>
-          <DangerButtonText>{t('products:deleteList')}</DangerButtonText>
-        </DangerButton>
+        <DangerZone>
+          <DangerButton
+            onPress={onEmptyListRequest}
+            disabled={!products.length}>
+            {isEmptyLoading ? (
+              <ActivityIndicator color="#ea0000" />
+            ) : (
+              <DangerButtonText disabled={!products.length}>
+                {t('products:emptyList')}
+              </DangerButtonText>
+            )}
+          </DangerButton>
+          <DangerButton onPress={onDeleteListRequest}>
+            <DangerButtonText>{t('products:deleteList')}</DangerButtonText>
+          </DangerButton>
+        </DangerZone>
       </InnerWrapper>
     </Wrapper>
   );
@@ -124,18 +156,21 @@ export function ProductsScreen({
 ProductsScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object.isRequired,
-  allProducts: PropTypes.array,
+  allProducts: PropTypes.object,
   isLoading: PropTypes.bool,
+  isEmptyLoading: PropTypes.bool,
   getProducts: PropTypes.func,
   createProduct: PropTypes.func,
   removeProduct: PropTypes.func,
   removeList: PropTypes.func,
   updateListName: PropTypes.func,
+  emptyList: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   allProducts: state.products.data,
   isLoading: state.products.isLoading,
+  isEmptyLoading: state.products.isEmptyLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -145,6 +180,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(ProductsActions.remove(id, inventoryId)),
   removeList: id => dispatch(ListsActions.remove(id)),
   updateListName: (id, name) => dispatch(ListsActions.updateName(id, name)),
+  emptyList: id => dispatch(ProductsActions.empty(id)),
 });
 
 const withConnect = connect(
@@ -204,19 +240,25 @@ const EmptyState = styled.Text`
   margin-bottom: 10px;
 `;
 
+const DangerZone = styled.View`
+  flex-direction: row;
+`;
+
 const DangerButton = styled.TouchableOpacity`
+  flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.whiteBackground};
-  border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px 20px;
+  border: ${props =>
+    props.disabled
+      ? `1px solid ${props.theme.grey1}`
+      : `1px solid ${props.theme.red}`};
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 12px 20px 7px;
 `;
 
 const DangerButtonText = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 14px;
-  color: ${props => props.theme.red};
-  line-height: 18px;
+  color: ${props => (props.disabled ? props.theme.grey1 : props.theme.red)};
 `;

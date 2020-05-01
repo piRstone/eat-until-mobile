@@ -5,6 +5,7 @@ import i18n from 'i18next';
 import NotificationActions from '../Redux/NotificationRedux';
 import { types } from '../Containers/Notification';
 import ListsActions from '../Redux/ListsRedux';
+import ProductsActions from '../Redux/ProductsRedux';
 
 export function* retrieveLists(api) {
   const response = yield call(api.getLists);
@@ -71,6 +72,19 @@ export function* updateName(api, { id, name }) {
         i18n.t('notification:serverError'),
         types.danger,
       ),
+    );
+  }
+}
+
+export function* emptyList(api, { inventoryId }) {
+  const response = yield call(api.emptyList, inventoryId);
+
+  if (response.ok) {
+    yield put(ProductsActions.emptySuccess(inventoryId));
+  } else {
+    yield put(ProductsActions.emptyFailure(response.data));
+    yield put(
+      NotificationActions.display(i18n.t('products:emptyError'), types.danger),
     );
   }
 }

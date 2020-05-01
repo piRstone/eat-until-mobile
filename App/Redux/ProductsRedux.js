@@ -15,6 +15,9 @@ const { Types, Creators } = createActions(
     removeSuccess: ['id', 'inventoryId'],
     removeFailure: ['error'],
     getOffData: ['ean13'],
+    empty: ['inventoryId'],
+    emptySuccess: ['inventoryId'],
+    emptyFailure: ['error'],
   },
   {
     prefix: 'PRODUCTS/',
@@ -30,6 +33,7 @@ export const INITIAL_STATE = Immutable({
   data: {},
   isLoading: false,
   isCreateLoading: false,
+  isEmptyLoading: false,
   error: undefined,
 });
 
@@ -109,6 +113,27 @@ export const removeFailure = (state, { error }) =>
     error,
   });
 
+export const empty = state =>
+  state.merge({
+    isEmptyLoading: true,
+    error: undefined,
+  });
+
+export const emptySuccess = (state, { inventoryId }) => {
+  const data = { ...state.data };
+  data[inventoryId] = [];
+  return state.merge({
+    isEmptyLoading: false,
+    data,
+  });
+};
+
+export const emptyFailure = (state, { error }) =>
+  state.merge({
+    isEmptyLoading: false,
+    error,
+  });
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -121,4 +146,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REMOVE]: remove,
   [Types.REMOVE_SUCCESS]: removeSuccess,
   [Types.REMOVE_FAILURE]: removeFailure,
+  [Types.EMPTY]: empty,
+  [Types.EMPTY_SUCCESS]: emptySuccess,
+  [Types.EMPTY_FAILURE]: emptyFailure,
 });

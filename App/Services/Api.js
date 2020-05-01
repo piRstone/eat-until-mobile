@@ -30,6 +30,7 @@ const create = (baseURL = 'http://localhost:8001/api') => {
     createList: name => api.post('/inventories', { name }),
     updateListName: (id, name) => api.patch(`/inventories/${id}`, { name }),
     removeList: id => api.delete(`/inventories/${id}`),
+    emptyList: id => api.post(`/inventories/${id}/clear_products`),
     getProducts: inventoryId =>
       api.get(`/products?inventory_id=${inventoryId}`),
     createProduct: product => api.post('/products', product),
