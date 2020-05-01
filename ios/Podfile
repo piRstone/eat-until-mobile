@@ -35,9 +35,11 @@ target 'EatUntilMobile' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Pods for EatUntilMobile
-  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
-    'BarcodeDetectorMLKit'
-  ]
+  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
+  # pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  #   'BarcodeDetectorMLKit'
+  # ]
 
   use_frameworks!
   use_native_modules!
@@ -51,4 +53,8 @@ target 'EatUntilMobile' do
   #     end
   #   end
   # end
+end
+
+pre_install do |installer|
+  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
 end
