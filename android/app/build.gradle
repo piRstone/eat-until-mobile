@@ -124,7 +124,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.eatuntilmobile"
+        applicationId "com.pirstone.eatuntil"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
