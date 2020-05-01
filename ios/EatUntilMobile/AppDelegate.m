@@ -13,6 +13,7 @@
 #import <React/RCTLinkingManager.h>
 #import <Firebase.h>
 #import <React/RCTLinkingManager.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
