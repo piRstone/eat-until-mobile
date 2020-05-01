@@ -1,4 +1,4 @@
-package com.eatuntilmobile;
+package com.pirstone.eatuntil;
 
 import android.app.Application;
 
