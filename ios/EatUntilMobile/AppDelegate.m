@@ -12,6 +12,7 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
 #import <Firebase.h>
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
