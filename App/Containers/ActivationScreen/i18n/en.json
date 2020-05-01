@@ -1,0 +1,10 @@
+{
+  "activation": "Activation",
+  "loadingMessage": "Activating your account...",
+  "title": "Yous account is active!",
+  "text": "You can now sign in.",
+  "login": "Sign in",
+  "errorTitle": "An error occurred",
+  "errorText": "This activation link is outdated. Generate a new with the button below.",
+  "generate": "Generate a new activation link"
+}

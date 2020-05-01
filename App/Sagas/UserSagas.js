@@ -58,6 +58,16 @@ export function* register(api, { email, password }) {
   }
 }
 
+export function* activate(api, { uidb64, token }) {
+  const response = yield call(api.activate, { uidb64, token });
+
+  if (response.ok) {
+    yield put(UserActions.activationSuccess());
+  } else {
+    yield put(UserActions.activationFailure());
+  }
+}
+
 export function* getUser(api) {
   const response = yield call(api.getUser);
 

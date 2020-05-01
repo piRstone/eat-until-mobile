@@ -66,6 +66,32 @@ describe('UserRedux', () => {
     expect(state.isLoading).toBeFalsy();
   });
 
+  test('activation', () => {
+    const state = reducer(INITIAL_STATE, Actions.activation());
+
+    expect(state.isLoading).toBeTruthy();
+    expect(state.activationState).toBeUndefined();
+  });
+
+  test('activationSuccess', () => {
+    const uidb64 = 'Mw';
+    const token = '5g3-66a8b816f915fac688d8';
+    const state = reducer(
+      INITIAL_STATE,
+      Actions.activationSuccess(uidb64, token),
+    );
+
+    expect(state.isLoading).toBeFalsy();
+    expect(state.activationState).toBeTruthy();
+  });
+
+  test('activationFailure', () => {
+    const state = reducer(INITIAL_STATE, Actions.activationFailure());
+
+    expect(state.isLoading).toBeFalsy();
+    expect(state.activationState).toBeFalsy();
+  });
+
   test('request', () => {
     const state = reducer(INITIAL_STATE, Actions.request());
 

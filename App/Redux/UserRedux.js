@@ -14,6 +14,9 @@ const { Types, Creators } = createActions(
     register: ['email', 'password'],
     registerSuccess: null,
     registerFailure: ['error'],
+    activation: ['uidb64', 'token'],
+    activationSuccess: null,
+    activationFailure: ['error'],
     request: null,
     success: ['user'],
     failure: ['error'],
@@ -36,6 +39,7 @@ export const INITIAL_STATE = Immutable({
   isLoading: false,
   error: undefined,
   resetPasswordState: undefined,
+  activationState: undefined,
 });
 
 /* ------------- Selectors ------------- */
@@ -100,6 +104,24 @@ export const registerFailure = state =>
     isLoading: false,
   });
 
+export const activation = state =>
+  state.merge({
+    isLoading: true,
+    activationState: undefined,
+  });
+
+export const activationSuccess = state =>
+  state.merge({
+    isLoading: false,
+    activationState: true,
+  });
+
+export const activationFailure = state =>
+  state.merge({
+    isLoading: false,
+    activationState: false,
+  });
+
 export const request = state =>
   state.merge({
     isLoading: true,
@@ -136,6 +158,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER]: register,
   [Types.REGISTER_SUCCESS]: registerSuccess,
   [Types.REGISTER_FAILURE]: registerFailure,
+  [Types.ACTIVATION]: activation,
+  [Types.ACTIVATION_SUCCESS]: activationSuccess,
+  [Types.ACTIVATION_FAILURE]: activationFailure,
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,

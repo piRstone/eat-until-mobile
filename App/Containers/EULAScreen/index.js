@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-export default function EULAScreen({ navigation }) {
+function EULAScreen({ navigation }) {
   return (
     <Wrapper>
       <InnerWrapper>
@@ -169,6 +169,8 @@ export default function EULAScreen({ navigation }) {
 EULAScreen.propTypes = {
   navigation: PropTypes.object,
 };
+
+export default EULAScreen;
 
 const Wrapper = styled.View`
   flex: 1;

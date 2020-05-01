@@ -13,6 +13,7 @@ import ProfileScreen from '../Containers/ProfileScreen';
 import RegisterScreen from '../Containers/RegisterScreen';
 import RegisterSuccessScreen from '../Containers/RegisterSuccessScreen';
 import EULAScreen from '../Containers/EULAScreen';
+import ActivationScreen from '../Containers/ActivationScreen';
 
 const MainStack = createStackNavigator(
   {
@@ -37,6 +38,7 @@ const AuthenticationStack = createStackNavigator(
     },
     ForgotPasswordScreen: { screen: ForgotPasswordScreen },
     EULAScreen: { screen: EULAScreen },
+    ActivationScreen: { screen: ActivationScreen },
   },
   {
     initialRouteName: 'LoginScreen',

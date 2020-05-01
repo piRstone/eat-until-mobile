@@ -1,10 +1,10 @@
 import Actions, { reducer, INITIAL_STATE } from '../NotificationRedux';
-import Notification from '../../Containers/Notification';
+import { types } from '../../Containers/Notification';
 import Immutable from 'seamless-immutable';
 
 test('Display', () => {
   const text = 'Ok';
-  const type = Notification.types.success;
+  const type = types.success;
   const state = reducer(INITIAL_STATE, Actions.display(text, type));
 
   expect(state.text).toEqual(text);
@@ -15,11 +15,11 @@ test('Display', () => {
 test('Display increments id', () => {
   const initialState = Immutable({
     text: 'Ok',
-    type: Notification.types.success,
+    type: types.success,
     id: 2,
   });
   const text = 'Ok';
-  const type = Notification.types.success;
+  const type = types.success;
   const state = reducer(initialState, Actions.display(text, type));
 
   expect(state.id).toEqual(initialState.id + 1);

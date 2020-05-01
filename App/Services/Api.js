@@ -24,6 +24,7 @@ const create = (baseURL = 'http://localhost:8001/api') => {
       return api.post('/users/forgot-password', { email });
     },
     register: data => api.post('/register', data),
+    activate: data => api.post('/user/activate', data),
     getUser: () => api.get('/me'),
     getLists: () => api.get('/inventories'),
     createList: name => api.post('/inventories', { name }),

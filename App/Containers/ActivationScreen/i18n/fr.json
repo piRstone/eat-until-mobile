@@ -1,0 +1,10 @@
+{
+  "activation": "Activation",
+  "loadingMessage": "Activation de votre compte...",
+  "title": "Votre compte est activé !",
+  "text": "Vous pouvez désormais vous connecter.",
+  "login": "Connexion",
+  "errorTitle": "Une erreur s'est produite",
+  "errorText": "Le lien que vous utilisez est périmé. Générez-en un grace au bouton ci-dessous.",
+  "generate": "Générer un nouveau lien"
+}
