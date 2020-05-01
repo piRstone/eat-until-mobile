@@ -24,18 +24,22 @@ const store = createStore();
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
+
+// Deep linking
+const prefix = 'eatuntil://';
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RootContainer />
+        <RootContainer uriPrefix={prefix} />
       </Provider>
     );
   }
 }
 
 // allow reactotron overlay for fast design in dev mode
-/* eslint-disable indent */
+/* eslint-disable indent, no-console */
 export default (DebugConfig.useStorybook
   ? storybook
   : DebugConfig.useReactotron

@@ -38,7 +38,7 @@ const AuthenticationStack = createStackNavigator(
     },
     ForgotPasswordScreen: { screen: ForgotPasswordScreen },
     EULAScreen: { screen: EULAScreen },
-    ActivationScreen: { screen: ActivationScreen },
+    ActivationScreen: { screen: ActivationScreen, path: 'activation' },
   },
   {
     initialRouteName: 'LoginScreen',

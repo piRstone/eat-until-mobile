@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { BackHandler, Platform } from 'react-native';
 import {
   createReactNavigationReduxMiddleware,
@@ -14,11 +15,10 @@ export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
 
 const ReduxAppNavigator = createReduxContainer(AppNavigation, 'root');
 
-class ReduxNavigation extends React.Component {
-  componentDidMount() {
+function ReduxNavigation({ dispatch, nav }) {
+  useEffect(() => {
     if (Platform.OS === 'ios') return;
     BackHandler.addEventListener('hardwareBackPress', () => {
-      const { dispatch, nav } = this.props;
       // change to whatever is your first screen, otherwise unpredictable results may occur
       if (
         nav.routes.length === 1 &&
@@ -30,24 +30,23 @@ class ReduxNavigation extends React.Component {
       dispatch({ type: 'Navigation/BACK' });
       return true;
     });
-  }
 
-  componentWillUnmount() {
-    if (Platform.OS === 'ios') return;
-    BackHandler.removeEventListener('hardwareBackPress', undefined);
-  }
+    return () => {
+      if (Platform.OS === 'ios') return;
+      BackHandler.removeEventListener('hardwareBackPress', undefined);
+    };
+  }, []);
 
-  render() {
-    return (
-      <ReduxAppNavigator
-        dispatch={this.props.dispatch}
-        state={this.props.nav}
-      />
-    );
-  }
+  return <ReduxAppNavigator dispatch={dispatch} state={nav} />;
 }
+
+ReduxNavigation.propTypes = {
+  dispatch: PropTypes.func,
+  nav: PropTypes.object,
+};
 
 const mapStateToProps = state => ({
   nav: state.nav,
 });
+
 export default connect(mapStateToProps)(ReduxNavigation);
