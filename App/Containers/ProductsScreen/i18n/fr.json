@@ -1,6 +1,6 @@
 {
   "productsRetrieval": "Récupération des produits...",
-  "noProducts": "Il n'y a aucun produit dans votre liste.",
+  "noProducts": "Il n'y a aucun produit dans votre liste. Ajoutez-en un avec le bouton \"+\" en haut.",
   "deleteList": "Supprimer la liste",
   "deleteListText": "Si vous supprimez cette liste, tous les produits qu'elle contient seront supprimés eux aussi.",
   "emptyList": "Vider la liste",

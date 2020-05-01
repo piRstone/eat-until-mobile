@@ -227,8 +227,8 @@ const StyledActivityIndicator = styled.ActivityIndicator`
 `;
 
 const EmptyWrapper = styled.View`
+  flex: 1;
   flex-direction: column;
-  padding-top: 300px;
   align-items: center;
   justify-content: center;
 `;
@@ -238,6 +238,7 @@ const EmptyState = styled.Text`
   font-size: 16px;
   color: ${props => props.theme.grey1};
   margin-bottom: 10px;
+  text-align: center;
 `;
 
 const DangerZone = styled.View`
