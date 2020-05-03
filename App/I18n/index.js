@@ -1,9 +1,20 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import DebugConfig from '../Config/DebugConfig';
+import { NativeModules, Platform } from 'react-native';
+
+// Determine default language according to device's one
+let defaultLanguage = 'fr';
+let lng;
+if (Platform.OS === 'ios') {
+  lng = NativeModules.SettingsManager.settings.AppleLocale;
+} else {
+  lng = NativeModules.I18nManager.localeIdentifier;
+}
+defaultLanguage = lng.split('_')[0];
 
 i18n.use(initReactI18next).init({
-  lng: 'fr',
+  lng: defaultLanguage,
   debug: DebugConfig.debugI18next,
   resources: {
     fr: {
