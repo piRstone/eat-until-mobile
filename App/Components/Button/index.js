@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -27,7 +28,7 @@ const Wrapper = styled.TouchableOpacity`
   background-color: ${props =>
     props.disabled ? props.theme.grey2 : props.theme.primary};
   margin-top: 20px;
-  padding-top: 7px;
+  padding-top: ${Platform.OS === 'ios' ? '7px' : 0};
 `;
 
 const Text = styled.Text`

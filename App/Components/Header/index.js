@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -57,5 +58,5 @@ const Title = styled.Text`
   font-size: ${props => (props.titleSmaller ? '25px' : '30px')};
   color: ${props =>
     props.barStyle === 'light' ? props.theme.white : props.theme.black};
-  padding-top: 17px;
+  padding-top: ${Platform.OS === 'ios' ? '17px' : 0};
 `;

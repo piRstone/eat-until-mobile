@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TextInput, StatusBar } from 'react-native';
+import React from 'react';
+import { StatusBar, Vibration } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
@@ -8,19 +8,13 @@ import DeviceInfo from 'react-native-device-info';
 
 import ProductsActions from '../../Redux/ProductsRedux';
 import Header from '../../Components/Header';
+import { Metrics } from '../../Themes';
 
 export function CameraScreen({ navigation, getProductData, isLoading }) {
-  const [ean13, setEan13] = useState(undefined);
-
-  const onSubmit = () => {
-    if (ean13.length === 13 && !isNaN(ean13)) {
-      getProductData(ean13);
-    }
-  };
-
   const handleBarcoreRead = e => {
     const type = RNCamera.Constants.BarCodeType.ean13;
     if (e.type === type) {
+      Vibration.vibrate();
       getProductData(e.data);
     }
   };
@@ -28,13 +22,6 @@ export function CameraScreen({ navigation, getProductData, isLoading }) {
   return (
     <Wrapper>
       <StatusBar barStyle="light-content" />
-      {/* <TextInput
-        onChangeText={e => setEan13(e)}
-        placeholder="Code barre"
-        returnKeyType="done"
-        value={ean13}
-        onSubmitEditing={onSubmit}
-      /> */}
       <RNCamera
         style={{ flex: 1 }}
         captureAudio={false}
@@ -47,6 +34,7 @@ export function CameraScreen({ navigation, getProductData, isLoading }) {
       <HeaderWrapper>
         <Header onPress={() => navigation.goBack()} barStyle="light" />
       </HeaderWrapper>
+      {isLoading && <StyledActivityIndicator color="#ffffff" size="large" />}
     </Wrapper>
   );
 }
@@ -79,4 +67,10 @@ const HeaderWrapper = styled.View`
   left: 20px;
   right: 20px;
   top: ${DeviceInfo.hasNotch() ? '50px' : '0px'};
+`;
+
+const StyledActivityIndicator = styled.ActivityIndicator`
+  position: absolute;
+  left: ${Metrics.screenWidth / 2 - 15};
+  top: ${Metrics.screenHeight / 2 - 15};
 `;
