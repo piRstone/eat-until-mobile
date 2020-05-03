@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-function Header({ onPress, title, titleSmaller }) {
+function Header({ onPress, title, titleSmaller, barStyle }) {
   return (
     <Wrapper>
       <BackButton onPress={onPress}>
-        <StyledBackIcon name="chevron-left" size={24} />
+        <StyledBackIcon name="chevron-left" size={24} barStyle={barStyle} />
       </BackButton>
-      {title && <Title titleSmaller={titleSmaller}>{title}</Title>}
+      {title && (
+        <Title barStyle={barStyle} titleSmaller={titleSmaller}>
+          {title}
+        </Title>
+      )}
     </Wrapper>
   );
 }
@@ -18,6 +22,11 @@ Header.propTypes = {
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string,
   titleSmaller: PropTypes.bool,
+  barStyle: PropTypes.oneOf(['light', 'dark']),
+};
+
+Header.defaultProps = {
+  barStyle: 'dark',
 };
 
 export default Header;
@@ -39,12 +48,14 @@ const BackButton = styled.TouchableOpacity`
 `;
 
 const StyledBackIcon = styled(Icon)`
-  color: ${props => props.theme.black};
+  color: ${props =>
+    props.barStyle === 'light' ? props.theme.white : props.theme.black};
 `;
 
 const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: ${props => (props.titleSmaller ? '25px' : '30px')};
-  color: ${props => props.theme.black};
+  color: ${props =>
+    props.barStyle === 'light' ? props.theme.white : props.theme.black};
   padding-top: 17px;
 `;

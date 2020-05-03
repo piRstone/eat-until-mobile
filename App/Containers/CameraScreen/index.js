@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { RNCamera } from 'react-native-camera';
+import DeviceInfo from 'react-native-device-info';
 
 import ProductsActions from '../../Redux/ProductsRedux';
+import Header from '../../Components/Header';
 
-export function CameraScreen({ getProductData, isLoading }) {
+export function CameraScreen({ navigation, getProductData, isLoading }) {
   const [ean13, setEan13] = useState(undefined);
 
   const onSubmit = () => {
@@ -25,13 +27,14 @@ export function CameraScreen({ getProductData, isLoading }) {
 
   return (
     <Wrapper>
-      <TextInput
+      <StatusBar barStyle="light-content" />
+      {/* <TextInput
         onChangeText={e => setEan13(e)}
         placeholder="Code barre"
         returnKeyType="done"
         value={ean13}
         onSubmitEditing={onSubmit}
-      />
+      /> */}
       <RNCamera
         style={{ flex: 1 }}
         captureAudio={false}
@@ -41,11 +44,15 @@ export function CameraScreen({ getProductData, isLoading }) {
         ]}
         onBarCodeRead={handleBarcoreRead}
       />
+      <HeaderWrapper>
+        <Header onPress={() => navigation.goBack()} barStyle="light" />
+      </HeaderWrapper>
     </Wrapper>
   );
 }
 
 CameraScreen.propTypes = {
+  navigation: PropTypes.object,
   isLoading: PropTypes.bool,
   getProductData: PropTypes.func,
 };
@@ -63,6 +70,13 @@ export default connect(
   mapDispatchToProps,
 )(CameraScreen);
 
-const Wrapper = styled.SafeAreaView`
+const Wrapper = styled.View`
   flex: 1;
+`;
+
+const HeaderWrapper = styled.View`
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: ${DeviceInfo.hasNotch() ? '50px' : '0px'};
 `;
