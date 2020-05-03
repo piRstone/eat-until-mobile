@@ -1,8 +1,9 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce';
+import Secrets from 'react-native-config';
 
 // our "constructor"
-const create = (baseURL = 'http://localhost:8001/api') => {
+const create = (baseURL = Secrets.API_URL) => {
   const api = apisauce.create({
     baseURL,
     headers: {
