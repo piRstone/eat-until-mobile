@@ -5,8 +5,9 @@ import { Keyboard, ScrollView } from 'react-native';
 import { compose } from 'redux';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
-import Icon from 'react-native-vector-icons/Feather';
 
+import Header from '../../Components/Header';
+import Button from '../../Components/Button';
 import Checkbox from '../../Components/Checkbox';
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
@@ -20,12 +21,10 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Header>
-          <BackButton onPress={() => navigation.goBack()}>
-            <StyledBackIcon name="chevron-left" size={24} />
-          </BackButton>
-          <Title>{t('register:signUp')}</Title>
-        </Header>
+        <Header
+          title={t('register:signUp')}
+          onPress={() => navigation.goBack()}
+        />
         <ScrollView
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="always">
@@ -70,18 +69,15 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
               .
             </EULAText>
           </EULAWrapper>
-          <StyledButton
+          <Button
             onPress={() => {
               register(email, password);
               Keyboard.dismiss();
             }}
-            disabled={!email || !password || !acceptEULA}>
-            {isLoading ? (
-              <StyledActivityIndicator />
-            ) : (
-              <ButtonText>{t('register:registration')}</ButtonText>
-            )}
-          </StyledButton>
+            disabled={!email || !password || !acceptEULA}
+            title={t('register:registration')}
+            isLoading={isLoading}
+          />
           <SmallText>{t('register:privacySentence')}</SmallText>
         </ScrollView>
       </InnerWrapper>
@@ -125,32 +121,6 @@ const InnerWrapper = styled.SafeAreaView`
   margin: 20px;
 `;
 
-const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const BackButton = styled.TouchableOpacity`
-  height: 25px;
-  width: 25px;
-  border-radius: 20px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-`;
-
-const StyledBackIcon = styled(Icon)`
-  color: ${props => props.theme.black};
-`;
-
-const Title = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 30px;
-  color: ${props => props.theme.black};
-  padding-top: 17px;
-`;
-
 const EULAWrapper = styled.View`
   flex-direction: row;
   align-items: center;
@@ -174,26 +144,4 @@ const SmallText = styled.Text`
   margin: 5px 0;
   margin-bottom: 20px;
   color: ${props => props.theme.grey1};
-`;
-
-const StyledButton = styled.TouchableOpacity`
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: ${props =>
-    props.disabled ? props.theme.grey2 : props.theme.primary};
-  margin-top: 20px;
-  margin-bottom: 30px;
-  padding-top: 7px;
-`;
-
-const ButtonText = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 18px;
-  color: ${props => props.theme.white};
-`;
-
-const StyledActivityIndicator = styled.ActivityIndicator`
-  color: ${props => props.theme.white};
 `;

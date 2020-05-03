@@ -133,4 +133,19 @@ describe('ProductsRedux', () => {
     expect(state.isEmptyLoading).toBeFalsy();
     expect(state.error).toEqual(error);
   });
+
+  test('offRequest', () => {
+    const state = reducer(INITIAL_STATE, Actions.getOffData());
+
+    expect(state.isOffLoading).toBeTruthy();
+  });
+
+  test('offSuccess', () => {
+    const initialState = Immutable({
+      isOffLoading: true,
+    });
+    const state = reducer(initialState, Actions.offSuccess());
+
+    expect(state.isOffLoading).toBeFalsy();
+  });
 });

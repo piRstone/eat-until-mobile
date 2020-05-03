@@ -5,20 +5,18 @@ import { compose } from 'redux';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
 import DeviceInfo from 'react-native-device-info';
-import Icon from 'react-native-vector-icons/Feather';
 
 import UserActions from '../../Redux/UserRedux';
+import Header from '../../Components/Header';
 
 export function ProfileScreen({ t, navigation, logout, user }) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Header>
-          <BackButton onPress={() => navigation.goBack()}>
-            <StyledBackIcon name="chevron-left" size={24} />
-          </BackButton>
-          <Title>{t('profile:profile')}</Title>
-        </Header>
+        <Header
+          title={t('profile:profile')}
+          onPress={() => navigation.goBack()}
+        />
         <StyledText>{user.email}</StyledText>
         <LogoutWrapper onPress={logout}>
           <LogoutText>{t('profile:logout')}</LogoutText>
@@ -66,32 +64,6 @@ const Wrapper = styled.View`
 const InnerWrapper = styled.SafeAreaView`
   flex: 1;
   margin: 20px;
-`;
-
-const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const BackButton = styled.TouchableOpacity`
-  height: 25px;
-  width: 25px;
-  border-radius: 20px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-`;
-
-const StyledBackIcon = styled(Icon)`
-  color: ${props => props.theme.black};
-`;
-
-const Title = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 30px;
-  color: ${props => props.theme.black};
-  padding-top: 17px;
 `;
 
 const StyledText = styled.Text`

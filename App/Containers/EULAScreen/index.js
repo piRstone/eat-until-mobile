@@ -2,17 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/Feather';
+
+import Header from '../../Components/Header';
 
 function EULAScreen({ navigation }) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <Header>
-          <BackButton onPress={() => navigation.goBack()}>
-            <StyledBackIcon name="chevron-left" size={24} />
-          </BackButton>
-        </Header>
+        <Header onPress={() => navigation.goBack()} />
         <ScrollView>
           <Title>CONDITIONS GÉNÉRALES D'UTILISATION</Title>
           <Text>
@@ -180,25 +177,6 @@ const Wrapper = styled.View`
 const InnerWrapper = styled.SafeAreaView`
   flex: 1;
   margin: 20px;
-`;
-
-const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const BackButton = styled.TouchableOpacity`
-  height: 25px;
-  width: 25px;
-  border-radius: 20px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-`;
-
-const StyledBackIcon = styled(Icon)`
-  color: ${props => props.theme.black};
 `;
 
 const Title = styled.Text`

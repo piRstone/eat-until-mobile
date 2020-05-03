@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { path } from 'ramda';
-import Icon from 'react-native-vector-icons/Feather';
 import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
+import Header from '../../Components/Header';
+import Button from '../../Components/Button';
 import TextInput from '../../Components/TextInput';
 
 const illustration = require('../../Images/blob_and_key.png');
@@ -41,12 +42,17 @@ export function ForgotPasswordScreen({
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="always">
         <InnerWrapper>
-          <TitleWrapper>
+          <Header
+            title={t('forgotPassword:title')}
+            onPress={() => navigation.goBack()}
+            titleSmaller
+          />
+          {/* <TitleWrapper>
             <StyledBackButton onPress={() => navigation.goBack()}>
               <StyledChevron name="chevron-left" size={35} />
             </StyledBackButton>
             <Title>{t('forgotPassword:title')}</Title>
-          </TitleWrapper>
+          </TitleWrapper> */}
           <StyledIllu source={illustration} resizeMode="contain" />
           <Text>{t('forgotPassword:explanationText')}</Text>
           <Form>
@@ -66,13 +72,12 @@ export function ForgotPasswordScreen({
               }}
             />
           </Form>
-          <StyledButton disabled={!userEmail} onPress={onSubmit}>
-            {isLoading ? (
-              <StyledActivityIndicator />
-            ) : (
-              <ButtonText>{t('forgotPassword:reset')}</ButtonText>
-            )}
-          </StyledButton>
+          <Button
+            disabled={!userEmail}
+            onPress={onSubmit}
+            title={t('forgotPassword:reset')}
+            isLoading={isLoading}
+          />
           {resetPasswordState !== undefined && (
             <StatusMessage isOk={resetPasswordState}>
               {resetPasswordState
@@ -121,21 +126,7 @@ const Wrapper = styled.SafeAreaView`
 const InnerWrapper = styled.View`
   align-items: center;
   margin: 20px;
-`;
-
-const TitleWrapper = styled.View`
-  width: 100%;
-  align-items: center;
-`;
-
-const StyledBackButton = styled.TouchableOpacity`
-  position: absolute;
-  top: -7px;
-  left: 0;
-`;
-
-const StyledChevron = styled(Icon)`
-  color: ${props => props.theme.grey1};
+  margin-top: 0;
 `;
 
 const StyledIllu = styled.Image`
@@ -144,47 +135,20 @@ const StyledIllu = styled.Image`
   margin: 20px 0;
 `;
 
-const Title = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 25px;
-  color: ${props => props.theme.black};
-`;
-
 const Text = styled.Text`
   font-family: 'SofiaProRegular';
   color: ${props => props.theme.black};
   margin-bottom: 10px;
   margin: 20px 0;
+  text-align: center;
 `;
 
 const Form = styled.View`
-  width: 90%;
+  width: 100%;
   flex-direction: column;
   border-radius: 10px;
   background-color: #fff;
   overflow: hidden;
-`;
-
-const StyledButton = styled.TouchableOpacity`
-  height: 40px;
-  width: 90%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: ${props =>
-    props.disabled ? props.theme.grey2 : props.theme.primary};
-  margin-top: 20px;
-  padding-top: 7px;
-`;
-
-const ButtonText = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 18px;
-  color: ${props => props.theme.white};
-`;
-
-const StyledActivityIndicator = styled.ActivityIndicator`
-  color: ${props => props.theme.black};
 `;
 
 /* eslint-disable indent */

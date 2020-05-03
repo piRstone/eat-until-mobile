@@ -14,10 +14,11 @@ const { Types, Creators } = createActions(
     remove: ['id', 'inventoryId'],
     removeSuccess: ['id', 'inventoryId'],
     removeFailure: ['error'],
-    getOffData: ['ean13'],
     empty: ['inventoryId'],
     emptySuccess: ['inventoryId'],
     emptyFailure: ['error'],
+    getOffData: ['ean13'],
+    offSuccess: null,
   },
   {
     prefix: 'PRODUCTS/',
@@ -34,6 +35,7 @@ export const INITIAL_STATE = Immutable({
   isLoading: false,
   isCreateLoading: false,
   isEmptyLoading: false,
+  isOffLoading: false, // OpenFoodFacts loading (CameraScreen)
   error: undefined,
 });
 
@@ -134,6 +136,16 @@ export const emptyFailure = (state, { error }) =>
     error,
   });
 
+export const offRequest = state =>
+  state.merge({
+    isOffLoading: true,
+  });
+
+export const offSuccess = state =>
+  state.merge({
+    isOffLoading: false,
+  });
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -149,4 +161,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.EMPTY]: empty,
   [Types.EMPTY_SUCCESS]: emptySuccess,
   [Types.EMPTY_FAILURE]: emptyFailure,
+  [Types.GET_OFF_DATA]: offRequest,
+  [Types.OFF_SUCCESS]: offSuccess,
 });

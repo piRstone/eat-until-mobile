@@ -8,6 +8,7 @@ import { withTranslation } from 'react-i18next';
 
 import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
+import Button from '../../Components/Button';
 const logo = require('../../Images/logo.png');
 
 export function LoginScreen({ t, navigation, isLoading, login, error }) {
@@ -71,13 +72,12 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
             }>
             <SmallLink>{t('login:forgotPassword')}</SmallLink>
           </ForgotPasswordWrapper>
-          <StyledButton disabled={!email || !password} onPress={onSubmit}>
-            {isLoading ? (
-              <StyledActivityIndicator />
-            ) : (
-              <ButtonText>{t('login:signIn')}</ButtonText>
-            )}
-          </StyledButton>
+          <Button
+            title={t('login:signIn')}
+            isLoading={isLoading}
+            disabled={!email || !password}
+            onPress={onSubmit}
+          />
           {error && <ErrorMessage>{error}</ErrorMessage>}
         </InnerWrapper>
       </ScrollView>
@@ -120,10 +120,7 @@ const Wrapper = styled.SafeAreaView`
 const InnerWrapper = styled.View`
   align-items: center;
   justify-content: center;
-`;
-
-const StyledActivityIndicator = styled.ActivityIndicator`
-  color: ${props => props.theme.black};
+  margin: 0 20px;
 `;
 
 const Title = styled.Text`
@@ -141,7 +138,7 @@ const LogoImage = styled.Image`
 `;
 
 const Body = styled.View`
-  width: 90%;
+  width: 100%;
   flex-direction: column;
   border-radius: 10px;
   background-color: ${props => props.theme.grey2};
@@ -159,24 +156,6 @@ const LoginText = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 16px;
   color: ${props => props.theme.grey1};
-`;
-
-const StyledButton = styled.TouchableOpacity`
-  height: 40px;
-  width: 90%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: ${props =>
-    props.disabled ? props.theme.grey2 : props.theme.primary};
-  margin-top: 20px;
-  padding-top: 7px;
-`;
-
-const ButtonText = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 18px;
-  color: ${props => props.theme.white};
 `;
 
 const ErrorMessage = styled.Text`
