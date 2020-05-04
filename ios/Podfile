@@ -37,6 +37,7 @@ target 'EatUntilMobile' do
   # Pods for EatUntilMobile
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   # pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
   #   'BarcodeDetectorMLKit'
   # ]
