@@ -114,7 +114,7 @@ export function ProductsScreen({
             <StyledActivityIndicator />
           </EmptyWrapper>
         ) : (
-          <View style={{ flex: 1, marginTop: 10, padding: 10 }}>
+          <View style={{ flex: 1, marginTop: 10 }}>
             {products.length ? (
               <FlatList
                 data={products}

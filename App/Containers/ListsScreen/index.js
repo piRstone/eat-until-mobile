@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Keyboard, KeyboardAvoidingView, FlatList } from 'react-native';
+import {
+  FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DeviceInfo from 'react-native-device-info';
@@ -60,7 +65,14 @@ export function ListsScreen({
             style={{ height: '80%' }}
             renderItem={({ item }) => (
               <List key={item.id} onPress={() => handleListPress(item)}>
-                <ListName>{item.name}</ListName>
+                <Col>
+                  <ListName>{item.name}</ListName>
+                  <ProductsCount>
+                    {item.products_count
+                      ? t('lists:productsCount', { count: item.products_count })
+                      : t('lists:noProducts')}
+                  </ProductsCount>
+                </Col>
                 <ChevronIcon name="chevron-right" size={20} />
               </List>
             )}
@@ -142,14 +154,15 @@ const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 30px;
   color: ${props => props.theme.black};
-  padding-top: 10px;
+  padding-top: ${Platform.OS === 'ios' ? '10px' : '0'};
 `;
 
 const List = styled.TouchableOpacity`
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  padding: 30px 10px 20px 10px;
+  padding: 20px 10px;
   background-color: ${props => props.theme.whiteBackground};
   margin-bottom: 20px;
 `;
@@ -159,6 +172,14 @@ const ListName = styled.Text`
   font-size: 18px;
   color: ${props => props.theme.black};
 `;
+
+const ProductsCount = styled.Text`
+  font-size: 14px;
+  color: ${props => props.theme.grey1};
+  margin-top: ${Platform.OS === 'ios' ? '0px' : '5px'};
+`;
+
+const Col = styled.View``;
 
 const ChevronIcon = styled(FeatherIcon)`
   color: ${props => props.theme.grey1};
@@ -174,7 +195,7 @@ const CreateListButton = styled.TouchableOpacity`
   height: 50px;
   border-radius: 10px;
   background-color: ${props => props.theme.primary};
-  padding-top: 5px;
+  padding-top: ${Platform.OS === 'ios' ? '5px' : '0'};
 `;
 
 const CreateListButtonText = styled.Text`

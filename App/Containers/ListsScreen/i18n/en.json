@@ -1,5 +1,8 @@
 {
   "title": "My lists",
   "create": "Create a list",
-  "listDeleted": "Liste supprimée"
+  "listDeleted": "Liste supprimée",
+  "noProducts": "No product",
+  "productsCount": "{{ count }} product",
+  "productsCount_plural": "{{ count }} products"
 }

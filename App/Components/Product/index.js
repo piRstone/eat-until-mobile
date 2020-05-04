@@ -68,7 +68,7 @@ export function Product({ t, data, onRemove }) {
           },
           {
             text: 'Modifier',
-            onPress: () => console.log('Dialog dismissed'),
+            onPress: () => {},
             style: 'cancel',
           },
           {
