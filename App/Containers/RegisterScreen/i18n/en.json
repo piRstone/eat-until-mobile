@@ -1,5 +1,7 @@
 {
   "signUp": "Sign up",
+  "firstName": "Prénom",
+  "firstNamePlaceholder": "Your first name",
   "emailPlaceholder": "email@domain.com",
   "topSentence": "Your email, it's the only thing we ask you!",
   "emailExplanation": "We'll use it only to send you notification relative to your use of the application.",

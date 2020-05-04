@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
-function TextInput({ label, onChangeText, inputProps, noBorderBottom }) {
+function TextInput({
+  label,
+  required,
+  onChangeText,
+  inputProps,
+  noBorderBottom,
+}) {
   return (
     <Wrapper noBorder={noBorderBottom}>
-      <Label>{label}</Label>
+      <Label>
+        {label}
+        {required && <Required>*</Required>}
+      </Label>
       <StyledInput onChangeText={onChangeText} {...inputProps} />
     </Wrapper>
   );
@@ -13,6 +22,7 @@ function TextInput({ label, onChangeText, inputProps, noBorderBottom }) {
 
 TextInput.propTypes = {
   label: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
   inputProps: PropTypes.object,
   noBorderBottom: PropTypes.bool,
@@ -33,6 +43,10 @@ const Label = styled.Text`
   color: ${props => props.theme.grey1};
   margin: 0;
   margin-bottom: 5px;
+`;
+
+const Required = styled(Label)`
+  color: ${props => props.theme.red};
 `;
 
 const StyledInput = styled.TextInput`

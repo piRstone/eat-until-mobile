@@ -4,5 +4,6 @@
   "listDeleted": "Liste supprimée",
   "noProducts": "Aucun produit",
   "productsCount": "{{ count }} produit",
-  "productsCount_plural": "{{ count }} produits"
+  "productsCount_plural": "{{ count }} produits",
+  "noLists": "Vous n'avez aucune liste. Créez-en une avec le bouton ci-dessous."
 }

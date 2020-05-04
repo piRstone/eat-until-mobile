@@ -40,13 +40,19 @@ export function* forgotPassword(api, { email }) {
   }
 }
 
-export function* register(api, { email, password }) {
-  const response = yield call(api.register, { email, password });
+export function* register(api, { firstname, email, password }) {
+  const response = yield call(api.register, {
+    first_name: firstname,
+    email,
+    password,
+  });
 
   if (response.ok) {
     yield put(UserActions.registerSuccess());
     yield put(
-      NavigationActions.navigate({ routeName: 'RegisterSuccessScreen' }),
+      NavigationActions.navigate({
+        routeName: 'RegisterSuccessScreen',
+      }),
     );
   } else {
     if (response.status === 400) {

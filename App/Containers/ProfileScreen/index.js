@@ -17,6 +17,9 @@ export function ProfileScreen({ t, navigation, logout, user }) {
           title={t('profile:profile')}
           onPress={() => navigation.goBack()}
         />
+        <StyledName>
+          {user.first_name} {user.last_name}
+        </StyledName>
         <StyledText>{user.email}</StyledText>
         <LogoutWrapper onPress={logout}>
           <LogoutText>{t('profile:logout')}</LogoutText>
@@ -66,10 +69,15 @@ const InnerWrapper = styled.SafeAreaView`
   margin: 20px;
 `;
 
-const StyledText = styled.Text`
+const StyledName = styled.Text`
   font-family: 'SofiaPro-Bold';
-  font-size: 20px;
+  font-size: 25px;
   color: ${props => props.theme.black};
+`;
+
+const StyledText = styled(StyledName)`
+  font-family: 'SofiaProRegular';
+  font-size: 18px;
 `;
 
 const LogoutWrapper = styled.TouchableOpacity`

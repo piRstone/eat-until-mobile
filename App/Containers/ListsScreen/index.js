@@ -58,26 +58,30 @@ export function ListsScreen({
           {showForm && (
             <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
           )}
-          <FlatList
-            data={lists}
-            refreshing={isLoading}
-            onRefresh={() => getLists()}
-            style={{ height: '80%' }}
-            renderItem={({ item }) => (
-              <List key={item.id} onPress={() => handleListPress(item)}>
-                <Col>
-                  <ListName>{item.name}</ListName>
-                  <ProductsCount>
-                    {item.products_count
-                      ? t('lists:productsCount', { count: item.products_count })
-                      : t('lists:noProducts')}
-                  </ProductsCount>
-                </Col>
-                <ChevronIcon name="chevron-right" size={20} />
-              </List>
-            )}
-            keyExtractor={item => item.id.toString()}
-          />
+          {lists.length ? (
+            <FlatList
+              data={lists}
+              refreshing={isLoading}
+              onRefresh={() => getLists()}
+              style={{ height: '80%' }}
+              renderItem={({ item }) => (
+                <List key={item.id} onPress={() => handleListPress(item)}>
+                  <Col>
+                    <ListName>{item.name}</ListName>
+                    <ProductsCount>
+                      {item.products_count
+                        ? t('lists:productsCount', { count: item.products_count }) // eslint-disable-line prettier/prettier
+                        : t('lists:noProducts')}
+                    </ProductsCount>
+                  </Col>
+                  <ChevronIcon name="chevron-right" size={20} />
+                </List>
+              )}
+              keyExtractor={item => item.id.toString()}
+            />
+          ) : (
+            <EmptyState>{t('lists:noLists')}</EmptyState>
+          )}
         </KeyboardAvoidingView>
       </InnerWrapper>
       <CreateListButton onPress={() => setShowForm(!showForm)}>
@@ -202,4 +206,10 @@ const CreateListButtonText = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 16px;
   color: ${props => props.theme.white};
+`;
+
+const EmptyState = styled.Text`
+  font-family: 'SofiaProRegular';
+  color: ${props => props.theme.grey1};
+  margin-top: 30px;
 `;

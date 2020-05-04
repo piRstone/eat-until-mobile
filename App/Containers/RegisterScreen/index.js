@@ -13,9 +13,11 @@ import UserActions from '../../Redux/UserRedux';
 import TextInput from '../../Components/TextInput';
 
 export function RegisterScreen({ t, navigation, register, isLoading }) {
+  const [firstname, setFirstname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [acceptEULA, setAcceptEULA] = useState(false);
+  const emailRef = useRef();
   const passwordRef = useRef();
 
   return (
@@ -28,34 +30,53 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
         <ScrollView
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="always">
-          <TextInput
-            label="Email"
-            onChangeText={setEmail}
-            inputProps={{
-              value: email,
-              autoCorrect: false,
-              autoCapitalize: 'none',
-              keyboardType: 'email-address',
-              placeholder: t('register:emailPlaceholder'),
-              autoFocus: true,
-              returnKeyType: 'next',
-              onSubmitEditing: () => passwordRef.current.focus(),
-            }}
-          />
+          <FieldWrapper>
+            <TextInput
+              label={t('register:firstName')}
+              onChangeText={setFirstname}
+              inputProps={{
+                value: firstname,
+                autoCorrect: false,
+                placeholder: t('register:firstNamePlaceholder'),
+                autoFocus: true,
+                returnKeyType: 'next',
+                onSubmitEditing: () => emailRef.current.focus(),
+              }}
+            />
+            <TextInput
+              label="Email"
+              onChangeText={setEmail}
+              noBorderBottom
+              required
+              inputProps={{
+                ref: emailRef,
+                value: email,
+                autoCorrect: false,
+                autoCapitalize: 'none',
+                keyboardType: 'email-address',
+                placeholder: t('register:emailPlaceholder'),
+                returnKeyType: 'next',
+                onSubmitEditing: () => passwordRef.current.focus(),
+              }}
+            />
+          </FieldWrapper>
           <SmallText>{t('register:emailExplanation')}</SmallText>
-          <TextInput
-            label={t('register:password')}
-            onChangeText={setPassword}
-            noBorderBottom
-            inputProps={{
-              ref: passwordRef,
-              value: password,
-              secureTextEntry: true,
-              placeholder: '********',
-              returnKeyType: 'done',
-              onSubmitEditing: () => Keyboard.dismiss(),
-            }}
-          />
+          <FieldWrapper>
+            <TextInput
+              label={t('register:password')}
+              onChangeText={setPassword}
+              noBorderBottom
+              required
+              inputProps={{
+                ref: passwordRef,
+                value: password,
+                secureTextEntry: true,
+                placeholder: '********',
+                returnKeyType: 'done',
+                onSubmitEditing: () => Keyboard.dismiss(),
+              }}
+            />
+          </FieldWrapper>
           <EULAWrapper>
             <Checkbox
               checked={acceptEULA}
@@ -71,7 +92,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
           </EULAWrapper>
           <Button
             onPress={() => {
-              register(email, password);
+              register(firstname, email, password);
               Keyboard.dismiss();
             }}
             disabled={!email || !password || !acceptEULA}
@@ -97,8 +118,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  register: (email, password) =>
-    dispatch(UserActions.register(email, password)),
+  register: (firstname, email, password) =>
+    dispatch(UserActions.register(firstname, email, password)),
 });
 
 const withConnect = connect(
@@ -119,6 +140,11 @@ const Wrapper = styled.View`
 const InnerWrapper = styled.SafeAreaView`
   flex: 1;
   margin: 20px;
+`;
+
+const FieldWrapper = styled.View`
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const EULAWrapper = styled.View`
