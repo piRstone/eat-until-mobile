@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import { path } from 'ramda';
@@ -249,6 +250,7 @@ const BigText = styled.Text`
   font-size: 18px;
   font-weight: 600;
   color: ${props => props.theme.black};
+  margin-bottom: ${Platform.OS === 'ios' ? '0px' : '8px'};
 `;
 
 const DayCol = styled.View`
@@ -281,7 +283,8 @@ const BottomRow = styled(Row)`
 const AddButton = styled.TouchableOpacity`
   background-color: ${props => props.theme.primary};
   border-radius: 20px;
-  padding: 5px 10px 0px 10px;
+  padding: 5px 10px;
+  padding-bottom: ${Platform.OS === 'ios' ? '0px' : '5px'};
 `;
 
 const AddButtonText = styled.Text`
@@ -295,6 +298,6 @@ const SecondaryButton = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 16px;
   color: ${props => props.theme.grey1};
-  margin-top: 16px;
+  margin-top: ${Platform.OS === 'ios' ? '16px' : '7px'};
   margin-right: 10px;
 `;

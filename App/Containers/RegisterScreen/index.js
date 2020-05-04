@@ -78,7 +78,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
             title={t('register:registration')}
             isLoading={isLoading}
           />
-          <SmallText>{t('register:privacySentence')}</SmallText>
+          <BottomSmallText>{t('register:privacySentence')}</BottomSmallText>
         </ScrollView>
       </InnerWrapper>
     </Wrapper>
@@ -144,4 +144,8 @@ const SmallText = styled.Text`
   margin: 5px 0;
   margin-bottom: 20px;
   color: ${props => props.theme.grey1};
+`;
+
+const BottomSmallText = styled(SmallText)`
+  margin-top: 30px;
 `;

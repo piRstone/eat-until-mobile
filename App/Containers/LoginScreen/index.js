@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { Platform, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
@@ -149,7 +149,8 @@ const LoginRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 7px 10px 0;
+  padding: 7px 10px;
+  padding-bottom: ${Platform.OS === 'ios' ? '0px' : '7px'};
 `;
 
 const LoginText = styled.Text`
@@ -176,7 +177,6 @@ const ForgotPasswordWrapper = styled.TouchableOpacity`
   align-items: flex-end;
   justify-content: flex-end;
   margin-top: 10px;
-  padding: 0 20px;
 `;
 
 const SmallLink = styled.Text`
