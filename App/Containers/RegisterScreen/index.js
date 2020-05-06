@@ -14,9 +14,11 @@ import TextInput from '../../Components/TextInput';
 
 export function RegisterScreen({ t, navigation, register, isLoading }) {
   const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [acceptEULA, setAcceptEULA] = useState(false);
+  const lastnameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -36,8 +38,19 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
               onChangeText={setFirstname}
               inputProps={{
                 value: firstname,
-                autoCorrect: false,
                 placeholder: t('register:firstNamePlaceholder'),
+                autoFocus: true,
+                returnKeyType: 'next',
+                onSubmitEditing: () => lastnameRef.current.focus(),
+              }}
+            />
+            <TextInput
+              label={t('register:lastName')}
+              onChangeText={setLastname}
+              inputProps={{
+                ref: lastnameRef,
+                value: lastname,
+                placeholder: t('register:lastNamePlaceholder'),
                 autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: () => emailRef.current.focus(),
@@ -51,7 +64,6 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
               inputProps={{
                 ref: emailRef,
                 value: email,
-                autoCorrect: false,
                 autoCapitalize: 'none',
                 keyboardType: 'email-address',
                 placeholder: t('register:emailPlaceholder'),
@@ -92,7 +104,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
           </EULAWrapper>
           <Button
             onPress={() => {
-              register(firstname, email, password);
+              register(firstname, lastname, email, password);
               Keyboard.dismiss();
             }}
             disabled={!email || !password || !acceptEULA}
@@ -118,8 +130,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  register: (firstname, email, password) =>
-    dispatch(UserActions.register(firstname, email, password)),
+  register: (firstname, lastname, email, password) =>
+    dispatch(UserActions.register(firstname, lastname, email, password)),
 });
 
 const withConnect = connect(

@@ -40,9 +40,10 @@ export function* forgotPassword(api, { email }) {
   }
 }
 
-export function* register(api, { firstname, email, password }) {
+export function* register(api, { firstname, lastname, email, password }) {
   const response = yield call(api.register, {
     first_name: firstname,
+    last_name: lastname,
     email,
     password,
   });

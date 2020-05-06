@@ -12,7 +12,7 @@ const { Types, Creators } = createActions(
     forgotPassword: ['email'],
     forgotPasswordSuccess: null,
     forgotPasswordFailure: null,
-    register: ['firstname', 'email', 'password'],
+    register: ['firstname', 'lastname', 'email', 'password'],
     registerSuccess: null,
     registerFailure: ['error'],
     activation: ['uidb64', 'token'],

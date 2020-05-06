@@ -2,6 +2,8 @@
   "signUp": "S'inscrire",
   "firstName": "Prénom",
   "firstNamePlaceholder": "Votre prénom",
+  "lastName": "Nom",
+  "lastNamePlaceholder": "Votre nom",
   "emailPlaceholder": "email@domaine.fr",
   "emailExplanation": "Nous ne l'utiliserons que pour vous envoyer des notifications en lien avec votre utilisation de l'application. ",
   "password": "Mot de passe",
