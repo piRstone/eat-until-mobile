@@ -33,8 +33,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
           <Body>
             <LoginRow>
               <LoginText>{t('login:signIn')}</LoginText>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('RegisterScreen')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                 <RegisterLink>{t('login:signUp')}</RegisterLink>
               </TouchableOpacity>
             </LoginRow>

@@ -32,14 +32,21 @@ const MainStack = createStackNavigator(
   },
 );
 
+const RegisterStack = createSwitchNavigator(
+  {
+    RegisterScreen: { screen: RegisterScreen },
+    RegisterSuccessScreen: { screen: RegisterSuccessScreen },
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'RegisterScreen',
+  },
+);
+
 const AuthenticationStack = createStackNavigator(
   {
     LoginScreen: { screen: LoginScreen },
-    RegisterScreen: { screen: RegisterScreen },
-    RegisterSuccessScreen: {
-      screen: RegisterSuccessScreen,
-      navigationOptions: { gesturesEnabled: false },
-    },
+    Register: { screen: RegisterStack },
     ForgotPasswordScreen: { screen: ForgotPasswordScreen },
     EULAScreen: { screen: EULAScreen },
     ActivationScreen: { screen: ActivationScreen, path: 'activation' },
