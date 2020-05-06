@@ -35,7 +35,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
               <LoginText>{t('login:signIn')}</LoginText>
               <TouchableOpacity
                 onPress={() => navigation.navigate('RegisterScreen')}>
-                <SmallLink>{t('login:signUp')}</SmallLink>
+                <RegisterLink>{t('login:signUp')}</RegisterLink>
               </TouchableOpacity>
             </LoginRow>
             <TextInput
@@ -47,7 +47,6 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
                 autoCapitalize: 'none',
                 keyboardType: 'email-address',
                 placeholder: t('login:emailPlaceholder'),
-                autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: () => passwordFieldRef.current.focus(),
               }}
@@ -183,4 +182,9 @@ const SmallLink = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.primary};
+`;
+
+const RegisterLink = styled(SmallLink)`
+  font-family: 'SofiaPro-Bold';
+  font-size: 16px;
 `;

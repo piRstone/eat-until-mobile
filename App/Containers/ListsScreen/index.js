@@ -10,12 +10,12 @@ import {
   Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import DeviceInfo from 'react-native-device-info';
 import { withTranslation } from 'react-i18next';
 
 import ListsActions from '../../Redux/ListsRedux';
 import ListForm from '../../Components/ListForm';
+import List from '../../Components/List';
 
 export function ListsScreen({
   t,
@@ -65,17 +65,11 @@ export function ListsScreen({
               onRefresh={() => getLists()}
               style={{ height: '80%' }}
               renderItem={({ item }) => (
-                <List key={item.id} onPress={() => handleListPress(item)}>
-                  <Col>
-                    <ListName>{item.name}</ListName>
-                    <ProductsCount>
-                      {item.products_count
-                        ? t('lists:productsCount', { count: item.products_count }) // eslint-disable-line prettier/prettier
-                        : t('lists:noProducts')}
-                    </ProductsCount>
-                  </Col>
-                  <ChevronIcon name="chevron-right" size={20} />
-                </List>
+                <List
+                  key={item.id}
+                  list={item}
+                  onPress={() => handleListPress(item)}
+                />
               )}
               keyExtractor={item => item.id.toString()}
             />
@@ -159,34 +153,6 @@ const Title = styled.Text`
   font-size: 30px;
   color: ${props => props.theme.black};
   padding-top: ${Platform.OS === 'ios' ? '10px' : '0'};
-`;
-
-const List = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
-  padding: 20px 10px;
-  background-color: ${props => props.theme.whiteBackground};
-  margin-bottom: 20px;
-`;
-
-const ListName = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 18px;
-  color: ${props => props.theme.black};
-`;
-
-const ProductsCount = styled.Text`
-  font-size: 14px;
-  color: ${props => props.theme.grey1};
-  margin-top: ${Platform.OS === 'ios' ? '0px' : '5px'};
-`;
-
-const Col = styled.View``;
-
-const ChevronIcon = styled(FeatherIcon)`
-  color: ${props => props.theme.grey1};
 `;
 
 const CreateListButton = styled.TouchableOpacity`

@@ -5,6 +5,7 @@ import Immutable from 'seamless-immutable';
 
 const { Types, Creators } = createActions(
   {
+    setHasEverLaunchedApp: null,
     login: ['email', 'password'],
     logout: null,
     setToken: ['token'],
@@ -43,6 +44,7 @@ export const INITIAL_STATE = Immutable({
   error: undefined,
   resetPasswordState: undefined,
   activationState: undefined,
+  hasEverLaunchedApp: false,
 });
 
 /* ------------- Selectors ------------- */
@@ -50,9 +52,15 @@ export const INITIAL_STATE = Immutable({
 export const UserSelectors = {
   user: state => state.user.data,
   token: state => state.user.token,
+  hasEverLaunchedApp: state => state.user.hasEverLaunchedApp,
 };
 
 /* ------------- Reducers ------------- */
+
+export const setHasEverLaunchedApp = state =>
+  state.merge({
+    hasEverLaunchedApp: true,
+  });
 
 export const login = state =>
   state.merge({
@@ -168,6 +176,7 @@ export const clearErrors = state =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.SET_HAS_EVER_LAUNCHED_APP]: setHasEverLaunchedApp,
   [Types.LOGIN]: login,
   [Types.LOGOUT]: logout,
   [Types.SET_TOKEN]: setToken,

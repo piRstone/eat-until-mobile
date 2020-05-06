@@ -72,7 +72,6 @@ export function* edit(api, { id, firstname, lastname, email }) {
   });
 
   if (response.ok) {
-    console.tron.warn(response);
     yield put(UserActions.editSuccess(response.data));
     yield put(
       NavigationActions.navigate({

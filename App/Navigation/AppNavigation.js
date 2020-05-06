@@ -4,6 +4,8 @@ import {
   createAppContainer,
 } from 'react-navigation';
 
+import SplashScreen from '../Containers/SplashScreen';
+import Onboarding from '../Containers/Onboarding';
 import LoginScreen from '../Containers/LoginScreen';
 import ListsScreen from '../Containers/ListsScreen';
 import ProductsScreen from '../Containers/ProductsScreen';
@@ -50,12 +52,14 @@ const AuthenticationStack = createStackNavigator(
 
 const RootStack = createSwitchNavigator(
   {
+    SplashScreen: { screen: SplashScreen },
+    Onboarding: { screen: Onboarding },
     AuthStack: { screen: AuthenticationStack },
     Main: { screen: MainStack },
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Main',
+    initialRouteName: 'SplashScreen',
   },
 );
 

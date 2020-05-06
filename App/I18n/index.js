@@ -18,6 +18,7 @@ i18n.use(initReactI18next).init({
   debug: DebugConfig.debugI18next,
   resources: {
     fr: {
+      onboarding: require('../Containers/Onboarding/i18n/fr.json'),
       login: require('../Containers/LoginScreen/i18n/fr.json'),
       register: require('../Containers/RegisterScreen/i18n/fr.json'),
       registerSuccess: require('../Containers/RegisterSuccessScreen/i18n/fr.json'),
@@ -32,6 +33,7 @@ i18n.use(initReactI18next).init({
       productForm: require('../Components/ProductForm/i18n/fr.json'),
     },
     en: {
+      onboarding: require('../Containers/Onboarding/i18n/en.json'),
       login: require('../Containers/LoginScreen/i18n/en.json'),
       register: require('../Containers/RegisterScreen/i18n/en.json'),
       registerSuccess: require('../Containers/RegisterSuccessScreen/i18n/en.json'),

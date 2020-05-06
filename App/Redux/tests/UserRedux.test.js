@@ -3,6 +3,12 @@ import Immutable from 'seamless-immutable';
 import Actions, { reducer, INITIAL_STATE } from '../UserRedux';
 
 describe('UserRedux', () => {
+  test('setHasEverLaunchedApp', () => {
+    const state = reducer(INITIAL_STATE, Actions.setHasEverLaunchedApp());
+
+    expect(state.hasEverLaunchedApp).toBeTruthy();
+  });
+
   test('login', () => {
     const email = 'email@test.com';
     const password = 'password';

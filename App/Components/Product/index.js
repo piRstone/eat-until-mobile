@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import moment from 'moment';
 import { withTranslation } from 'react-i18next';
 
-export function Product({ t, data, onRemove }) {
+export function Product({ t, data, onRemove, disablePress }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
     moment(),
     'd',
@@ -38,6 +38,8 @@ export function Product({ t, data, onRemove }) {
   };
 
   const onPressProduct = product => {
+    if (disablePress) return;
+
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
@@ -99,6 +101,7 @@ Product.propTypes = {
   t: PropTypes.func,
   data: PropTypes.object.isRequired,
   onRemove: PropTypes.func,
+  disablePress: PropTypes.bool,
 };
 
 export default withTranslation()(Product);
