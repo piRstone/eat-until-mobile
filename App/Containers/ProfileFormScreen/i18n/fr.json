@@ -1,0 +1,8 @@
+{
+  "firstName": "Prénom",
+  "firstNamePlaceholder": "Votre prénom",
+  "lastName": "Nom",
+  "lastNamePlaceholder": "Votre nom",
+  "emailPlaceholder": "email@domaine.fr",
+  "save": "Enregistrer"
+}

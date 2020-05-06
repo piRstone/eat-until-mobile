@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Platform } from 'react-native';
 import { compose } from 'redux';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
@@ -16,6 +17,14 @@ export function ProfileScreen({ t, navigation, logout, user }) {
         <Header
           title={t('profile:profile')}
           onPress={() => navigation.goBack()}
+          right={
+            <EditButton
+              onPress={() =>
+                navigation.navigate('ProfileFormScreen', { user })
+              }>
+              {t('profile:edit')}
+            </EditButton>
+          }
         />
         <StyledName>
           {user.first_name} {user.last_name}
@@ -100,4 +109,11 @@ const StyledLink = styled.Text`
 const SecondaryText = styled.Text`
   font-family: 'SofiaProRegular';
   color: ${props => props.theme.grey1};
+`;
+
+const EditButton = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 16px;
+  color: ${props => props.theme.primary};
+  margin-top: ${Platform.OS === 'ios' ? '7px' : '0'};
 `;

@@ -92,6 +92,40 @@ describe('UserRedux', () => {
     expect(state.activationState).toBeFalsy();
   });
 
+  test('edit', () => {
+    const state = reducer(INITIAL_STATE, Actions.edit());
+
+    expect(state.isLoading).toBeTruthy();
+  });
+
+  test('editSuccess', () => {
+    const initialState = Immutable({
+      user: {
+        first_name: 'John',
+        last_name: 'Doe',
+        email: 'john.doe@email.com',
+      },
+      isLoading: true,
+    });
+
+    const expectedUser = {
+      first_name: 'Paul',
+      last_name: 'Simons',
+      email: 'psimon@email.com',
+    };
+
+    const state = reducer(initialState, Actions.editSuccess(expectedUser));
+
+    expect(state.isLoading).toBeFalsy();
+    expect(state.data).toEqual(expectedUser);
+  });
+
+  test('editFailure', () => {
+    const state = reducer(INITIAL_STATE, Actions.editFailure());
+
+    expect(state.isLoading).toBeFalsy();
+  });
+
   test('request', () => {
     const state = reducer(INITIAL_STATE, Actions.request());
 

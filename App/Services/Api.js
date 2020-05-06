@@ -25,6 +25,7 @@ const create = (baseURL = Secrets.API_URL) => {
       return api.post('/users/forgot-password', { email });
     },
     register: data => api.post('/register', data),
+    editUser: (id, data) => api.patch(`/users/${id}`, data),
     activate: data => api.post('/user/activate', data),
     getUser: () => api.get('/me'),
     getLists: () => api.get('/inventories'),

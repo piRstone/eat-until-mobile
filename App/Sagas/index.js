@@ -13,7 +13,7 @@ import { ProductsTypes } from '../Redux/ProductsRedux';
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas';
-import { login, register, logout, forgotPassword } from './UserSagas';
+import { login, register, edit, logout, forgotPassword } from './UserSagas';
 import {
   retrieveLists,
   createList,
@@ -40,6 +40,7 @@ export default function* root() {
     takeLatest(UserTypes.LOGIN, login, api),
     takeLatest(UserTypes.LOGOUT, logout, api),
     takeLatest(UserTypes.REGISTER, register, api),
+    takeLatest(UserTypes.EDIT, edit, api),
     takeLatest(UserTypes.FORGOT_PASSWORD, forgotPassword, api),
     takeLatest(ListsTypes.REQUEST, retrieveLists, api),
     takeLatest(ListsTypes.CREATE, createList, api),

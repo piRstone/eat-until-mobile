@@ -64,6 +64,31 @@ export function* register(api, { firstname, email, password }) {
   }
 }
 
+export function* edit(api, { id, firstname, lastname, email }) {
+  const response = yield call(api.editUser, id, {
+    first_name: firstname,
+    last_name: lastname,
+    email,
+  });
+
+  if (response.ok) {
+    console.tron.warn(response);
+    yield put(UserActions.editSuccess(response.data));
+    yield put(
+      NavigationActions.navigate({
+        routeName: 'ProfileScreen',
+      }),
+    );
+  } else {
+    if (response.status === 400) {
+      const key = Object.keys(response.data)[0];
+      const error = response.data[key][0];
+      yield put(NotificationActions.display(`${key} : ${error}`, types.danger));
+    }
+    yield put(UserActions.editFailure());
+  }
+}
+
 export function* activate(api, { uidb64, token }) {
   const response = yield call(api.activate, { uidb64, token });
 

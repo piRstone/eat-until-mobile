@@ -10,6 +10,7 @@ import ProductsScreen from '../Containers/ProductsScreen';
 import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen';
 import CameraScreen from '../Containers/CameraScreen';
 import ProfileScreen from '../Containers/ProfileScreen';
+import ProfileFormScreen from '../Containers/ProfileFormScreen';
 import RegisterScreen from '../Containers/RegisterScreen';
 import RegisterSuccessScreen from '../Containers/RegisterSuccessScreen';
 import EULAScreen from '../Containers/EULAScreen';
@@ -21,6 +22,7 @@ const MainStack = createStackNavigator(
     ProductsScreen: { screen: ProductsScreen },
     CameraScreen: { screen: CameraScreen },
     ProfileScreen: { screen: ProfileScreen },
+    ProfileFormScreen: { screen: ProfileFormScreen },
   },
   {
     initialRouteName: 'ListsScreen',

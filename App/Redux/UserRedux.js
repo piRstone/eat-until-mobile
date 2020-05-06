@@ -17,6 +17,9 @@ const { Types, Creators } = createActions(
     activation: ['uidb64', 'token'],
     activationSuccess: null,
     activationFailure: ['error'],
+    edit: ['id', 'firstname', 'lastname', 'email'],
+    editSuccess: ['user'],
+    editFailure: ['error'],
     request: null,
     success: ['user'],
     failure: ['error'],
@@ -122,6 +125,22 @@ export const activationFailure = state =>
     activationState: false,
   });
 
+export const edit = state =>
+  state.merge({
+    isLoading: true,
+  });
+
+export const editSuccess = (state, { user }) =>
+  state.merge({
+    data: user,
+    isLoading: false,
+  });
+
+export const editFailure = state =>
+  state.merge({
+    isLoading: false,
+  });
+
 export const request = state =>
   state.merge({
     isLoading: true,
@@ -161,6 +180,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ACTIVATION]: activation,
   [Types.ACTIVATION_SUCCESS]: activationSuccess,
   [Types.ACTIVATION_FAILURE]: activationFailure,
+  [Types.EDIT]: edit,
+  [Types.EDIT_SUCCESS]: editSuccess,
+  [Types.EDIT_FAILURE]: editFailure,
   [Types.REQUEST]: request,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,

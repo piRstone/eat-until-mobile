@@ -1,0 +1,8 @@
+{
+  "firstName": "First name",
+  "firstNamePlaceholder": "Your first name",
+  "lastName": "Last name",
+  "lastNamePlaceholder": "Your last name",
+  "emailPlaceholder": "email@domain.com",
+  "save": "Save"
+}
