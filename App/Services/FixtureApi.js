@@ -10,4 +10,22 @@ export default {
   register: () => ({
     ok: true,
   }),
+  getLists: () => ({
+    ok: true,
+    data: require('../Fixtures/lists/lists.json'),
+  }),
+  createList: () => ({
+    ok: true,
+    data: require('../Fixtures/lists/createList.json'),
+  }),
+  removeList: () => ({
+    ok: true,
+  }),
+  updateListName: () => ({
+    ok: true,
+    data: require('../Fixtures/lists/createList.json'),
+  }),
+  emptyList: () => ({
+    ok: true,
+  }),
 };
