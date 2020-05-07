@@ -28,4 +28,15 @@ export default {
   emptyList: () => ({
     ok: true,
   }),
+  getProducts: () => ({
+    ok: true,
+    data: require('../Fixtures/products/products.json'),
+  }),
+  createProduct: () => ({
+    ok: true,
+    data: require('../Fixtures/products/createProduct.json'),
+  }),
+  removeProduct: () => ({
+    ok: true,
+  }),
 };

@@ -25,7 +25,6 @@ export function* createProduct(api, action) {
   const { name, expiresAt, notifyBefore, inventoryId, ean13 } = action.product;
   const product = {
     name,
-    description: 'Produit',
     expiration_date: expiresAt,
     notification_delay: parseInt(notifyBefore, 10),
     inventory: inventoryId,
