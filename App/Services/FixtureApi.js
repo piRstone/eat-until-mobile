@@ -4,10 +4,23 @@ export default {
     ok: true,
     data: require('../Fixtures/login.json'),
   }),
+  setToken: () => {},
+  removeToken: () => {},
   forgotPassword: () => ({
     ok: true,
   }),
   register: () => ({
+    ok: true,
+  }),
+  getUser: () => ({
+    ok: true,
+    data: require('../Fixtures/user.json'),
+  }),
+  editUser: () => ({
+    ok: true,
+    data: require('../Fixtures/user.json'),
+  }),
+  activate: () => ({
     ok: true,
   }),
   getLists: () => ({
