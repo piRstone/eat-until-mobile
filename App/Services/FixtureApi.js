@@ -23,6 +23,12 @@ export default {
   activate: () => ({
     ok: true,
   }),
+  verifyToken: () => ({
+    ok: true,
+  }),
+  refreshToken: () => ({
+    ok: true,
+  }),
   getLists: () => ({
     ok: true,
     data: require('../Fixtures/lists/lists.json'),
