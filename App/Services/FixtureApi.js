@@ -55,6 +55,10 @@ export default {
     ok: true,
     data: require('../Fixtures/products/createProduct.json'),
   }),
+  editProduct: () => ({
+    ok: true,
+    data: require('../Fixtures/products/editProduct.json'),
+  }),
   removeProduct: () => ({
     ok: true,
   }),

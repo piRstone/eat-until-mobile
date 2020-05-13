@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { withTranslation } from 'react-i18next';
 
 function TextInput({
+  t,
   label,
   required,
   onChangeText,
   inputProps,
   noBorderBottom,
+  invalid,
 }) {
   return (
-    <Wrapper noBorder={noBorderBottom}>
+    <Wrapper noBorder={noBorderBottom} invalid={invalid}>
       <Label>
         {label}
         {required && <Required>*</Required>}
+        {invalid && <Required> {t('textInput:required')}</Required>}
       </Label>
       <StyledInput onChangeText={onChangeText} {...inputProps} />
     </Wrapper>
@@ -21,14 +25,16 @@ function TextInput({
 }
 
 TextInput.propTypes = {
+  t: PropTypes.func,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
   inputProps: PropTypes.object,
   noBorderBottom: PropTypes.bool,
+  invalid: PropTypes.bool,
 };
 
-export default TextInput;
+export default withTranslation()(TextInput);
 
 const Wrapper = styled.View`
   padding: 10px;

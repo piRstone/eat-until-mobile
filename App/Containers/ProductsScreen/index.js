@@ -20,6 +20,7 @@ import ListTitle from '../../Components/ListTitle';
 import Product from '../../Components/Product';
 import AddButton from '../../Components/AddButton';
 import ProductForm from '../../Components/ProductForm';
+import ProductEditModal from './ProductEditModal';
 
 export function ProductsScreen({
   t,
@@ -27,15 +28,20 @@ export function ProductsScreen({
   getProducts,
   allProducts,
   isLoading,
+  isEditLoading,
+  editError,
   isEmptyLoading,
   createProduct,
+  editProduct,
   removeProduct,
   removeList,
   updateListName,
   emptyList,
 }) {
   const [list, setList] = useState({});
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(undefined);
 
   useEffect(() => {
     if (list.id) {
@@ -90,6 +96,16 @@ export function ProductsScreen({
     [list, removeProduct],
   );
 
+  const handleEditProduct = product => {
+    setShowEditModal(true);
+    setProductToEdit(product);
+  };
+
+  const onEditModalClose = () => {
+    setShowEditModal(false);
+    setProductToEdit(undefined);
+  };
+
   const products = list && allProducts[list.id] ? allProducts[list.id] : [];
   return (
     <Wrapper>
@@ -121,7 +137,11 @@ export function ProductsScreen({
                 refreshing={isLoading}
                 onRefresh={() => getProducts(list.id)}
                 renderItem={({ item }) => (
-                  <Product data={item} onRemove={handleRemoveProduct} />
+                  <Product
+                    data={item}
+                    onRemove={handleRemoveProduct}
+                    onEdit={handleEditProduct}
+                  />
                 )}
                 keyExtractor={item => item.id.toString()}
               />
@@ -149,6 +169,15 @@ export function ProductsScreen({
           </DangerButton>
         </DangerZone>
       </InnerWrapper>
+      <ProductEditModal
+        visible={showEditModal}
+        product={productToEdit}
+        onDismiss={onEditModalClose}
+        onRequestClose={onEditModalClose}
+        onSubmit={(id, product) => editProduct(id, product, list.id)}
+        isLoading={isEditLoading}
+        error={editError}
+      />
     </Wrapper>
   );
 }
@@ -158,9 +187,12 @@ ProductsScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   allProducts: PropTypes.object,
   isLoading: PropTypes.bool,
+  isEditLoading: PropTypes.bool,
+  editError: PropTypes.object,
   isEmptyLoading: PropTypes.bool,
   getProducts: PropTypes.func,
   createProduct: PropTypes.func,
+  editProduct: PropTypes.func,
   removeProduct: PropTypes.func,
   removeList: PropTypes.func,
   updateListName: PropTypes.func,
@@ -170,6 +202,7 @@ ProductsScreen.propTypes = {
 const mapStateToProps = state => ({
   allProducts: state.products.data,
   isLoading: state.products.isLoading,
+  isEditLoading: state.products.isEditLoading,
   isEmptyLoading: state.products.isEmptyLoading,
 });
 
@@ -178,6 +211,8 @@ const mapDispatchToProps = dispatch => ({
   createProduct: product => dispatch(ProductsActions.create(product)),
   removeProduct: (id, inventoryId) =>
     dispatch(ProductsActions.remove(id, inventoryId)),
+  editProduct: (id, product, inventoryId) =>
+    dispatch(ProductsActions.edit(id, product, inventoryId)),
   removeList: id => dispatch(ListsActions.remove(id)),
   updateListName: (id, name) => dispatch(ListsActions.updateName(id, name)),
   emptyList: id => dispatch(ProductsActions.empty(id)),

@@ -9,5 +9,6 @@
   "cancel": "Annuler",
   "delete": "Supprimer",
   "productDeleted": "Produit supprimé",
-  "productAdded": "Produit ajouté"
+  "productAdded": "Produit ajouté",
+  "productEdited": "Produit modifié"
 }

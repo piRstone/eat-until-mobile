@@ -24,6 +24,7 @@ import {
 import {
   retrieveProducts,
   createProduct,
+  editProduct,
   removeProduct,
 } from './ProductsSagas';
 import { getProductData } from './OFFSagas';
@@ -48,6 +49,7 @@ export default function* root() {
     takeLatest(ListsTypes.UPDATE_NAME, updateName, api),
     takeLatest(ProductsTypes.REQUEST, retrieveProducts, api),
     takeLatest(ProductsTypes.CREATE, createProduct, api),
+    takeLatest(ProductsTypes.EDIT, editProduct, api),
     takeLatest(ProductsTypes.REMOVE, removeProduct, api),
     takeLatest(ProductsTypes.GET_OFF_DATA, getProductData),
     takeLatest(ProductsTypes.EMPTY, emptyList, api),

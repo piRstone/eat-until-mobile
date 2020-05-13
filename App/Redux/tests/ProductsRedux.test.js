@@ -68,6 +68,44 @@ describe('ProductsRedux', () => {
     expect(state.error).toBeUndefined();
   });
 
+  test('edit', () => {
+    const state = reducer(INITIAL_STATE, Actions.edit());
+
+    expect(state.isEditLoading).toBeTruthy();
+    expect(state.editError).toBeUndefined();
+  });
+
+  test('editSuccess', () => {
+    const idToEdit = 1;
+    const inventoryId = 1;
+    const product = { id: 1, name: 'Carrots' };
+    const initialState = Immutable({
+      isEditLoading: true,
+      data: {
+        [inventoryId]: [{ id: 1, name: 'Tomatoes' }, { id: 2, name: 'Bacon' }],
+      },
+    });
+    const state = reducer(
+      initialState,
+      Actions.editSuccess(idToEdit, product, inventoryId),
+    );
+
+    const expectedData = {
+      [inventoryId]: [{ id: 1, name: 'Carrots' }, { id: 2, name: 'Bacon' }],
+    };
+
+    expect(state.isEditLoading).toBeFalsy();
+    expect(state.data).toStrictEqual(expectedData);
+  });
+
+  test('editFailure', () => {
+    const error = 'error';
+    const state = reducer(INITIAL_STATE, Actions.editFailure(error));
+
+    expect(state.isEditLoading).toBeFalsy();
+    expect(state.editError).toEqual(error);
+  });
+
   test('remove', () => {
     const state = reducer(INITIAL_STATE, Actions.remove());
 

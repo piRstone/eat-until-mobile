@@ -32,6 +32,7 @@ i18n.use(initReactI18next).init({
       camera: require('../Containers/CameraScreen/i18n/fr.json'),
       product: require('../Components/Product/i18n/fr.json'),
       productForm: require('../Components/ProductForm/i18n/fr.json'),
+      textInput: require('../Components/TextInput/i18n/fr.json'),
     },
     en: {
       onboarding: require('../Containers/Onboarding/i18n/en.json'),
@@ -48,6 +49,7 @@ i18n.use(initReactI18next).init({
       camera: require('../Containers/CameraScreen/i18n/en.json'),
       product: require('../Components/Product/i18n/en.json'),
       productForm: require('../Components/ProductForm/i18n/en.json'),
+      textInput: require('../Components/TextInput/i18n/en.json'),
     },
   },
 });

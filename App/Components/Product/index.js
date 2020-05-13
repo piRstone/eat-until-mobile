@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import moment from 'moment';
 import { withTranslation } from 'react-i18next';
 
-export function Product({ t, data, onRemove, disablePress }) {
+export function Product({ t, data, onEdit, onRemove, disablePress }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
     moment(),
     'd',
@@ -53,7 +53,7 @@ export function Product({ t, data, onRemove, disablePress }) {
         },
         buttonIndex => {
           if (buttonIndex === 0) {
-            // TODO: edit action
+            onEdit(product);
           } else if (buttonIndex === 1) {
             handleRemove(product.id);
           }
@@ -65,16 +65,16 @@ export function Product({ t, data, onRemove, disablePress }) {
         '',
         [
           {
-            text: 'Annuler',
+            text: t('product:cancel'),
             onPress: () => {},
           },
           {
-            text: 'Modifier',
-            onPress: () => {},
+            text: t('product:edit'),
+            onPress: () => onEdit(product),
             style: 'cancel',
           },
           {
-            text: 'Supprimer',
+            text: t('product:delete'),
             onPress: () => handleRemove(product.id),
             style: 'destructive',
           },
@@ -100,6 +100,7 @@ export function Product({ t, data, onRemove, disablePress }) {
 Product.propTypes = {
   t: PropTypes.func,
   data: PropTypes.object.isRequired,
+  onEdit: PropTypes.func,
   onRemove: PropTypes.func,
   disablePress: PropTypes.bool,
 };

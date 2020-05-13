@@ -123,7 +123,7 @@ const SecondaryText = styled.Text`
 
 const EditButton = styled.Text`
   font-family: 'SofiaProRegular';
-  font-size: 16px;
+  font-size: 18px;
   color: ${props => props.theme.primary};
-  margin-top: ${Platform.OS === 'ios' ? '7px' : '0'};
+  margin-top: ${Platform.OS === 'ios' ? '5px' : '0'};
 `;

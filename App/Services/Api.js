@@ -36,6 +36,7 @@ const create = (baseURL = Secrets.API_URL) => {
     getProducts: inventoryId =>
       api.get(`/products?inventory_id=${inventoryId}`),
     createProduct: product => api.post('/products', product),
+    editProduct: (id, data) => api.patch(`/products/${id}`, data),
     removeProduct: id => api.delete(`/products/${id}`),
   };
 };

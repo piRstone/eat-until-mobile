@@ -5,6 +5,7 @@ import FixtureAPI from '../../Services/FixtureApi';
 import {
   retrieveProducts,
   createProduct,
+  editProduct,
   removeProduct,
 } from '../ProductsSagas';
 import NotificationActions from '../../Redux/NotificationRedux';
@@ -98,6 +99,70 @@ describe('createProduct', () => {
 
     expect(generator.next(response).value).toEqual(
       put(ProductsActions.createFailure(response.data)),
+    );
+    expect(generator.next().value).toEqual(
+      put(
+        NotificationActions.display(
+          i18n.t('notification:serverError'),
+          types.danger,
+        ),
+      ),
+    );
+  });
+});
+
+describe('editProduct', () => {
+  let generator;
+  const id = 12;
+  const inventoryId = 1;
+  const product = {
+    name: 'Tomatoes',
+    expirationDate: '2020-05-18',
+    notificationDelay: '3',
+  };
+  beforeEach(() => {
+    generator = editProduct(FixtureAPI, { id, product, inventoryId });
+  });
+
+  it('should call editProduct request', () => {
+    const formattedProduct = {
+      name: 'Tomatoes',
+      expiration_date: '2020-05-18',
+      notification_delay: '3',
+    };
+    expect(generator.next().value).toEqual(
+      call(FixtureAPI.editProduct, id, formattedProduct),
+    );
+  });
+
+  it('should dispatch editSuccess action', () => {
+    generator.next(); // call
+
+    const response = FixtureAPI.editProduct();
+
+    expect(generator.next(response).value).toEqual(
+      put(ProductsActions.editSuccess(id, response.data, inventoryId)),
+    );
+    expect(generator.next().value).toEqual(
+      put(ProductsActions.request(inventoryId)),
+    );
+    expect(generator.next().value).toEqual(
+      put(
+        NotificationActions.display(
+          i18n.t('products:productEdited'),
+          types.success,
+        ),
+      ),
+    );
+  });
+
+  it('should dispatch failure action', () => {
+    generator.next(); // call
+
+    const response = { ok: false, data: 'Error' };
+
+    expect(generator.next(response).value).toEqual(
+      put(ProductsActions.editFailure(response.data)),
     );
     expect(generator.next().value).toEqual(
       put(

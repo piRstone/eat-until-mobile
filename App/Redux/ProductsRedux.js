@@ -11,6 +11,9 @@ const { Types, Creators } = createActions(
     create: ['product'],
     createSuccess: ['product', 'inventoryId'],
     createFailure: ['error'],
+    edit: ['id', 'product', 'inventoryId'],
+    editSuccess: ['id', 'product', 'inventoryId'],
+    editFailure: ['error'],
     remove: ['id', 'inventoryId'],
     removeSuccess: ['id', 'inventoryId'],
     removeFailure: ['error'],
@@ -34,9 +37,11 @@ export const INITIAL_STATE = Immutable({
   data: {},
   isLoading: false,
   isCreateLoading: false,
+  isEditLoading: false,
   isEmptyLoading: false,
   isOffLoading: false, // OpenFoodFacts loading (CameraScreen)
   error: undefined,
+  editError: undefined,
 });
 
 /* ------------- Selectors ------------- */
@@ -91,7 +96,31 @@ export const createFailure = (state, { error }) =>
     error,
   });
 
-export const remove = (state, { id }) =>
+export const edit = state =>
+  state.merge({
+    isEditLoading: true,
+    editError: undefined,
+  });
+
+export const editSuccess = (state, { id, product, inventoryId }) => {
+  const data = { ...state.data };
+  const products = [...data[inventoryId]];
+  const i = products.findIndex(p => p.id === id);
+  if (i > -1) products.splice(i, 1, product); // Replace product by the new one
+  data[inventoryId] = products;
+  return state.merge({
+    isEditLoading: false,
+    data,
+  });
+};
+
+export const editFailure = (state, { error }) =>
+  state.merge({
+    isEditLoading: false,
+    editError: error,
+  });
+
+export const remove = state =>
   state.merge({
     isCreateLoading: true,
     error: undefined,
@@ -155,6 +184,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE]: create,
   [Types.CREATE_SUCCESS]: createSuccess,
   [Types.CREATE_FAILURE]: createFailure,
+  [Types.EDIT]: edit,
+  [Types.EDIT_SUCCESS]: editSuccess,
+  [Types.EDIT_FAILURE]: editFailure,
   [Types.REMOVE]: remove,
   [Types.REMOVE_SUCCESS]: removeSuccess,
   [Types.REMOVE_FAILURE]: removeFailure,

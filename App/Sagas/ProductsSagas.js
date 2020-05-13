@@ -51,6 +51,34 @@ export function* createProduct(api, action) {
   }
 }
 
+export function* editProduct(api, { id, product, inventoryId }) {
+  const data = {
+    name: product.name,
+    expiration_date: product.expirationDate,
+    notification_delay: product.notificationDelay,
+  };
+  const response = yield call(api.editProduct, id, data);
+
+  if (response.ok) {
+    yield put(ProductsActions.editSuccess(id, response.data, inventoryId));
+    yield put(ProductsActions.request(inventoryId));
+    yield put(
+      NotificationActions.display(
+        i18n.t('products:productEdited'),
+        types.success,
+      ),
+    );
+  } else {
+    yield put(ProductsActions.editFailure(response.data));
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
+  }
+}
+
 export function* removeProduct(api, { id, inventoryId }) {
   const response = yield call(api.removeProduct, id);
 
