@@ -27,7 +27,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
       <InnerWrapper>
         <Header
           title={t('register:signUp')}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('LoginScreen')}
         />
         <ScrollView
           keyboardDismissMode="on-drag"
@@ -96,7 +96,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
             />
             <EULAText>
               <EULAText>{t('register:EULASentence')}</EULAText>
-              <EULALink onPress={() => navigation.navigate('EULAScreen')}>
+              <EULALink onPress={() => navigation.navigate('AuthEULAScreen')}>
                 {t('register:EULA')}
               </EULALink>
               .

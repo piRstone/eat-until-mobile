@@ -25,6 +25,7 @@ const MainStack = createStackNavigator(
     CameraScreen: { screen: CameraScreen },
     ProfileScreen: { screen: ProfileScreen },
     ProfileFormScreen: { screen: ProfileFormScreen },
+    EULAScreen: { screen: EULAScreen },
   },
   {
     initialRouteName: 'ListsScreen',
@@ -48,7 +49,7 @@ const AuthenticationStack = createStackNavigator(
     LoginScreen: { screen: LoginScreen },
     Register: { screen: RegisterStack },
     ForgotPasswordScreen: { screen: ForgotPasswordScreen },
-    EULAScreen: { screen: EULAScreen },
+    AuthEULAScreen: { screen: EULAScreen },
     ActivationScreen: { screen: ActivationScreen, path: 'activation' },
   },
   {

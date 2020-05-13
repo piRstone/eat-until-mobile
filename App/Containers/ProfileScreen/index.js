@@ -29,13 +29,18 @@ export function ProfileScreen({ t, navigation, logout, user }) {
         <StyledName>
           {user.first_name} {user.last_name}
         </StyledName>
-        <StyledText>{user.email}</StyledText>
+        <StyledEmail>{user.email}</StyledEmail>
         <LogoutWrapper onPress={logout}>
           <LogoutText>{t('profile:logout')}</LogoutText>
         </LogoutWrapper>
-        <StyledLink>
+        <StyledText>
           {t('profile:sendComments')} : eatuntil@pirstone.com
-        </StyledLink>
+        </StyledText>
+        <EULAWrapper onPress={() => navigation.navigate('EULAScreen')}>
+          <StyledLink>
+            Conditions générales d'utilisation et politique de confidentialité
+          </StyledLink>
+        </EULAWrapper>
         <SecondaryText>© piRstone {new Date().getFullYear()}</SecondaryText>
         <SecondaryText>Eat Until v{DeviceInfo.getVersion()}</SecondaryText>
       </InnerWrapper>
@@ -84,26 +89,31 @@ const StyledName = styled.Text`
   color: ${props => props.theme.black};
 `;
 
-const StyledText = styled(StyledName)`
+const StyledEmail = styled(StyledName)`
   font-family: 'SofiaProRegular';
   font-size: 18px;
+`;
+
+const StyledText = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 16px;
+  color: ${props => props.theme.black};
 `;
 
 const LogoutWrapper = styled.TouchableOpacity`
   margin: 20px 0 80px;
 `;
 
-const LogoutText = styled.Text`
-  font-family: 'SofiaProRegular';
-  font-size: 16px;
+const LogoutText = styled(StyledText)`
   color: ${props => props.theme.red};
 `;
 
-const StyledLink = styled.Text`
-  font-family: 'SofiaProRegular';
-  font-size: 16px;
-  color: ${props => props.theme.black};
-  margin-bottom: 20px;
+const EULAWrapper = styled.TouchableOpacity`
+  margin: 20px 0;
+`;
+
+const StyledLink = styled(StyledText)`
+  color: ${props => props.theme.primary};
 `;
 
 const SecondaryText = styled.Text`
