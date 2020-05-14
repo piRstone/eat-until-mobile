@@ -1,8 +1,5 @@
-import {
-  createStackNavigator,
-  createSwitchNavigator,
-  createAppContainer,
-} from 'react-navigation';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SplashScreen from '../Containers/SplashScreen';
 import Onboarding from '../Containers/Onboarding';
