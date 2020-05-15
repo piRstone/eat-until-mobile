@@ -3,10 +3,16 @@ import Immutable from 'seamless-immutable';
 import Actions, { reducer, INITIAL_STATE } from '../UserRedux';
 
 describe('UserRedux', () => {
-  test('setHasEverLaunchedApp', () => {
-    const state = reducer(INITIAL_STATE, Actions.setHasEverLaunchedApp());
+  test('setHasEverLaunchedApp to true', () => {
+    const state = reducer(INITIAL_STATE, Actions.setHasEverLaunchedApp(true));
 
     expect(state.hasEverLaunchedApp).toBeTruthy();
+  });
+
+  test('setHasEverLaunchedApp to false', () => {
+    const state = reducer(INITIAL_STATE, Actions.setHasEverLaunchedApp(false));
+
+    expect(state.hasEverLaunchedApp).toBeFalsy();
   });
 
   test('login', () => {

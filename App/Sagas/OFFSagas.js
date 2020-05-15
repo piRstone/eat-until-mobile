@@ -1,6 +1,6 @@
 import apisauce from 'apisauce';
 import { call, put } from 'redux-saga/effects';
-import { NavigationActions } from 'react-navigation';
+// import { NavigationActions } from 'react-navigation';
 
 export function* getProductData({ ean13 }) {
   const baseURL = 'https://fr.openfoodfacts.org/api/v0';
@@ -17,11 +17,11 @@ export function* getProductData({ ean13 }) {
   const response = yield call(api.get, `/product/${ean13}.json`);
 
   if (response.data.status === 1) {
-    yield put(
-      NavigationActions.navigate({
-        routeName: 'ProductsScreen',
-        params: { OFFProduct: response.data.product },
-      }),
-    );
+    // yield put(
+    //   NavigationActions.navigate({
+    //     routeName: 'ProductsScreen',
+    //     params: { OFFProduct: response.data.product },
+    //   }),
+    // );
   }
 }

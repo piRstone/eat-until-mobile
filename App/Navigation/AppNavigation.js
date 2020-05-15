@@ -1,5 +1,5 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import SplashScreen from '../Containers/SplashScreen';
 import Onboarding from '../Containers/Onboarding';
@@ -15,57 +15,60 @@ import RegisterSuccessScreen from '../Containers/RegisterSuccessScreen';
 import EULAScreen from '../Containers/EULAScreen';
 import ActivationScreen from '../Containers/ActivationScreen';
 
-const MainStack = createStackNavigator(
-  {
-    ListsScreen: { screen: ListsScreen },
-    ProductsScreen: { screen: ProductsScreen },
-    CameraScreen: { screen: CameraScreen },
-    ProfileScreen: { screen: ProfileScreen },
-    ProfileFormScreen: { screen: ProfileFormScreen },
-    EULAScreen: { screen: EULAScreen },
-  },
-  {
-    initialRouteName: 'ListsScreen',
-    headerMode: 'none',
-  },
+const Stack = createStackNavigator();
+
+export const SplashScreenStack = () => (
+  <Stack.Navigator
+    initialRouteName="SplashScreen"
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="SplashScreen" component={SplashScreen} />
+  </Stack.Navigator>
 );
 
-const RegisterStack = createSwitchNavigator(
-  {
-    RegisterScreen: { screen: RegisterScreen },
-    RegisterSuccessScreen: { screen: RegisterSuccessScreen },
-  },
-  {
-    headerMode: 'none',
-    initialRouteName: 'RegisterScreen',
-  },
+export const OnboardingStack = () => (
+  <Stack.Navigator
+    initialRouteName="Onboarding"
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Onboarding" component={Onboarding} />
+  </Stack.Navigator>
 );
 
-const AuthenticationStack = createStackNavigator(
-  {
-    LoginScreen: { screen: LoginScreen },
-    Register: { screen: RegisterStack },
-    ForgotPasswordScreen: { screen: ForgotPasswordScreen },
-    AuthEULAScreen: { screen: EULAScreen },
-    ActivationScreen: { screen: ActivationScreen, path: 'activation' },
-  },
-  {
-    initialRouteName: 'LoginScreen',
-    headerMode: 'none',
-  },
+export const MainStack = () => (
+  <Stack.Navigator
+    initialRouteName="ListsScreen"
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="ListsScreen" component={ListsScreen} />
+    <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
+    <Stack.Screen name="CameraScreen" component={CameraScreen} />
+    <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <Stack.Screen name="ProfileFormScreen" component={ProfileFormScreen} />
+    <Stack.Screen name="EULAScreen" component={EULAScreen} />
+  </Stack.Navigator>
 );
 
-const RootStack = createSwitchNavigator(
-  {
-    SplashScreen: { screen: SplashScreen },
-    Onboarding: { screen: Onboarding },
-    AuthStack: { screen: AuthenticationStack },
-    Main: { screen: MainStack },
-  },
-  {
-    headerMode: 'none',
-    initialRouteName: 'SplashScreen',
-  },
+const RegisterStack = () => (
+  <Stack.Navigator
+    initialRouteName="RegisterScreen"
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+    <Stack.Screen
+      name="RegisterSuccessScreen"
+      component={RegisterSuccessScreen}
+    />
+  </Stack.Navigator>
 );
 
-export default createAppContainer(RootStack);
+export const AuthenticationStack = () => (
+  <Stack.Navigator
+    initialRouteName="LoginScreen"
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="LoginScreen" component={LoginScreen} />
+    <Stack.Screen name="Register" component={RegisterStack} />
+    <Stack.Screen
+      name="ForgotPasswordScreen"
+      component={ForgotPasswordScreen}
+    />
+    <Stack.Screen name="AuthEULAScreen" component={EULAScreen} />
+    <Stack.Screen name="ActivationScreen" component={ActivationScreen} />
+  </Stack.Navigator>
+);

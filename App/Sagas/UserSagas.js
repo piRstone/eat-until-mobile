@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/native';
 import i18n from 'i18next';
 
 import UserActions from '../Redux/UserRedux';
@@ -15,7 +15,7 @@ export function* login(api, action) {
     yield call(api.setToken, token); // Set token in requests authorizations header
     yield put(UserActions.setToken(token));
     yield put(UserActions.success(user));
-    yield put(NavigationActions.navigate({ routeName: 'Main' }));
+    // yield put(NavigationActions.navigate({ routeName: 'Main' }));
   } else {
     let errorMessage = i18n.t('login:anErrorOccurred');
     if (response.status === 400) {
@@ -27,7 +27,7 @@ export function* login(api, action) {
 
 export function* logout(api) {
   yield call(api.removeToken);
-  yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
+  // yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
 }
 
 export function* forgotPassword(api, { email }) {
@@ -51,8 +51,8 @@ export function* register(api, { firstname, lastname, email, password }) {
   if (response.ok) {
     yield put(UserActions.registerSuccess());
     yield put(
-      NavigationActions.navigate({
-        routeName: 'RegisterSuccessScreen',
+      CommonActions.navigate({
+        name: 'RegisterSuccessScreen',
       }),
     );
   } else {
@@ -74,11 +74,11 @@ export function* edit(api, { id, firstname, lastname, email }) {
 
   if (response.ok) {
     yield put(UserActions.editSuccess(response.data));
-    yield put(
-      NavigationActions.navigate({
-        routeName: 'ProfileScreen',
-      }),
-    );
+    // yield put(
+    //   NavigationActions.navigate({
+    //     routeName: 'ProfileScreen',
+    //   }),
+    // );
   } else {
     if (response.status === 400) {
       const key = Object.keys(response.data)[0];

@@ -25,14 +25,11 @@ const store = createStore();
  * We separate like this to play nice with React Native's hot reloading.
  */
 
-// Deep linking
-const prefix = 'eatuntil://';
-
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RootContainer uriPrefix={prefix} />
+        <RootContainer />
       </Provider>
     );
   }

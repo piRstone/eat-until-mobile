@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { NavigationActions } from 'react-navigation';
+// import { NavigationActions } from 'react-navigation';
 import i18n from 'i18next';
 
 import NotificationActions from '../Redux/NotificationRedux';
@@ -44,7 +44,7 @@ export function* removeList(api, { id }) {
 
   if (response.ok) {
     yield put(ListsActions.removeSuccess(id));
-    yield put(NavigationActions.navigate({ routeName: 'ListsScreen' }));
+    // yield put(NavigationActions.navigate({ routeName: 'ListsScreen' }));
     yield put(ListsActions.request());
     yield put(
       NotificationActions.display(i18n.t('lists:listDeleted'), types.success),

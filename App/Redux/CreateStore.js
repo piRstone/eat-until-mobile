@@ -3,8 +3,8 @@ import Rehydration from '../Services/Rehydration';
 import ReduxPersist from '../Config/ReduxPersist';
 import Config from '../Config/DebugConfig';
 import createSagaMiddleware from 'redux-saga';
-import ScreenTracking from './ScreenTrackingMiddleware';
-import { appNavigatorMiddleware } from '../Navigation/ReduxNavigation';
+// import ScreenTracking from './ScreenTrackingMiddleware';
+// import { appNavigatorMiddleware } from '../Navigation/ReduxNavigation';
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -14,10 +14,10 @@ export default (rootReducer, rootSaga) => {
   const enhancers = [];
 
   /* ------------- Navigation Middleware ------------ */
-  middleware.push(appNavigatorMiddleware);
+  // middleware.push(appNavigatorMiddleware);
 
   /* ------------- Analytics Middleware ------------- */
-  middleware.push(ScreenTracking);
+  // middleware.push(ScreenTracking);
 
   /* ------------- Saga Middleware ------------- */
 

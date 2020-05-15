@@ -59,7 +59,7 @@ function Onboarding({ t, navigation, done }) {
   const onPressNext = () => {
     if (currentPage === 1) {
       done();
-      navigation.navigate('AuthStack');
+      // navigation.navigate('LoginScreen');
     } else {
       flatListRef.current.scrollToIndex({
         animated: true,
@@ -109,7 +109,7 @@ Onboarding.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  done: () => dispatch(UserActions.setHasEverLaunchedApp()),
+  done: () => dispatch(UserActions.setHasEverLaunchedApp(true)),
 });
 
 const withConnect = connect(

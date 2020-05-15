@@ -1,5 +1,4 @@
 import { put, call, select } from 'redux-saga/effects';
-import { NavigationActions } from 'react-navigation';
 
 import UserActions, { UserSelectors } from '../Redux/UserRedux';
 
@@ -7,18 +6,13 @@ export function* startup(api) {
   const hasEverLaunchedApp = yield select(UserSelectors.hasEverLaunchedApp);
   const token = yield select(UserSelectors.token);
 
-  if (!hasEverLaunchedApp) {
-    yield put(NavigationActions.navigate({ routeName: 'Onboarding' }));
-    return;
+  if (hasEverLaunchedApp === undefined) {
+    yield put(UserActions.setHasEverLaunchedApp(false));
   }
 
   yield put(UserActions.clearErrors());
 
-  if (!token) {
-    yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
-  } else {
-    yield put(NavigationActions.navigate({ routeName: 'Main' }));
-
+  if (token) {
     yield call(api.setToken, token);
 
     // Verify token
@@ -28,7 +22,6 @@ export function* startup(api) {
       if (!refreshResponse.ok) {
         // Token expired: redirect to LoginScreen
         yield call(api.removeToken);
-        yield put(NavigationActions.navigate({ routeName: 'AuthStack' }));
       }
     }
   }

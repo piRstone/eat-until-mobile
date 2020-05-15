@@ -25,6 +25,7 @@ import ProductEditModal from './ProductEditModal';
 export function ProductsScreen({
   t,
   navigation,
+  route,
   getProducts,
   allProducts,
   isLoading,
@@ -51,11 +52,11 @@ export function ProductsScreen({
 
   // Set list name
   useEffect(() => {
-    const paramStateList = path(['state', 'params', 'list'], navigation);
+    const paramStateList = path(['params', 'list'], route);
     if (paramStateList) {
       setList(paramStateList);
     }
-  }, [navigation]);
+  }, [route]);
 
   const handleSubmit = product => {
     product.inventoryId = list.id;
@@ -185,6 +186,7 @@ export function ProductsScreen({
 ProductsScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   allProducts: PropTypes.object,
   isLoading: PropTypes.bool,
   isEditLoading: PropTypes.bool,

@@ -11,7 +11,7 @@ import Header from '../../Components/Header';
 import TextInput from '../../Components/TextInput';
 import Button from '../../Components/Button';
 
-function ProfileFormScreen({ t, navigation, isLoading, save }) {
+function ProfileFormScreen({ t, navigation, route, isLoading, save }) {
   const [userId, setUserId] = useState(undefined);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -20,14 +20,14 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
   const emailRef = useRef();
 
   useEffect(() => {
-    const user = navigation.getParam('user');
+    const user = route.params.user;
     if (user) {
       setUserId(user.id);
       setFirstname(user.first_name);
       setLastname(user.last_name);
       setEmail(user.email);
     }
-  }, [navigation]);
+  }, [route]);
 
   const onSave = () => {
     save(userId, firstname, lastname, email);
@@ -99,6 +99,7 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
 ProfileFormScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object,
+  route: PropTypes.object,
   isLoading: PropTypes.bool,
   save: PropTypes.func,
 };
