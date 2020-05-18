@@ -4,17 +4,27 @@ import DebugConfig from '../Config/DebugConfig';
 import { NativeModules, Platform } from 'react-native';
 
 // Determine default language according to device's one
-let defaultLanguage = 'fr';
-let lng;
+let lng = 'fr';
 if (Platform.OS === 'ios') {
   lng = NativeModules.SettingsManager.settings.AppleLocale;
+  if (lng === undefined) {
+    // iOS 13 workaround, take first of AppleLanguages array ["en", "fr-FR"]
+    lng = NativeModules.SettingsManager.settings.AppleLanguages[0];
+    lng = lng.split('-')[0];
+    if (lng === undefined) {
+      lng = 'fr'; // default language
+    }
+  }
+  lng = lng.split('_')[0];
 } else {
   lng = NativeModules.I18nManager.localeIdentifier;
+  lng = lng.split('_')[0];
 }
-defaultLanguage = lng.split('_')[0];
+
+console.tron.warn(lng);
 
 i18n.use(initReactI18next).init({
-  lng: defaultLanguage,
+  lng,
   debug: DebugConfig.debugI18next,
   resources: {
     fr: {
