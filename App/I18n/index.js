@@ -9,19 +9,18 @@ if (Platform.OS === 'ios') {
   lng = NativeModules.SettingsManager.settings.AppleLocale;
   if (lng === undefined) {
     // iOS 13 workaround, take first of AppleLanguages array ["en", "fr-FR"]
-    lng = NativeModules.SettingsManager.settings.AppleLanguages[0];
-    lng = lng.split('-')[0];
-    if (lng === undefined) {
+    const iosLng = NativeModules.SettingsManager.settings.AppleLanguages[0];
+    if (iosLng === undefined) {
       lng = 'fr'; // default language
+    } else {
+      lng = iosLng.split('-')[0];
     }
+  } else {
+    lng = lng.split('_')[0];
   }
-  lng = lng.split('_')[0];
 } else {
-  lng = NativeModules.I18nManager.localeIdentifier;
-  lng = lng.split('_')[0];
+  lng = NativeModules.I18nManager.localeIdentifier.split('_')[0];
 }
-
-console.tron.warn(lng);
 
 i18n.use(initReactI18next).init({
   lng,
