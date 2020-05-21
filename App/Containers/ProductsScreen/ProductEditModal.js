@@ -36,7 +36,6 @@ function ProductEditModal({
 
   // Check loading state to know if edit is done
   useEffect(() => {
-    console.tron.log('isLoading : ' + isLoading);
     if (isLoading && !prevLoading.current) {
       prevLoading.current = true;
     }

@@ -15,11 +15,6 @@ export function ActivationScreen({
   activationState,
   activate,
 }) {
-  // Get token from url
-  useEffect(() => {
-    console.tron.warn(navigation);
-  }, []);
-
   return (
     <Wrapper>
       <InnerWrapper>
