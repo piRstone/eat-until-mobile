@@ -22,6 +22,7 @@ const { Types, Creators } = createActions(
     emptyFailure: ['error'],
     getOffData: ['ean13'],
     offSuccess: null,
+    offFailure: null,
   },
   {
     prefix: 'PRODUCTS/',
@@ -175,6 +176,11 @@ export const offSuccess = state =>
     isOffLoading: false,
   });
 
+export const offFailure = state =>
+  state.merge({
+    isOffLoading: false,
+  });
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -195,4 +201,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.EMPTY_FAILURE]: emptyFailure,
   [Types.GET_OFF_DATA]: offRequest,
   [Types.OFF_SUCCESS]: offSuccess,
+  [Types.OFF_FAILURE]: offFailure,
 });

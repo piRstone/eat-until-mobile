@@ -1,3 +1,4 @@
 {
-  "explanation": "Scannez le code barre d'un produit pour récupérer ses informations"
+  "explanation": "Scannez le code barre d'un produit pour récupérer ses informations",
+  "unknownProduct": "Produit non reconnu"
 }

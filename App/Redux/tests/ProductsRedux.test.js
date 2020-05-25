@@ -186,4 +186,13 @@ describe('ProductsRedux', () => {
 
     expect(state.isOffLoading).toBeFalsy();
   });
+
+  test('offFailure', () => {
+    const initialState = Immutable({
+      isOffLoading: true,
+    });
+    const state = reducer(initialState, Actions.offFailure());
+
+    expect(state.isOffLoading).toBeFalsy();
+  });
 });

@@ -2,5 +2,7 @@
   "deleteText": "Do you want to delete this product?",
   "delete": "Delete",
   "cancel": "Cancel",
-  "edit": "Edit"
+  "edit": "Edit",
+  "days": "d",
+  "years": "y"
 }

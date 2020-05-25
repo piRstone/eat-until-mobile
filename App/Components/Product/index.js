@@ -10,6 +10,10 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
     moment(),
     'd',
   );
+  const remainingYears = moment(data.expiration_date, 'YYYY-MM-DD').diff(
+    moment(),
+    'y',
+  );
   let dayClass;
   if (remainingDays < 3) {
     dayClass = 'danger';
@@ -86,13 +90,17 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
 
   return (
     <Wrapper onPress={() => onPressProduct(data)}>
-      <View>
-        <Name>{data.name}</Name>
+      <View style={{ width: '80%' }}>
+        <Name numberOfLines={1}>{data.name}</Name>
         <Date>
           {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
         </Date>
       </View>
-      <Days style={dayClass}>{remainingDays} j</Days>
+      <Days style={dayClass}>
+        {remainingDays < 365
+          ? `${remainingDays} ${t('product:days')}`
+          : `${remainingYears} ${t('product:years')}`}
+      </Days>
     </Wrapper>
   );
 }

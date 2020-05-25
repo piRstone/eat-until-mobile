@@ -2,7 +2,6 @@ import { call, put } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 import i18n from 'i18next';
 
-import Secrets from 'react-native-config';
 import UserActions from '../Redux/UserRedux';
 import NotificationActions from '../Redux/NotificationRedux';
 import { types } from '../Containers/Notification';
@@ -18,12 +17,6 @@ export function* login(api, action) {
     yield put(UserActions.success(user));
     yield put(NavigationActions.navigate({ routeName: 'Main' }));
   } else {
-    yield put(
-      NotificationActions.display(
-        `${Secrets.API_URL} ${JSON.stringify(response.data)}`,
-        types.danger,
-      ),
-    );
     let errorMessage = i18n.t('login:anErrorOccurred');
     if (response.status === 400) {
       errorMessage = i18n.t('login:wrongEmailOrPassword');
@@ -68,6 +61,12 @@ export function* register(api, { firstname, lastname, email, password }) {
       const error = response.data[key][0];
       yield put(NotificationActions.display(`${key} : ${error}`, types.danger));
     }
+    yield put(
+      NotificationActions.display(
+        i18n.t('notification:serverError'),
+        types.danger,
+      ),
+    );
     yield put(UserActions.registerFailure());
   }
 }

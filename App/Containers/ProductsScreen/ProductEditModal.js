@@ -175,6 +175,7 @@ const Header = styled.View`
 const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 30px;
+  color: ${props => props.theme.black};
 `;
 
 const CancelButton = styled.Text`

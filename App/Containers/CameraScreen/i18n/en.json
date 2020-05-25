@@ -1,3 +1,4 @@
 {
-  "explanation": "Scan the product barcode to get its informations"
+  "explanation": "Scan the product barcode to get its informations",
+  "unknownProduct": "Unknown product"
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-function ListForm({ isLoading, onSubmit }) {
+function ListForm({ isLoading, onSubmit, onClose }) {
   const [value, setValue] = useState('');
 
   const handleSubmit = () => {
@@ -27,9 +27,12 @@ function ListForm({ isLoading, onSubmit }) {
         {isLoading ? (
           <StyledActivityIndicator />
         ) : (
-          <StyledIcon name="check" size={20} />
+          <CheckIcon name="check" size={20} />
         )}
       </SubmitButton>
+      <CancelButton onPress={onClose}>
+        <TimesIcon name="x" size={20} />
+      </CancelButton>
     </Wrapper>
   );
 }
@@ -37,6 +40,7 @@ function ListForm({ isLoading, onSubmit }) {
 ListForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ListForm;
@@ -68,16 +72,27 @@ const Input = styled.TextInput`
   align-items: center;
 `;
 
-const SubmitButton = styled.TouchableOpacity`
+const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 35px;
   width: 35px;
   border-radius: 5px;
-  background-color: ${props => props.theme.lightgreen};
   margin-left: 10px;
 `;
 
-const StyledIcon = styled(Icon)`
+const SubmitButton = styled(Button)`
+  background-color: ${props => props.theme.lightgreen};
+`;
+
+const CancelButton = styled(Button)`
+  background-color: ${props => props.theme.lightgrey};
+`;
+
+const CheckIcon = styled(Icon)`
   color: ${props => props.theme.green};
+`;
+
+const TimesIcon = styled(Icon)`
+  color: ${props => props.theme.red};
 `;

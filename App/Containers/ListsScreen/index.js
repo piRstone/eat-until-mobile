@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
@@ -27,11 +27,27 @@ export function ListsScreen({
   createList,
 }) {
   const [showForm, setShowForm] = useState(false);
+  const [isKeybordOpened, setiIsKeybordOpened] = useState(false);
+
+  const showListener = useRef();
+  const hideListener = useRef();
 
   useEffect(() => {
     setTimeout(() => {
       getLists();
     }, 10);
+
+    showListener.current = Keyboard.addListener('keyboardDidShow', () =>
+      setiIsKeybordOpened(true),
+    );
+    hideListener.current = Keyboard.addListener('keyboardDidHide', () =>
+      setiIsKeybordOpened(false),
+    );
+
+    return () => {
+      showListener.current.remove();
+      hideListener.current.remove();
+    };
   }, [getLists]);
 
   const handleListPress = list => {
@@ -56,7 +72,11 @@ export function ListsScreen({
         </Header>
         <KeyboardAvoidingView behavior="height" enabled={showForm}>
           {showForm && (
-            <ListForm onSubmit={handleSubmit} isLoading={isCreateLoading} />
+            <ListForm
+              isLoading={isCreateLoading}
+              onSubmit={handleSubmit}
+              onClose={() => setShowForm(false)}
+            />
           )}
           {lists.length ? (
             <FlatList
@@ -78,9 +98,11 @@ export function ListsScreen({
           )}
         </KeyboardAvoidingView>
       </InnerWrapper>
-      <CreateListButton onPress={() => setShowForm(!showForm)}>
-        <CreateListButtonText>{t('lists:create')}</CreateListButtonText>
-      </CreateListButton>
+      {!isKeybordOpened && (
+        <CreateListButton onPress={() => setShowForm(!showForm)}>
+          <CreateListButtonText>{t('lists:create')}</CreateListButtonText>
+        </CreateListButton>
+      )}
     </Wrapper>
   );
 }

@@ -16,7 +16,7 @@ import { Metrics } from '../../Themes';
 export function CameraScreen({ t, navigation, getProductData, isLoading }) {
   const handleBarcoreRead = e => {
     const type = RNCamera.Constants.BarCodeType.ean13;
-    if (e.type === type) {
+    if (e.type === type && !isLoading) {
       Vibration.vibrate();
       getProductData(e.data);
     }

@@ -1,6 +1,11 @@
 import apisauce from 'apisauce';
 import { call, put } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
+import i18n from 'i18next';
+
+import ProductsActions from '../Redux/ProductsRedux';
+import NotificationActions from '../Redux/NotificationRedux';
+import { types } from '../Containers/Notification';
 
 export function* getProductData({ ean13 }) {
   const baseURL = 'https://fr.openfoodfacts.org/api/v0';
@@ -22,6 +27,14 @@ export function* getProductData({ ean13 }) {
         routeName: 'ProductsScreen',
         params: { OFFProduct: response.data.product },
       }),
+    );
+  } else {
+    yield put(ProductsActions.offFailure());
+    yield put(
+      NotificationActions.display(
+        i18n.t('camera:unknownProduct'),
+        types.danger,
+      ),
     );
   }
 }
