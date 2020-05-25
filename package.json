@@ -22,7 +22,13 @@
     "ios:dev": "react-native run-ios --simulator='iPhone 11 Pro'",
     "ios:release": "react-native run-ios --configuration Release --device='iPhone de Pierre'",
     "storybook": "storybook start -p 7007",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "version:major": "npm version major --no-git-tag-version --increment-build",
+    "version:minor": "npm version minor --no-git-tag-version --increment-build",
+    "version:patch": "npm version patch --no-git-tag-version --increment-build",
+    "version:preminor": "npm version preminor --no-git-tag-version --increment-build",
+    "version:prepatch": "npm version prerelease --no-git-tag-version --increment-build",
+    "postversion": "react-native-version --never-amend"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -96,6 +102,7 @@
     "mockery": "2.1.0",
     "react-devtools-core": "3.6.3",
     "react-dom": "16.8.6",
+    "react-native-version": "3.1.0",
     "react-test-renderer": "16.9.0",
     "reactotron-react-native": "2.2.0",
     "reactotron-redux": "2.1.3",
