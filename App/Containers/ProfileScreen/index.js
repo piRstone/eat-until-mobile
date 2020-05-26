@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose } from 'redux';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
@@ -26,23 +26,34 @@ export function ProfileScreen({ t, navigation, logout, user }) {
             </EditButton>
           }
         />
-        <StyledName>
-          {user.first_name} {user.last_name}
-        </StyledName>
-        <StyledEmail>{user.email}</StyledEmail>
-        <LogoutWrapper onPress={logout}>
-          <LogoutText>{t('profile:logout')}</LogoutText>
-        </LogoutWrapper>
-        <StyledText>
-          {t('profile:sendComments')} : eatuntil@pirstone.com
-        </StyledText>
-        <EULAWrapper onPress={() => navigation.navigate('EULAScreen')}>
-          <StyledLink>
-            Conditions générales d'utilisation et politique de confidentialité
-          </StyledLink>
-        </EULAWrapper>
-        <SecondaryText>© piRstone {new Date().getFullYear()}</SecondaryText>
-        <SecondaryText>Eat Until v{DeviceInfo.getVersion()}</SecondaryText>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'space-between',
+          }}>
+          <View>
+            <StyledName>
+              {user.first_name} {user.last_name}
+            </StyledName>
+            <StyledEmail>{user.email}</StyledEmail>
+            <LogoutWrapper onPress={logout}>
+              <LogoutText>{t('profile:logout')}</LogoutText>
+            </LogoutWrapper>
+          </View>
+          <View>
+            <StyledText>
+              {t('profile:sendComments')} : eatuntil@pirstone.com
+            </StyledText>
+            <EULAWrapper onPress={() => navigation.navigate('EULAScreen')}>
+              <StyledLink>
+                Conditions générales d'utilisation et politique de
+                confidentialité
+              </StyledLink>
+            </EULAWrapper>
+            <SecondaryText>© piRstone {new Date().getFullYear()}</SecondaryText>
+            <SecondaryText>Eat Until v{DeviceInfo.getVersion()}</SecondaryText>
+          </View>
+        </View>
       </InnerWrapper>
     </Wrapper>
   );

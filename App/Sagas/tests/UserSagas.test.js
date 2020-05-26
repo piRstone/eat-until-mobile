@@ -181,7 +181,6 @@ describe('edit', () => {
     id: 1,
     firsname: 'Paul',
     lastname: 'Simons',
-    email: 'psimons@test.com',
   };
   let generator;
 
@@ -193,7 +192,6 @@ describe('edit', () => {
     const data = {
       first_name: action.firstname,
       last_name: action.lastname,
-      email: action.email,
     };
     expect(generator.next().value).toEqual(
       call(FixtureApi.editUser, action.id, data),

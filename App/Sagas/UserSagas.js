@@ -77,11 +77,10 @@ export function* register(api, { firstname, lastname, email, password }) {
   }
 }
 
-export function* edit(api, { id, firstname, lastname, email }) {
+export function* edit(api, { id, firstname, lastname }) {
   const response = yield call(api.editUser, id, {
     first_name: firstname,
     last_name: lastname,
-    email,
   });
 
   if (response.ok) {

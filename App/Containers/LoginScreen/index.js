@@ -11,8 +11,15 @@ import TextInput from '../../Components/TextInput';
 import Button from '../../Components/Button';
 const logo = require('../../Images/logo.png');
 
-export function LoginScreen({ t, navigation, isLoading, login, error }) {
-  const [email, setEmail] = useState('');
+export function LoginScreen({
+  t,
+  navigation,
+  storedEmail,
+  isLoading,
+  login,
+  error,
+}) {
+  const [email, setEmail] = useState(storedEmail || '');
   const [password, setPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
   const passwordFieldRef = useRef();
@@ -103,6 +110,7 @@ LoginScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object,
   isLoading: PropTypes.bool,
+  storedEmail: PropTypes.string,
   login: PropTypes.func,
   error: PropTypes.string,
 };
@@ -110,6 +118,7 @@ LoginScreen.propTypes = {
 const mapStateToProps = state => ({
   isLoading: state.user.isLoading,
   error: state.user.error,
+  storedEmail: state.user.email,
 });
 
 const mapDispatchToProps = dispatch => ({
