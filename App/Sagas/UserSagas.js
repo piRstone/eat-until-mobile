@@ -20,6 +20,12 @@ export function* login(api, action) {
     let errorMessage = i18n.t('login:anErrorOccurred');
     if (response.status === 400) {
       errorMessage = i18n.t('login:wrongEmailOrPassword');
+      yield put(
+        NotificationActions.display(
+          i18n.t('login:wrongEmailOrPassword'),
+          types.danger,
+        ),
+      );
     }
     yield put(UserActions.failure(errorMessage));
   }

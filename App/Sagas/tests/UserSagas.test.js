@@ -55,6 +55,14 @@ describe('login', () => {
     expect(generator.next(response).value).toEqual(
       put(UserActions.failure(i18n.t('login:wrongEmailOrPassword'))),
     );
+    expect(generator.next(response).value).toEqual(
+      put(
+        NotificationActions.display(
+          i18n.t('login:wrongEmailOrPassword'),
+          types.danger,
+        ),
+      ),
+    );
   });
 
   it('should dispatch the failure action with generic error', () => {

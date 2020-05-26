@@ -11,13 +11,19 @@ function TextInput({
   inputProps,
   noBorderBottom,
   invalid,
+  errorMessage,
 }) {
   return (
     <Wrapper noBorder={noBorderBottom} invalid={invalid}>
       <Label>
         {label}
         {required && <Required>*</Required>}
-        {invalid && <Required> {t('textInput:required')}</Required>}
+        {invalid && (
+          <Required>
+            {' '}
+            {errorMessage ? errorMessage : t('textInput:required')}
+          </Required>
+        )}
       </Label>
       <StyledInput onChangeText={onChangeText} {...inputProps} />
     </Wrapper>
@@ -32,6 +38,7 @@ TextInput.propTypes = {
   inputProps: PropTypes.object,
   noBorderBottom: PropTypes.bool,
   invalid: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 
 export default withTranslation()(TextInput);

@@ -14,7 +14,19 @@ const logo = require('../../Images/logo.png');
 export function LoginScreen({ t, navigation, isLoading, login, error }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const passwordFieldRef = useRef();
+
+  const checkEmail = () => {
+    if (email.length) {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!regex.test(email)) {
+        setInvalidEmail(true);
+      } else {
+        setInvalidEmail(false);
+      }
+    }
+  };
 
   const onSubmit = () => {
     if (email.length && password.length) {
@@ -40,6 +52,8 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
             <TextInput
               label="Email"
               onChangeText={setEmail}
+              invalid={invalidEmail}
+              errorMessage={t('login:invalidEmail')}
               inputProps={{
                 value: email,
                 autoCorrect: false,
@@ -48,6 +62,8 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
                 placeholder: t('login:emailPlaceholder'),
                 returnKeyType: 'next',
                 onSubmitEditing: () => passwordFieldRef.current.focus(),
+                onBlur: checkEmail,
+                onFocus: () => invalidEmail && setInvalidEmail(false),
               }}
             />
             <TextInput
@@ -73,7 +89,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
           <Button
             title={t('login:signIn')}
             isLoading={isLoading}
-            disabled={!email || !password}
+            disabled={!email || !password || invalidEmail}
             onPress={onSubmit}
           />
           {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -165,6 +181,7 @@ const ErrorMessage = styled.Text`
   color: ${props => props.theme.white};
   background-color: ${props => props.theme.red};
   padding: 7px 5px 0;
+  padding-bottom: ${Platform.OS === 'ios' ? '0px' : '7px'};
   border-radius: 4px;
   margin-top: 20px;
   overflow: hidden;
