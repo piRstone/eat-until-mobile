@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import moment from 'moment';
 import { withTranslation } from 'react-i18next';
 
-export function Product({ t, data, onEdit, onRemove, disablePress }) {
+export function Product({ t, data, onEdit, onRemove, disabled }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
     moment(),
     'd',
@@ -42,7 +42,7 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
   };
 
   const onPressProduct = product => {
-    if (disablePress) return;
+    if (disabled) return;
 
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
@@ -89,7 +89,7 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
   };
 
   return (
-    <Wrapper onPress={() => onPressProduct(data)}>
+    <Wrapper onPress={() => onPressProduct(data)} disabled={disabled}>
       <View style={{ width: '80%' }}>
         <Name numberOfLines={1}>{data.name}</Name>
         <Date>
@@ -110,7 +110,7 @@ Product.propTypes = {
   data: PropTypes.object.isRequired,
   onEdit: PropTypes.func,
   onRemove: PropTypes.func,
-  disablePress: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default withTranslation()(Product);
