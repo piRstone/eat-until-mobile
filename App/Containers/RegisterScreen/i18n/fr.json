@@ -10,5 +10,6 @@
   "registration": "Inscription",
   "EULASentence": "J'ai lu et j'accepte les ",
   "EULA": "conditions générales d'utilisation",
-  "privacySentence": "Vos données personnelles ne sont jamais transmises ni revendues à un tiers et ne sont utilisées que dans le cadre du fonctionnement de cette application. Conformément à la loi Informatique et Libertés et Règlement général sur la protection des données (RGPD), vous disposez d’un droit d’accès, de modification, de suppression et d’opposition au traitement de vos données à caractère personnel."
+  "privacySentence": "Vos données personnelles ne sont jamais transmises ni revendues à un tiers et ne sont utilisées que dans le cadre du fonctionnement de cette application. Conformément à la loi Informatique et Libertés et Règlement général sur la protection des données (RGPD), vous disposez d’un droit d’accès, de modification, de suppression et d’opposition au traitement de vos données à caractère personnel.",
+  "invalidEmail": "Veuillez saisir une adresse email"
 }

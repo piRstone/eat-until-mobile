@@ -18,9 +18,21 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [acceptEULA, setAcceptEULA] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const lastnameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const checkEmail = () => {
+    if (email.length) {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!regex.test(email)) {
+        setInvalidEmail(true);
+      } else {
+        setInvalidEmail(false);
+      }
+    }
+  };
 
   return (
     <Wrapper>
@@ -51,7 +63,6 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
                 ref: lastnameRef,
                 value: lastname,
                 placeholder: t('register:lastNamePlaceholder'),
-                autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: () => emailRef.current.focus(),
               }}
@@ -61,6 +72,8 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
               onChangeText={setEmail}
               noBorderBottom
               required
+              invalid={invalidEmail}
+              errorMessage={t('register:invalidEmail')}
               inputProps={{
                 ref: emailRef,
                 value: email,
@@ -69,6 +82,8 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
                 placeholder: t('register:emailPlaceholder'),
                 returnKeyType: 'next',
                 onSubmitEditing: () => passwordRef.current.focus(),
+                onBlur: checkEmail,
+                onFocus: () => invalidEmail && setInvalidEmail(false),
               }}
             />
           </FieldWrapper>
@@ -107,7 +122,7 @@ export function RegisterScreen({ t, navigation, register, isLoading }) {
               register(firstname, lastname, email, password);
               Keyboard.dismiss();
             }}
-            disabled={!email || !password || !acceptEULA}
+            disabled={!email || !password || !acceptEULA || invalidEmail}
             title={t('register:registration')}
             isLoading={isLoading}
           />

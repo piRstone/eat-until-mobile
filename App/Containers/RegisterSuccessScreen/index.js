@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { View } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
 import { Metrics } from '../../Themes';
+import Button from '../../Components/Button';
 
 export function RegisterSuccessScreen({ t, navigation }) {
   return (
@@ -11,10 +13,16 @@ export function RegisterSuccessScreen({ t, navigation }) {
       <InnerWrapper>
         <Emoji>🎉</Emoji>
         <Title>{t('registerSuccess:title')}</Title>
-        <Text>{t('registerSuccess:success')}</Text>
-        <StyledButton onPress={() => navigation.navigate('LoginScreen')}>
-          <ButtonText>{t('registerSuccess:login')}</ButtonText>
-        </StyledButton>
+        <TextWrapper>
+          <Text>{t('registerSuccess:success')}</Text>
+          <TextSecondary>{t('registerSuccess:checkSpam')}</TextSecondary>
+        </TextWrapper>
+        <View style={{ width: Metrics.screenWidth - 40 }}>
+          <Button
+            onPress={() => navigation.navigate('LoginScreen')}
+            title={t('registerSuccess:login')}
+          />
+        </View>
       </InnerWrapper>
     </Wrapper>
   );
@@ -48,29 +56,20 @@ const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 24px;
   margin-bottom: 20px;
+  color: ${props => props.theme.black};
+`;
+
+const TextWrapper = styled.View`
+  margin: 0 20px 40px;
 `;
 
 const Text = styled.Text`
   font-family: 'SofiaProRegular';
+  color: ${props => props.theme.black};
   font-size: 16px;
-  margin-bottom: 30px;
 `;
 
-const StyledButton = styled.TouchableOpacity`
-  height: 40px;
-  width: ${Metrics.screenWidth - 40};
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: ${props =>
-    props.disabled ? props.theme.grey2 : props.theme.primary};
-  margin-top: 20px;
+const TextSecondary = styled(Text)`
   margin-bottom: 30px;
-  padding-top: 7px;
-`;
-
-const ButtonText = styled.Text`
-  font-family: 'SofiaPro-Bold';
-  font-size: 18px;
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.grey1};
 `;

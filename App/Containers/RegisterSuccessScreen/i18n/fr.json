@@ -1,5 +1,6 @@
 {
-  "title": "Vous êtes inscrit !",
+  "title": "Vous êtes inscrit(e) !",
   "success": "Consultez votre boîte mail pour activer votre compte et vous connecter.",
+  "checkSpam": "Vérifiez dans les spams si rien n'apparait dans la boite de réception.",
   "login": "Connexion"
 }
