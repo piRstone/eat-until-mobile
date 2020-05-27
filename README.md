@@ -1,31 +1,33 @@
-#  EatUntilMobile
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+#  Eat Until Mobile
 
-* Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
+**Never waste food anymore!**
 
-## :arrow_up: How to Setup
+List everything you don't want to loose if you forget it at the bottom of your shelf! You'll be notified some days before the expiration date so you can cook and eat it.
 
-**Step 1:** git clone this repo:
+_This project has been started from [Ignite](https://github.com/infinitered/ignite)._
 
-**Step 2:** cd to the cloned repo:
+Note: this project depends on the [eat-until-api](https://github.com/piRstone/eat-until-api) backend.
 
-**Step 3:** Install the Application with `yarn` or `npm i`
+## Setup
+
+**Step 1:** git clone this repo
+
+**Step 2:** cd to the cloned repo.
+
+**Step 3:** Install dependencies with `yarn`.
 
 
-## :arrow_forward: How to Run App
+## How to Run App
 
-1. cd to the repo
-2. Run Build for either OS
+1. cd to the repo.
+2. Copy `.env.example` as `.env` and set the `API_URL` constant to you point on your API
+3. Run Build for either OS
   * for iOS
     * run `react-native run-ios`
   * for Android
-    * Run Genymotion
+    * start an emulator
     * run `react-native run-android`
 
-## :no_entry_sign: Standard Compliant
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-This project adheres to Standard.  Our CI enforces this, so we suggest you enable linting to keep your project compliant during development.
 
 **To Lint on Commit**
 
@@ -45,8 +47,7 @@ This project uses [react-native-config](https://github.com/luggit/react-native-c
 and other sensitive information in a `.env` file:
 
 ```
-API_URL=https://myapi.com
-GOOGLE_MAPS_API_KEY=abcdefgh
+API_URL=https://myapi.com/api
 ```
 
 and access them from React Native like so:
@@ -55,7 +56,6 @@ and access them from React Native like so:
 import Secrets from 'react-native-config'
 
 Secrets.API_URL  // 'https://myapi.com'
-Secrets.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 ```
 
 The `.env` file is ignored by git keeping those secrets out of your repo.
@@ -65,3 +65,9 @@ The `.env` file is ignored by git keeping those secrets out of your repo.
 2. Add your config variables
 3. Follow instructions at [https://github.com/luggit/react-native-config#setup](https://github.com/luggit/react-native-config#setup)
 4. Done!
+
+## Roadmap
+
+- Setup Push Notifications
+- Bulk add products by scanning their EAN13 barcode.
+- Be able to scan drugs package datamatrix code and retrieve their data.
