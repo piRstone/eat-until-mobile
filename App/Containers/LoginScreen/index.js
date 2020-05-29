@@ -47,8 +47,12 @@ export function LoginScreen({
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="always">
         <InnerWrapper>
-          <Title>Eat Until</Title>
           <LogoImage source={logo} />
+          <Title>
+            <Eat>Eat</Eat>
+            <Title> </Title>
+            <Until>Until</Until>
+          </Title>
           <Body>
             <LoginRow>
               <LoginText>{t('login:signIn')}</LoginText>
@@ -146,18 +150,28 @@ const InnerWrapper = styled.View`
   margin: 0 20px;
 `;
 
+const LogoImage = styled.Image`
+  height: 100px;
+  width: 100px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
 const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 40px;
-  color: ${props => props.theme.black};
-  margin-top: 30px;
+  margin-bottom: 30px;
   text-align: center;
 `;
 
-const LogoImage = styled.Image`
-  height: 130px;
-  width: 130px;
-  margin-bottom: 30px;
+const Eat = styled.Text`
+  color: ${props => props.theme.primary};
+  margin-right: 20px;
+`;
+
+const Until = styled.Text`
+  font-family: 'SofiaProRegular';
+  color: ${props => props.theme.black};
 `;
 
 const Body = styled.View`
