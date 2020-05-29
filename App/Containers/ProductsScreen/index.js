@@ -4,6 +4,7 @@ import {
   Alert,
   FlatList,
   Keyboard,
+  Platform,
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -291,6 +292,7 @@ const DangerButton = styled.TouchableOpacity`
   border-radius: 10px;
   margin: 10px 5px;
   padding: 12px 20px 7px;
+  padding-bottom: ${Platform.OS === 'ios' ? '7px' : '12px'};
 `;
 
 const DangerButtonText = styled.Text`
