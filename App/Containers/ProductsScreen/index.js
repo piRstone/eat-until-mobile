@@ -119,11 +119,7 @@ export function ProductsScreen({
           <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
         {showForm && (
-          <ProductForm
-            onSubmit={handleSubmit}
-            onClose={() => setShowForm(false)}
-            navigation={navigation}
-          />
+          <ProductForm onSubmit={handleSubmit} navigation={navigation} />
         )}
         {isLoading && !products.length ? (
           <EmptyWrapper>

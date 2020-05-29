@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import {
-  ActivityIndicator,
-  Alert,
-  Modal,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import { Alert, Modal, Platform, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import TextInput from '../../Components/TextInput';

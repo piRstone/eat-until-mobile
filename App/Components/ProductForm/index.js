@@ -7,7 +7,7 @@ import { path } from 'ramda';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { withTranslation } from 'react-i18next';
 
-const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
+const ProductForm = ({ t, onSubmit, navigation }) => {
   const expireDaysInputRef = useRef(null);
   const notifyDaysInputRef = useRef(null);
   const [name, setName] = useState('');
@@ -90,7 +90,7 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
         </HeadRightCol>
       </HeadRow>
       <Row2>
-        <Col>
+        <DateCol onPress={() => expireDaysInputRef.current.focus()}>
           <Label>{t('productForm:endsIn')}</Label>
           <Row>
             <NotifyDaysInput
@@ -102,11 +102,12 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
               value={expireDays}
               invalid={inputErrors.expireDays}
               onSubmitEditing={() => notifyDaysInputRef.current.focus()}
+              selectTextOnFocus
             />
             <BigText>{t('productForm:days')}</BigText>
           </Row>
-        </Col>
-        <DayCol>
+        </DateCol>
+        <DayCol onPress={() => notifyDaysInputRef.current.focus()}>
           <Label>{t('productForm:notificationDays')}</Label>
           <Row>
             <BigText>{t('productForm:day')} - </BigText>
@@ -119,6 +120,7 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
               value={notifyDays}
               invalid={inputErrors.notifyDays}
               onSubmitEditing={onSubmit}
+              selectTextOnFocus
             />
           </Row>
         </DayCol>
@@ -128,9 +130,6 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
           {t('productForm:clear')}
         </SecondaryButton>
         <Row>
-          <SecondaryButton onPress={onClose}>
-            {t('productForm:close')}
-          </SecondaryButton>
           <ButtonWrapper>
             <AddButton onPress={handleSubmit}>
               <AddButtonText>{t('productForm:add')}</AddButtonText>
@@ -145,7 +144,6 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
 ProductForm.propTypes = {
   t: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   navigation: PropTypes.object,
 };
 
@@ -253,7 +251,12 @@ const BigText = styled.Text`
   margin-bottom: ${Platform.OS === 'ios' ? '0px' : '8px'};
 `;
 
-const DayCol = styled.View`
+const DateCol = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: column;
+`;
+
+const DayCol = styled.TouchableOpacity`
   flex-direction: column;
   margin-left: 10px;
 `;
