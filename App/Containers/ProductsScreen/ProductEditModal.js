@@ -1,7 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Modal, TouchableOpacity } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Modal,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import TextInput from '../../Components/TextInput';
 import Button from '../../Components/Button';
@@ -12,6 +19,7 @@ function ProductEditModal({
   onDismiss,
   onRequestClose,
   onSubmit,
+  onDelete,
   isLoading,
   error,
 }) {
@@ -22,8 +30,9 @@ function ProductEditModal({
 
   const dateRef = useRef();
   const notifRef = useRef();
-
   const prevLoading = useRef(false);
+
+  const { t } = useTranslation();
 
   // Update form with passed product
   useEffect(() => {
@@ -69,6 +78,27 @@ function ProductEditModal({
       }
       setInputErrors(errors);
     }
+  };
+
+  const handleRemove = () => {
+    Alert.alert(
+      t('product:delete'),
+      t('product:deleteText'),
+      [
+        {
+          text: t('product:cancel'),
+        },
+        {
+          text: t('product:delete'),
+          onPress: () => {
+            onDelete(product.id);
+            onDismiss();
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true },
+    );
   };
 
   return (
@@ -133,6 +163,11 @@ function ProductEditModal({
             title="Enregistrer"
             isLoading={isLoading}
           />
+          <DangerZone>
+            <DangerButton onPress={handleRemove}>
+              <DangerButtonText>{t('products:delete')}</DangerButtonText>
+            </DangerButton>
+          </DangerZone>
         </InnerWrapper>
       </Wrapper>
     </Modal>
@@ -145,6 +180,7 @@ ProductEditModal.propTypes = {
   onDismiss: PropTypes.func.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
 };
@@ -187,4 +223,29 @@ const CancelButton = styled.Text`
 const FieldWrapper = styled.View`
   border-radius: 10px;
   overflow: hidden;
+`;
+
+const DangerZone = styled.View`
+  flex-direction: row;
+  margin-top: auto;
+`;
+
+const DangerButton = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border: ${props =>
+    props.disabled
+      ? `1px solid ${props.theme.grey1}`
+      : `1px solid ${props.theme.red}`};
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 12px 20px 7px;
+  padding-bottom: ${Platform.OS === 'ios' ? '7px' : '12px'};
+`;
+
+const DangerButtonText = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 14px;
+  color: ${props => (props.disabled ? props.theme.grey1 : props.theme.red)};
 `;

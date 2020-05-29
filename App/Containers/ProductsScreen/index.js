@@ -176,6 +176,7 @@ export function ProductsScreen({
         onDismiss={onEditModalClose}
         onRequestClose={onEditModalClose}
         onSubmit={(id, product) => editProduct(id, product, list.id)}
+        onDelete={handleRemoveProduct}
         isLoading={isEditLoading}
         error={editError}
       />

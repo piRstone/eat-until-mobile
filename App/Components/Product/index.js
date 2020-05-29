@@ -64,27 +64,8 @@ export function Product({ t, data, onEdit, onRemove, disabled }) {
         },
       );
     } else {
-      Alert.alert(
-        product.name,
-        '',
-        [
-          {
-            text: t('product:cancel'),
-            onPress: () => {},
-          },
-          {
-            text: t('product:edit'),
-            onPress: () => onEdit(product),
-            style: 'cancel',
-          },
-          {
-            text: t('product:delete'),
-            onPress: () => handleRemove(product.id),
-            style: 'destructive',
-          },
-        ],
-        { cancelable: true },
-      );
+      // On Android, open edit modal on product press
+      onEdit(product);
     }
   };
 
