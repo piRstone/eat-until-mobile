@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import { withTranslation } from 'react-i18next';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export function Product({ t, data, onEdit, onRemove, disabled }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
@@ -73,9 +74,17 @@ export function Product({ t, data, onEdit, onRemove, disabled }) {
     <Wrapper onPress={() => onPressProduct(data)} disabled={disabled}>
       <View style={{ width: '80%' }}>
         <Name numberOfLines={1}>{data.name}</Name>
-        <Date>
-          {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
-        </Date>
+        <Row>
+          <SecondaryText>
+            {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
+          </SecondaryText>
+          <Row>
+            <StyledIcon name="bell" />
+            <SecondaryText>
+              {t('product:days').toUpperCase()}-{data.notification_delay}
+            </SecondaryText>
+          </Row>
+        </Row>
       </View>
       <Days style={dayClass}>
         {remainingDays < 365
@@ -106,13 +115,18 @@ const Wrapper = styled.TouchableOpacity`
   margin-bottom: 10px;
 `;
 
+const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Name = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 18px;
   color: ${props => props.theme.black};
 `;
 
-const Date = styled.Text`
+const SecondaryText = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.grey1};
@@ -129,4 +143,12 @@ const Days = styled.Text`
       : props.style === 'warning'
       ? props.theme.orange
       : props.theme.green};
+`;
+
+const StyledIcon = styled(Icon)`
+  color: ${props => props.theme.grey1};
+  font-size: 12px;
+  margin-left: 15px;
+  margin-right: 2px;
+  padding-top: ${Platform.OS === 'ios' ? 0 : '7px'};
 `;

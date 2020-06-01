@@ -42,6 +42,7 @@ i18n.use(initReactI18next).init({
       product: require('../Components/Product/i18n/fr.json'),
       productForm: require('../Components/ProductForm/i18n/fr.json'),
       textInput: require('../Components/TextInput/i18n/fr.json'),
+      dateInput: require('../Components/DateInput/i18n/fr.json'),
     },
     en: {
       onboarding: require('../Containers/Onboarding/i18n/en.json'),
@@ -59,6 +60,7 @@ i18n.use(initReactI18next).init({
       product: require('../Components/Product/i18n/en.json'),
       productForm: require('../Components/ProductForm/i18n/en.json'),
       textInput: require('../Components/TextInput/i18n/en.json'),
+      dateInput: require('../Components/DateInput/i18n/en.json'),
     },
   },
 });
