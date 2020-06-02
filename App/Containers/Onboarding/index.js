@@ -49,6 +49,7 @@ function Onboarding({ t, navigation, done }) {
             expiration_date: moment()
               .add(3, 'days')
               .format('YYYY-MM-DD'),
+            notification_delay: 3,
           }}
           onPress={() => {}}
           disabled
