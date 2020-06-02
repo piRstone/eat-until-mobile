@@ -11,10 +11,29 @@ import TextInput from '../../Components/TextInput';
 import Button from '../../Components/Button';
 const logo = require('../../Images/logo.png');
 
-export function LoginScreen({ t, navigation, isLoading, login, error }) {
-  const [email, setEmail] = useState('');
+export function LoginScreen({
+  t,
+  navigation,
+  storedEmail,
+  isLoading,
+  login,
+  error,
+}) {
+  const [email, setEmail] = useState(storedEmail || '');
   const [password, setPassword] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const passwordFieldRef = useRef();
+
+  const checkEmail = () => {
+    if (email.length) {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!regex.test(email)) {
+        setInvalidEmail(true);
+      } else {
+        setInvalidEmail(false);
+      }
+    }
+  };
 
   const onSubmit = () => {
     if (email.length && password.length) {
@@ -28,8 +47,12 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="always">
         <InnerWrapper>
-          <Title>Eat Until</Title>
           <LogoImage source={logo} />
+          <Title>
+            <Eat>Eat</Eat>
+            <Title> </Title>
+            <Until>Until</Until>
+          </Title>
           <Body>
             <LoginRow>
               <LoginText>{t('login:signIn')}</LoginText>
@@ -40,6 +63,8 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
             <TextInput
               label="Email"
               onChangeText={setEmail}
+              invalid={invalidEmail}
+              errorMessage={t('login:invalidEmail')}
               inputProps={{
                 value: email,
                 autoCorrect: false,
@@ -48,6 +73,8 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
                 placeholder: t('login:emailPlaceholder'),
                 returnKeyType: 'next',
                 onSubmitEditing: () => passwordFieldRef.current.focus(),
+                onBlur: checkEmail,
+                onFocus: () => invalidEmail && setInvalidEmail(false),
               }}
             />
             <TextInput
@@ -73,7 +100,7 @@ export function LoginScreen({ t, navigation, isLoading, login, error }) {
           <Button
             title={t('login:signIn')}
             isLoading={isLoading}
-            disabled={!email || !password}
+            disabled={!email || !password || invalidEmail}
             onPress={onSubmit}
           />
           {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -87,6 +114,7 @@ LoginScreen.propTypes = {
   t: PropTypes.func,
   navigation: PropTypes.object,
   isLoading: PropTypes.bool,
+  storedEmail: PropTypes.string,
   login: PropTypes.func,
   error: PropTypes.string,
 };
@@ -94,6 +122,7 @@ LoginScreen.propTypes = {
 const mapStateToProps = state => ({
   isLoading: state.user.isLoading,
   error: state.user.error,
+  storedEmail: state.user.email,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -121,18 +150,28 @@ const InnerWrapper = styled.View`
   margin: 0 20px;
 `;
 
+const LogoImage = styled.Image`
+  height: 100px;
+  width: 100px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
 const Title = styled.Text`
   font-family: 'SofiaPro-Bold';
   font-size: 40px;
-  color: ${props => props.theme.black};
-  margin-top: 30px;
+  margin-bottom: 30px;
   text-align: center;
 `;
 
-const LogoImage = styled.Image`
-  height: 130px;
-  width: 130px;
-  margin-bottom: 30px;
+const Eat = styled.Text`
+  color: ${props => props.theme.primary};
+  margin-right: 20px;
+`;
+
+const Until = styled.Text`
+  font-family: 'SofiaProRegular';
+  color: ${props => props.theme.black};
 `;
 
 const Body = styled.View`
@@ -165,6 +204,7 @@ const ErrorMessage = styled.Text`
   color: ${props => props.theme.white};
   background-color: ${props => props.theme.red};
   padding: 7px 5px 0;
+  padding-bottom: ${Platform.OS === 'ios' ? '0px' : '7px'};
   border-radius: 4px;
   margin-top: 20px;
   overflow: hidden;

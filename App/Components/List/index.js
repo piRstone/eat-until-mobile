@@ -5,9 +5,9 @@ import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-function List({ t, list, onPress }) {
+function List({ t, list, onPress, disabled }) {
   return (
-    <Wrapper key={list.id} onPress={onPress}>
+    <Wrapper key={list.id} onPress={onPress} disabled={disabled}>
       <Col>
         <ListName>{list.name}</ListName>
         <ProductsCount>
@@ -25,6 +25,7 @@ List.propTypes = {
   t: PropTypes.func,
   list: PropTypes.object.isRequired,
   onPress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default withTranslation()(List);

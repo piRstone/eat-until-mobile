@@ -11,5 +11,6 @@
   "registration": "Sign up",
   "EULASentence": "I have read et I accept ",
   "EULA": "end user licence agreement",
-  "privacySentence": "Your personnal data are never sent or selled to anyone and are only used for this application. According to the french low \"Informatique et Libertés\" and the General Data Protection Regulation (GDPR), you have the right to access, edit, delete and oppose your personnal data."
+  "privacySentence": "Your personnal data are never sent or selled to anyone and are only used for this application. According to the french low \"Informatique et Libertés\" and the General Data Protection Regulation (GDPR), you have the right to access, edit, delete and oppose your personnal data.",
+  "invalidEmail": "Please type an email address"
 }

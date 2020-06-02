@@ -10,5 +10,11 @@
   "delete": "Delete",
   "productDeleted": "Product deleted",
   "productAdded": "Product added",
-  "productEdited": "Product edited"
+  "productEdited": "Product edited",
+  "edit": "Edit",
+  "name": "Name",
+  "namePlaceholder": "Tomatoes",
+  "expiresOn": "Expires on",
+  "notif": "Notification (days)",
+  "save": "Save"
 }

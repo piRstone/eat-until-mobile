@@ -20,6 +20,12 @@ export function* login(api, action) {
     let errorMessage = i18n.t('login:anErrorOccurred');
     if (response.status === 400) {
       errorMessage = i18n.t('login:wrongEmailOrPassword');
+      yield put(
+        NotificationActions.display(
+          i18n.t('login:wrongEmailOrPassword'),
+          types.danger,
+        ),
+      );
     }
     yield put(UserActions.failure(errorMessage));
   }
@@ -71,11 +77,10 @@ export function* register(api, { firstname, lastname, email, password }) {
   }
 }
 
-export function* edit(api, { id, firstname, lastname, email }) {
+export function* edit(api, { id, firstname, lastname }) {
   const response = yield call(api.editUser, id, {
     first_name: firstname,
     last_name: lastname,
-    email,
   });
 
   if (response.ok) {

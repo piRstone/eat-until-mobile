@@ -12,6 +12,8 @@ import UserActions from '../../Redux/UserRedux';
 import List from '../../Components/List';
 import Product from '../../Components/Product';
 import Button from '../../Components/Button';
+import onboardingIllu1 from '../../Images/onboarding1.png';
+import onboardingIllu2 from '../../Images/onboarding2.png';
 import Slide from './Slide';
 
 function Onboarding({ t, navigation, done }) {
@@ -23,12 +25,15 @@ function Onboarding({ t, navigation, done }) {
       id: 1,
       title: t('onboarding:step1Title'),
       text: t('onboarding:step1Text'),
+      illu: onboardingIllu1,
       component: (
         <List
           list={{
             name: t('onboarding:fridge'),
             products_count: 28,
           }}
+          onPress={() => {}}
+          disabled
         />
       ),
     },
@@ -36,6 +41,7 @@ function Onboarding({ t, navigation, done }) {
       id: 2,
       title: t('onboarding:step2Title'),
       text: t('onboarding:step2Text'),
+      illu: onboardingIllu2,
       component: (
         <Product
           data={{
@@ -43,8 +49,10 @@ function Onboarding({ t, navigation, done }) {
             expiration_date: moment()
               .add(3, 'days')
               .format('YYYY-MM-DD'),
+            notification_delay: 3,
           }}
-          disablePress
+          onPress={() => {}}
+          disabled
         />
       ),
     },
@@ -85,6 +93,7 @@ function Onboarding({ t, navigation, done }) {
             <Slide
               title={item.title}
               text={item.text}
+              illu={item.illu}
               component={item.component}
             />
           )}

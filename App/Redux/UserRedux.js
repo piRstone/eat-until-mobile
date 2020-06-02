@@ -18,7 +18,7 @@ const { Types, Creators } = createActions(
     activation: ['uidb64', 'token'],
     activationSuccess: null,
     activationFailure: ['error'],
-    edit: ['id', 'firstname', 'lastname', 'email'],
+    edit: ['id', 'firstname', 'lastname'],
     editSuccess: ['user'],
     editFailure: ['error'],
     request: null,
@@ -45,6 +45,7 @@ export const INITIAL_STATE = Immutable({
   resetPasswordState: undefined,
   activationState: undefined,
   hasEverLaunchedApp: false,
+  email: undefined,
 });
 
 /* ------------- Selectors ------------- */
@@ -62,10 +63,11 @@ export const setHasEverLaunchedApp = state =>
     hasEverLaunchedApp: true,
   });
 
-export const login = state =>
+export const login = (state, { email }) =>
   state.merge({
     isLoading: true,
     error: undefined,
+    email,
   });
 
 export const logout = state =>

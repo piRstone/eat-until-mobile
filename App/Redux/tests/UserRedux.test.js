@@ -16,6 +16,7 @@ describe('UserRedux', () => {
 
     expect(state.isLoading).toBeTruthy();
     expect(state.error).toBeUndefined();
+    expect(state.email).toEqual(email);
   });
 
   test('logout', () => {

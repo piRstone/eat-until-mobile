@@ -5,5 +5,6 @@
   "signIn": "Sign in",
   "signUp": "Sign up",
   "wrongEmailOrPassword": "Wrong email or password",
-  "anErrorOccurred": "An error occurred"
+  "anErrorOccurred": "An error occurred",
+  "invalidEmail": "Please type an email address"
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { TouchableWithoutFeedback } from 'react-native';
+import { Platform, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Metrics } from '../../Themes';
@@ -121,6 +121,7 @@ const StyledText = styled.Text`
   font-family: 'SofiaPro-Bold';
   color: ${props => props.theme.black};
   font-size: 16px;
+  padding-top: ${Platform.OS === 'ios' ? '7px' : '0'};
   margin-left: 15px;
   margin-right: 70px;
 `;

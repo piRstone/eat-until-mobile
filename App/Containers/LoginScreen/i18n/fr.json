@@ -5,5 +5,6 @@
   "signIn": "Connexion",
   "signUp": "S'inscrire",
   "wrongEmailOrPassword": "Mauvais identifiant ou mot de passe",
-  "anErrorOccurred": "Une erreur est survenue"
+  "anErrorOccurred": "Une erreur est survenue",
+  "invalidEmail": "Veuillez saisir une adresse email"
 }

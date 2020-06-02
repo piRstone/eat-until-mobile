@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import { withTranslation } from 'react-i18next';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export function Product({ t, data, onEdit, onRemove, disablePress }) {
+export function Product({ t, data, onEdit, onRemove, disabled }) {
   const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
     moment(),
     'd',
@@ -42,7 +43,7 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
   };
 
   const onPressProduct = product => {
-    if (disablePress) return;
+    if (disabled) return;
 
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
@@ -64,37 +65,26 @@ export function Product({ t, data, onEdit, onRemove, disablePress }) {
         },
       );
     } else {
-      Alert.alert(
-        product.name,
-        '',
-        [
-          {
-            text: t('product:cancel'),
-            onPress: () => {},
-          },
-          {
-            text: t('product:edit'),
-            onPress: () => onEdit(product),
-            style: 'cancel',
-          },
-          {
-            text: t('product:delete'),
-            onPress: () => handleRemove(product.id),
-            style: 'destructive',
-          },
-        ],
-        { cancelable: true },
-      );
+      // On Android, open edit modal on product press
+      onEdit(product);
     }
   };
 
   return (
-    <Wrapper onPress={() => onPressProduct(data)}>
+    <Wrapper onPress={() => onPressProduct(data)} disabled={disabled}>
       <View style={{ width: '80%' }}>
         <Name numberOfLines={1}>{data.name}</Name>
-        <Date>
-          {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
-        </Date>
+        <Row>
+          <SecondaryText>
+            {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
+          </SecondaryText>
+          <Row>
+            <StyledIcon name="bell" />
+            <SecondaryText>
+              {t('product:days').toUpperCase()}-{data.notification_delay}
+            </SecondaryText>
+          </Row>
+        </Row>
       </View>
       <Days style={dayClass}>
         {remainingDays < 365
@@ -110,7 +100,7 @@ Product.propTypes = {
   data: PropTypes.object.isRequired,
   onEdit: PropTypes.func,
   onRemove: PropTypes.func,
-  disablePress: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default withTranslation()(Product);
@@ -125,13 +115,18 @@ const Wrapper = styled.TouchableOpacity`
   margin-bottom: 10px;
 `;
 
+const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Name = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 18px;
   color: ${props => props.theme.black};
 `;
 
-const Date = styled.Text`
+const SecondaryText = styled.Text`
   font-family: 'SofiaProRegular';
   font-size: 14px;
   color: ${props => props.theme.grey1};
@@ -148,4 +143,12 @@ const Days = styled.Text`
       : props.style === 'warning'
       ? props.theme.orange
       : props.theme.green};
+`;
+
+const StyledIcon = styled(Icon)`
+  color: ${props => props.theme.grey1};
+  font-size: 12px;
+  margin-left: 15px;
+  margin-right: 2px;
+  padding-top: ${Platform.OS === 'ios' ? 0 : '7px'};
 `;

@@ -1,7 +1,9 @@
 {
   "productName": "Product name",
   "namePlaceholder": "Tomatoes",
-  "endsIn": "Expires in",
+  "endsOn": "Expires on",
+  "datePlaceholder": "YYYY-MM-DD",
+  "dateError": "Please fill in a valide date",
   "days": "days",
   "notificationDays": "Notification (days)",
   "day": "D",

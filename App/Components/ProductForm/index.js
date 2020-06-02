@@ -4,14 +4,16 @@ import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import moment from 'moment';
 import { path } from 'ramda';
+import { TextInputMask } from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { withTranslation } from 'react-i18next';
 
-const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
+const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
+  const dateFormat = i18n.language === 'fr' ? 'DD/MM/YYYY' : 'YYYY-MM-DD';
   const expireDaysInputRef = useRef(null);
   const notifyDaysInputRef = useRef(null);
   const [name, setName] = useState('');
-  const [expireDays, setExpireDays] = useState('5');
+  const [expireDays, setExpireDays] = useState(moment().format(dateFormat));
   const [notifyDays, setNotifyDays] = useState('2');
   const [inputErrors, setInputErrors] = useState({});
   const [ean13, setEan13] = useState(undefined);
@@ -25,6 +27,30 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
       setEan13(id);
     }
   }, [navigation]);
+
+  const handleDate = text => {
+    setExpireDays(text);
+
+    if (text.length === 5) {
+      // Auto fill year after type day and month then go to next field
+      const currentYear = moment().get('year');
+      const completeDate =
+        i18n.language === 'fr'
+          ? `${text}/${currentYear}`
+          : `${currentYear}-${text}`;
+      setExpireDays(completeDate);
+      notifyDaysInputRef.current.focus();
+    }
+    if (text.length === 10) {
+      // Go to next field after correct the full date
+      notifyDaysInputRef.current.focus();
+    }
+  };
+
+  const checkDate = () => {
+    const isValid = moment(expireDays, dateFormat).isValid();
+    setInputErrors({ ...inputErrors, expireDays: !isValid });
+  };
 
   const handleSubmit = () => {
     if (name !== '' && expireDays !== '' && notifyDays !== '') {
@@ -73,7 +99,9 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
             returnKeyType="next"
             value={name}
             invalid={inputErrors.name}
-            onSubmitEditing={() => expireDaysInputRef.current.focus()}
+            onSubmitEditing={() =>
+              expireDaysInputRef.current.getElement().focus()
+            }
           />
         </HeadLeftCol>
         <HeadRightCol>
@@ -90,23 +118,27 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
         </HeadRightCol>
       </HeadRow>
       <Row2>
-        <Col>
-          <Label>{t('productForm:endsIn')}</Label>
+        <DateCol
+          onPress={() => expireDaysInputRef.current.getElement().focus()}>
+          <Label>{t('productForm:endsOn')}</Label>
           <Row>
-            <NotifyDaysInput
+            <StyledTextInputMask
               ref={expireDaysInputRef}
-              onChangeText={e => setExpireDays(e)}
-              keyboardType="number-pad"
-              placeholder="5"
-              returnKeyType="next"
+              type="datetime"
+              options={{
+                format: dateFormat,
+              }}
+              placeholder={t('productForm:datePlaceholder')}
               value={expireDays}
+              onChangeText={handleDate}
+              onBlur={checkDate}
+              keyboardType="number-pad"
               invalid={inputErrors.expireDays}
-              onSubmitEditing={() => notifyDaysInputRef.current.focus()}
+              selectTextOnFocus
             />
-            <BigText>{t('productForm:days')}</BigText>
           </Row>
-        </Col>
-        <DayCol>
+        </DateCol>
+        <DayCol onPress={() => notifyDaysInputRef.current.focus()}>
           <Label>{t('productForm:notificationDays')}</Label>
           <Row>
             <BigText>{t('productForm:day')} - </BigText>
@@ -118,19 +150,22 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
               returnKeyType="done"
               value={notifyDays}
               invalid={inputErrors.notifyDays}
-              onSubmitEditing={onSubmit}
+              onSubmitEditing={handleSubmit}
+              selectTextOnFocus
             />
           </Row>
         </DayCol>
       </Row2>
+      {inputErrors.expireDays && (
+        <Row>
+          <ErrorText>{t('productForm:dateError')}</ErrorText>
+        </Row>
+      )}
       <BottomRow>
         <SecondaryButton onPress={clearForm}>
           {t('productForm:clear')}
         </SecondaryButton>
         <Row>
-          <SecondaryButton onPress={onClose}>
-            {t('productForm:close')}
-          </SecondaryButton>
           <ButtonWrapper>
             <AddButton onPress={handleSubmit}>
               <AddButtonText>{t('productForm:add')}</AddButtonText>
@@ -144,8 +179,8 @@ const ProductForm = ({ t, onSubmit, onClose, navigation }) => {
 
 ProductForm.propTypes = {
   t: PropTypes.func,
+  i18n: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   navigation: PropTypes.object,
 };
 
@@ -253,21 +288,43 @@ const BigText = styled.Text`
   margin-bottom: ${Platform.OS === 'ios' ? '0px' : '8px'};
 `;
 
-const DayCol = styled.View`
+const DateCol = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: column;
+`;
+
+const DayCol = styled.TouchableOpacity`
   flex-direction: column;
   margin-left: 10px;
 `;
 
-const NotifyDaysInput = styled(Input)`
-  font-family: 'SofiaProRegular';
-  width: 40px;
-  padding-right: 5px;
-  text-align: right;
+const StyledTextInputMask = styled(TextInputMask)`
+  font-family: 'SofiaPro-Bold';
+  font-size: 18px;
+  height: 35px;
+  width: 100%;
+  color: ${props => props.theme.black};
+  border-radius: 5px;
+  padding: 0;
+  border: ${props =>
+    props.invalid
+      ? `1px solid ${props.theme.red}`
+      : `1px solid ${props.theme.white}`};
+  background-color: ${props => props.theme.white};
+  align-items: center;
+  line-height: 16px;
 `;
 
 const DayInput = styled(Input)`
   font-family: 'SofiaProRegular';
   width: 100px;
+`;
+
+const ErrorText = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 12px;
+  color: ${props => props.theme.red};
+  margin: 5px 0;
 `;
 
 const ButtonWrapper = styled.View`

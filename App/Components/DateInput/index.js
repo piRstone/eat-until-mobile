@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { TextInputMask } from 'react-native-masked-text';
 import { withTranslation } from 'react-i18next';
 
 function TextInput({
   t,
+  i18n,
   label,
   required,
   onChangeText,
+  format,
   inputProps,
   noBorderBottom,
   invalid,
   errorMessage,
 }) {
+  const defaultFormat = i18n.language === 'fr' ? 'DD/MM/YYYY' : 'YYYY-MM-DD';
+  const dateFormat = format || defaultFormat;
+
   return (
     <Wrapper noBorder={noBorderBottom} invalid={invalid}>
       <Label>
@@ -21,21 +27,38 @@ function TextInput({
         {invalid && (
           <Required>
             {' '}
-            {errorMessage ? errorMessage : t('textInput:required')}
+            {errorMessage ? errorMessage : t('dateInput:required')}
           </Required>
         )}
       </Label>
-      <StyledInput onChangeText={onChangeText} {...inputProps} />
+      <StyledTextInputMask
+        type="datetime"
+        options={{
+          format: dateFormat,
+        }}
+        placeholder={t('dateInput:datePlaceholder')}
+        onChangeText={onChangeText}
+        keyboardType="number-pad"
+        selectTextOnFocus
+        {...inputProps}
+      />
     </Wrapper>
   );
 }
 
 TextInput.propTypes = {
   t: PropTypes.func,
+  i18n: PropTypes.object,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
-  inputProps: PropTypes.object,
+  format: PropTypes.string,
+  inputProps: PropTypes.shape({
+    ref: PropTypes.object,
+    value: PropTypes.string,
+    onSubmitEditing: PropTypes.func,
+    onBlur: PropTypes.func,
+  }),
   noBorderBottom: PropTypes.bool,
   invalid: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -62,7 +85,7 @@ const Required = styled(Label)`
   color: ${props => props.theme.red};
 `;
 
-const StyledInput = styled.TextInput`
+const StyledTextInputMask = styled(TextInputMask)`
   font-family: 'SofiaProRegular';
   font-size: 20px;
   color: ${props => props.theme.black};

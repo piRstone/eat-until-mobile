@@ -55,6 +55,14 @@ describe('login', () => {
     expect(generator.next(response).value).toEqual(
       put(UserActions.failure(i18n.t('login:wrongEmailOrPassword'))),
     );
+    expect(generator.next(response).value).toEqual(
+      put(
+        NotificationActions.display(
+          i18n.t('login:wrongEmailOrPassword'),
+          types.danger,
+        ),
+      ),
+    );
   });
 
   it('should dispatch the failure action with generic error', () => {
@@ -173,7 +181,6 @@ describe('edit', () => {
     id: 1,
     firsname: 'Paul',
     lastname: 'Simons',
-    email: 'psimons@test.com',
   };
   let generator;
 
@@ -185,7 +192,6 @@ describe('edit', () => {
     const data = {
       first_name: action.firstname,
       last_name: action.lastname,
-      email: action.email,
     };
     expect(generator.next().value).toEqual(
       call(FixtureApi.editUser, action.id, data),

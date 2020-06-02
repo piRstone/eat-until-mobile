@@ -10,5 +10,11 @@
   "delete": "Supprimer",
   "productDeleted": "Produit supprimé",
   "productAdded": "Produit ajouté",
-  "productEdited": "Produit modifié"
+  "productEdited": "Produit modifié",
+  "edit": "Modifier",
+  "name": "Nom",
+  "namePlaceholder": "Tomates",
+  "expiresOn": "Expire le",
+  "notif": "Notification (jours)",
+  "save": "Enregistrer"
 }

@@ -94,7 +94,11 @@ export function ListsScreen({
               keyExtractor={item => item.id.toString()}
             />
           ) : (
-            <EmptyState>{t('lists:noLists')}</EmptyState>
+            <>
+              {!isKeybordOpened && (
+                <EmptyState>{t('lists:noLists')}</EmptyState>
+              )}
+            </>
           )}
         </KeyboardAvoidingView>
       </InnerWrapper>

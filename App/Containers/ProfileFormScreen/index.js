@@ -15,9 +15,7 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
   const [userId, setUserId] = useState(undefined);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
   const lastnameRef = useRef();
-  const emailRef = useRef();
 
   useEffect(() => {
     const user = navigation.getParam('user');
@@ -25,12 +23,11 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
       setUserId(user.id);
       setFirstname(user.first_name);
       setLastname(user.last_name);
-      setEmail(user.email);
     }
   }, [navigation]);
 
   const onSave = () => {
-    save(userId, firstname, lastname, email);
+    save(userId, firstname, lastname);
     Keyboard.dismiss();
   };
 
@@ -57,6 +54,7 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
             <TextInput
               label={t('profileForm:lastName')}
               onChangeText={setLastname}
+              noBorderBottom
               inputProps={{
                 ref: lastnameRef,
                 value: lastname,
@@ -64,29 +62,13 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
                 placeholder: t('profileForm:lastNamePlaceholder'),
                 autoFocus: true,
                 returnKeyType: 'next',
-                onSubmitEditing: () => emailRef.current.focus(),
-              }}
-            />
-            <TextInput
-              label="Email"
-              onChangeText={setEmail}
-              noBorderBottom
-              required
-              inputProps={{
-                ref: emailRef,
-                value: email,
-                autoCorrect: false,
-                autoCapitalize: 'none',
-                keyboardType: 'email-address',
-                placeholder: t('profileForm:emailPlaceholder'),
-                returnKeyType: 'next',
                 onSubmitEditing: onSave,
               }}
             />
           </FieldWrapper>
           <Button
             onPress={onSave}
-            disabled={!email || isLoading}
+            disabled={isLoading}
             title={t('profileForm:save')}
             isLoading={isLoading}
           />
@@ -108,8 +90,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  save: (userId, firstname, lastname, email) =>
-    dispatch(UserActions.edit(userId, firstname, lastname, email)),
+  save: (userId, firstname, lastname) =>
+    dispatch(UserActions.edit(userId, firstname, lastname)),
 });
 
 const withConnect = connect(

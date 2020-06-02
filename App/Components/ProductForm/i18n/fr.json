@@ -1,7 +1,9 @@
 {
   "productName": "Nom du produit",
   "namePlaceholder": "Tomates",
-  "endsIn": "Se périme dans",
+  "endsOn": "Se périme le",
+  "datePlaceholder": "JJ/MM/AAAA",
+  "dateError": "Veuillez saisir une date valide",
   "days": "jours",
   "notificationDays": "Notification (jours)",
   "day": "J",

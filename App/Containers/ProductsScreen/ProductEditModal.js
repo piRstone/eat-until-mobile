@@ -1,17 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { Modal, TouchableOpacity } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  Modal,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { withTranslation } from 'react-i18next';
+import moment from 'moment';
 
+import DateInput from '../../Components/DateInput';
 import TextInput from '../../Components/TextInput';
 import Button from '../../Components/Button';
 
 function ProductEditModal({
+  t,
+  i18n,
   product,
   visible,
   onDismiss,
   onRequestClose,
   onSubmit,
+  onDelete,
   isLoading,
   error,
 }) {
@@ -19,20 +32,44 @@ function ProductEditModal({
   const [expirationDate, setExpirationDate] = useState('');
   const [notificationDelay, setNotificationDelay] = useState('3');
   const [inputErrors, setInputErrors] = useState({});
+  const [isKeybordOpened, setiIsKeybordOpened] = useState(false);
+
+  const showListener = useRef();
+  const hideListener = useRef();
 
   const dateRef = useRef();
   const notifRef = useRef();
-
   const prevLoading = useRef(false);
+
+  const dateFormat = i18n.language === 'fr' ? 'DD/MM/YYYY' : 'YYYY-MM-DD';
+
+  // Watch keyboard status
+  useEffect(() => {
+    showListener.current = Keyboard.addListener('keyboardDidShow', () =>
+      setiIsKeybordOpened(true),
+    );
+    hideListener.current = Keyboard.addListener('keyboardDidHide', () =>
+      setiIsKeybordOpened(false),
+    );
+
+    return () => {
+      showListener.current.remove();
+      hideListener.current.remove();
+    };
+  });
 
   // Update form with passed product
   useEffect(() => {
     if (product) {
       setName(product.name);
-      setExpirationDate(product.expiration_date);
+
+      const expDate = moment(product.expiration_date, 'YYYY-MM-DD').format(
+        dateFormat,
+      );
+      setExpirationDate(expDate);
       setNotificationDelay(product.notification_delay.toString());
     }
-  }, [product]);
+  }, [product, dateFormat]);
 
   // Check loading state to know if edit is done
   useEffect(() => {
@@ -47,12 +84,36 @@ function ProductEditModal({
     }
   }, [isLoading, error, onDismiss]);
 
+  const handleDate = text => {
+    setExpirationDate(text);
+
+    if (text.length === 5) {
+      // Auto fill year after type day and month then go to next field
+      const currentYear = moment().get('year');
+      const completeDate =
+        i18n.language === 'fr'
+          ? `${text}/${currentYear}`
+          : `${currentYear}-${text}`;
+      setExpirationDate(completeDate);
+      notifRef.current.focus();
+    }
+    if (text.length === 10) {
+      // Go to next field after correct the full date
+      notifRef.current.focus();
+    }
+  };
+
+  const checkDate = () => {
+    const isValid = moment(expirationDate, dateFormat).isValid();
+    setInputErrors({ ...inputErrors, expirationDate: !isValid });
+  };
+
   const handleSubmit = () => {
     if (name !== '' && expirationDate !== '' && notificationDelay !== '') {
       setInputErrors({});
       const editedProduct = {
         name,
-        expirationDate,
+        expirationDate: moment(expirationDate, dateFormat).format('YYYY-MM-DD'),
         notificationDelay,
       };
       onSubmit(product.id, editedProduct);
@@ -71,6 +132,27 @@ function ProductEditModal({
     }
   };
 
+  const handleRemove = () => {
+    Alert.alert(
+      t('product:delete'),
+      t('product:deleteText'),
+      [
+        {
+          text: t('product:cancel'),
+        },
+        {
+          text: t('product:delete'),
+          onPress: () => {
+            onDelete(product.id);
+            onDismiss();
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: true },
+    );
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -81,58 +163,70 @@ function ProductEditModal({
       <Wrapper>
         <InnerWrapper>
           <Header>
-            <Title>Modifier</Title>
+            <Title>{t('products:edit')}</Title>
             <TouchableOpacity onPress={onDismiss}>
-              <CancelButton>Annuler</CancelButton>
+              <CancelButton>{t('products:cancel')}</CancelButton>
             </TouchableOpacity>
           </Header>
-          <FieldWrapper>
-            <TextInput
-              label="Nom"
-              onChangeText={setName}
-              required
-              invalid={inputErrors.name}
-              inputProps={{
-                value: name,
-                placeholder: 'Tomates',
-                returnKeyType: 'next',
-                onSubmitEditing: () => dateRef.current.focus(),
-              }}
+          <ScrollView
+            keyboardDismissMode="on-drag"
+            keyboardShouldPersistTaps="always"
+            style={{ flex: 1 }}>
+            <FieldWrapper>
+              <TextInput
+                label={t('products:name')}
+                onChangeText={setName}
+                required
+                invalid={inputErrors.name}
+                inputProps={{
+                  value: name,
+                  placeholder: t('products:namePlaceholder'),
+                  returnKeyType: 'next',
+                  onSubmitEditing: () => dateRef.current.getElement().focus(),
+                }}
+              />
+              <DateInput
+                label={t('products:expiresOn')}
+                onChangeText={handleDate}
+                required
+                invalid={inputErrors.expirationDate}
+                inputProps={{
+                  ref: dateRef,
+                  value: expirationDate,
+                  onSubmitEditing: () => notifRef.current.focus(),
+                  onBlur: checkDate,
+                }}
+              />
+              <TextInput
+                label={t('products:notif')}
+                onChangeText={setNotificationDelay}
+                noBorderBottom
+                required
+                invalid={inputErrors.notificationDelay}
+                inputProps={{
+                  ref: notifRef,
+                  value: notificationDelay,
+                  placeholder: '3',
+                  keyboardType: 'number-pad',
+                  returnKeyType: 'done',
+                  onSubmitEditing: () => {},
+                  selectTextOnFocus: true,
+                }}
+              />
+            </FieldWrapper>
+            <Button
+              onPress={handleSubmit}
+              title={t('products:save')}
+              isLoading={isLoading}
             />
-            <TextInput
-              label="Expire le"
-              onChangeText={setExpirationDate}
-              required
-              invalid={inputErrors.expirationDate}
-              inputProps={{
-                ref: dateRef,
-                value: expirationDate,
-                placeholder: '01/01/2020',
-                returnKeyType: 'next',
-                onSubmitEditing: () => notifRef.current.focus(),
-              }}
-            />
-            <TextInput
-              label="Notification (jours)"
-              onChangeText={setNotificationDelay}
-              noBorderBottom
-              required
-              invalid={inputErrors.notificationDelay}
-              inputProps={{
-                ref: notifRef,
-                value: notificationDelay,
-                placeholder: '3',
-                keyboardType: 'number-pad',
-                returnKeyType: 'done',
-                onSubmitEditing: () => {},
-              }}
-            />
-          </FieldWrapper>
-          <Button
-            onPress={handleSubmit}
-            title="Enregistrer"
-            isLoading={isLoading}
-          />
+          </ScrollView>
+          {!isKeybordOpened && (
+            <DangerZone>
+              <DangerButton onPress={handleRemove}>
+                <DangerButtonText>{t('products:delete')}</DangerButtonText>
+              </DangerButton>
+            </DangerZone>
+          )}
         </InnerWrapper>
       </Wrapper>
     </Modal>
@@ -140,11 +234,14 @@ function ProductEditModal({
 }
 
 ProductEditModal.propTypes = {
+  t: PropTypes.func,
+  i18n: PropTypes.object,
   product: PropTypes.object,
   visible: PropTypes.bool,
   onDismiss: PropTypes.func.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
 };
@@ -153,7 +250,7 @@ ProductEditModal.defaultProps = {
   visible: false,
 };
 
-export default ProductEditModal;
+export default withTranslation()(ProductEditModal);
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -187,4 +284,29 @@ const CancelButton = styled.Text`
 const FieldWrapper = styled.View`
   border-radius: 10px;
   overflow: hidden;
+`;
+
+const DangerZone = styled.View`
+  flex-direction: row;
+  margin-top: auto;
+`;
+
+const DangerButton = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border: ${props =>
+    props.disabled
+      ? `1px solid ${props.theme.grey1}`
+      : `1px solid ${props.theme.red}`};
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 12px 20px 7px;
+  padding-bottom: ${Platform.OS === 'ios' ? '7px' : '12px'};
+`;
+
+const DangerButtonText = styled.Text`
+  font-family: 'SofiaProRegular';
+  font-size: 14px;
+  color: ${props => (props.disabled ? props.theme.grey1 : props.theme.red)};
 `;

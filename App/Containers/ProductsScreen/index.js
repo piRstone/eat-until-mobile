@@ -4,6 +4,7 @@ import {
   Alert,
   FlatList,
   Keyboard,
+  Platform,
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -118,11 +119,7 @@ export function ProductsScreen({
           <AddButton onPress={() => setShowForm(!showForm)} opened={showForm} />
         </Header>
         {showForm && (
-          <ProductForm
-            onSubmit={handleSubmit}
-            onClose={() => setShowForm(false)}
-            navigation={navigation}
-          />
+          <ProductForm onSubmit={handleSubmit} navigation={navigation} />
         )}
         {isLoading && !products.length ? (
           <EmptyWrapper>
@@ -175,6 +172,7 @@ export function ProductsScreen({
         onDismiss={onEditModalClose}
         onRequestClose={onEditModalClose}
         onSubmit={(id, product) => editProduct(id, product, list.id)}
+        onDelete={handleRemoveProduct}
         isLoading={isEditLoading}
         error={editError}
       />
@@ -291,6 +289,7 @@ const DangerButton = styled.TouchableOpacity`
   border-radius: 10px;
   margin: 10px 5px;
   padding: 12px 20px 7px;
+  padding-bottom: ${Platform.OS === 'ios' ? '7px' : '12px'};
 `;
 
 const DangerButtonText = styled.Text`
