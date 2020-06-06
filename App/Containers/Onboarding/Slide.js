@@ -4,13 +4,12 @@ import styled from 'styled-components/native';
 
 import { Metrics } from '../../Themes';
 
-function Slide({ title, text, illu, component }) {
+function Slide({ title, text, illu }) {
   return (
     <Wrapper>
       <Title>{title}</Title>
       <Text>{text}</Text>
       <Illu source={illu} resizeMode="contain" />
-      <ComponentWrapper>{component}</ComponentWrapper>
     </Wrapper>
   );
 }
@@ -19,7 +18,6 @@ Slide.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   illu: PropTypes.element.isRequired,
-  component: PropTypes.element.isRequired,
 };
 
 export default Slide;
@@ -48,8 +46,4 @@ const Illu = styled.Image`
   width: ${Metrics.screenWidth - 40};
   height: 200px;
   margin: 40px auto 40px;
-`;
-
-const ComponentWrapper = styled.View`
-  width: 100%;
 `;

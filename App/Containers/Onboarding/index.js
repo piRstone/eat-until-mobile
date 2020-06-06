@@ -6,11 +6,8 @@ import { compose } from 'redux';
 import styled from 'styled-components/native';
 import { withTranslation } from 'react-i18next';
 import DeviceInfo from 'react-native-device-info';
-import moment from 'moment';
 
 import UserActions from '../../Redux/UserRedux';
-import List from '../../Components/List';
-import Product from '../../Components/Product';
 import Button from '../../Components/Button';
 import onboardingIllu1 from '../../Images/onboarding1.png';
 import onboardingIllu2 from '../../Images/onboarding2.png';
@@ -26,35 +23,12 @@ function Onboarding({ t, navigation, done }) {
       title: t('onboarding:step1Title'),
       text: t('onboarding:step1Text'),
       illu: onboardingIllu1,
-      component: (
-        <List
-          list={{
-            name: t('onboarding:fridge'),
-            products_count: 28,
-          }}
-          onPress={() => {}}
-          disabled
-        />
-      ),
     },
     {
       id: 2,
       title: t('onboarding:step2Title'),
       text: t('onboarding:step2Text'),
       illu: onboardingIllu2,
-      component: (
-        <Product
-          data={{
-            name: t('onboarding:tomatoes'),
-            expiration_date: moment()
-              .add(3, 'days')
-              .format('YYYY-MM-DD'),
-            notification_delay: 3,
-          }}
-          onPress={() => {}}
-          disabled
-        />
-      ),
     },
   ];
 
