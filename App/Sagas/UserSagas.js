@@ -66,13 +66,14 @@ export function* register(api, { firstname, lastname, email, password }) {
       const key = Object.keys(response.data)[0];
       const error = response.data[key][0];
       yield put(NotificationActions.display(`${key} : ${error}`, types.danger));
+    } else {
+      yield put(
+        NotificationActions.display(
+          i18n.t('notification:serverError'),
+          types.danger,
+        ),
+      );
     }
-    yield put(
-      NotificationActions.display(
-        i18n.t('notification:serverError'),
-        types.danger,
-      ),
-    );
     yield put(UserActions.registerFailure());
   }
 }
