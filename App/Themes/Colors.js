@@ -4,7 +4,7 @@ const colors = isDark => ({
   black: isDark ? '#ffffff' : '#000000',
   grey0: '#7e7e7e',
   grey1: '#A6A6A6',
-  grey2: '#E5E5E5',
+  grey2: isDark ? '#1c1c1e' : '#E5E5E5',
   lightgrey: '#f2f1f7',
   white: isDark ? '#000000' : '#FFFFFF',
   primary: '#18D873',

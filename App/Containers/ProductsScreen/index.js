@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -43,11 +43,29 @@ export function ProductsScreen({
   const [showEditModal, setShowEditModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [productToEdit, setProductToEdit] = useState(undefined);
+  const [isKeybordOpened, setiIsKeybordOpened] = useState(false);
 
+  const showListener = useRef();
+  const hideListener = useRef();
+
+  // Init list
+  // Check if keyboard is opened
   useEffect(() => {
     if (list.id) {
       getProducts(list.id);
     }
+
+    showListener.current = Keyboard.addListener('keyboardDidShow', () =>
+      setiIsKeybordOpened(true),
+    );
+    hideListener.current = Keyboard.addListener('keyboardDidHide', () =>
+      setiIsKeybordOpened(false),
+    );
+
+    return () => {
+      showListener.current.remove();
+      hideListener.current.remove();
+    };
   }, [list, getProducts]);
 
   // Set list name
@@ -143,28 +161,34 @@ export function ProductsScreen({
                 keyExtractor={item => item.id.toString()}
               />
             ) : (
-              <EmptyWrapper>
-                <EmptyState>{t('products:noProducts')}</EmptyState>
-              </EmptyWrapper>
+              <>
+                {!isKeybordOpened && (
+                  <EmptyWrapper>
+                    <EmptyState>{t('products:noProducts')}</EmptyState>
+                  </EmptyWrapper>
+                )}
+              </>
             )}
           </View>
         )}
-        <DangerZone>
-          <DangerButton
-            onPress={onEmptyListRequest}
-            disabled={!products.length}>
-            {isEmptyLoading ? (
-              <ActivityIndicator color="#ea0000" />
-            ) : (
-              <DangerButtonText disabled={!products.length}>
-                {t('products:emptyList')}
-              </DangerButtonText>
-            )}
-          </DangerButton>
-          <DangerButton onPress={onDeleteListRequest}>
-            <DangerButtonText>{t('products:deleteList')}</DangerButtonText>
-          </DangerButton>
-        </DangerZone>
+        {!isKeybordOpened && (
+          <DangerZone>
+            <DangerButton
+              onPress={onEmptyListRequest}
+              disabled={!products.length}>
+              {isEmptyLoading ? (
+                <ActivityIndicator color="#ea0000" />
+              ) : (
+                <DangerButtonText disabled={!products.length}>
+                  {t('products:emptyList')}
+                </DangerButtonText>
+              )}
+            </DangerButton>
+            <DangerButton onPress={onDeleteListRequest}>
+              <DangerButtonText>{t('products:deleteList')}</DangerButtonText>
+            </DangerButton>
+          </DangerZone>
+        )}
       </InnerWrapper>
       <ProductEditModal
         visible={showEditModal}

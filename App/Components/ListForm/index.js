@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useDarkMode } from 'react-native-dark-mode';
 
 function ListForm({ isLoading, onSubmit, onClose }) {
   const [value, setValue] = useState('');
+  const isDarkMode = useDarkMode();
 
   const handleSubmit = () => {
     if (value !== '') {
@@ -23,14 +25,14 @@ function ListForm({ isLoading, onSubmit, onClose }) {
         value={value}
         onSubmitEditing={handleSubmit}
       />
-      <SubmitButton onPress={handleSubmit}>
+      <SubmitButton onPress={handleSubmit} isDarkMode={isDarkMode}>
         {isLoading ? (
           <StyledActivityIndicator />
         ) : (
           <CheckIcon name="check" size={20} />
         )}
       </SubmitButton>
-      <CancelButton onPress={onClose}>
+      <CancelButton onPress={onClose} isDarkMode={isDarkMode}>
         <TimesIcon name="x" size={20} />
       </CancelButton>
     </Wrapper>
@@ -82,11 +84,17 @@ const Button = styled.TouchableOpacity`
 `;
 
 const SubmitButton = styled(Button)`
-  background-color: ${props => props.theme.lightgreen};
+  background-color: ${props =>
+    props.isDarkMode ? 'transparent' : props.theme.lightgreen};
+  border: ${props =>
+    props.isDarkMode ? `1px solid ${props.theme.green}` : 'none'};
 `;
 
 const CancelButton = styled(Button)`
-  background-color: ${props => props.theme.lightgrey};
+  background-color: ${props =>
+    props.isDarkMode ? 'transparent' : props.theme.lightgrey};
+  border: ${props =>
+    props.isDarkMode ? `1px solid ${props.theme.red}` : 'none'};
 `;
 
 const CheckIcon = styled(Icon)`
