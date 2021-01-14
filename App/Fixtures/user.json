@@ -1,7 +1,7 @@
 {
   "id": 1,
   "email": "psimons@test.com",
-  "first_name": "Paul",
-  "last_name": "Simons",
+  "firstName": "Paul",
+  "lastName": "Simons",
   "avatar_thumbnail_url": "http://localhost:8001/api/users/1/avatar_thumbnail"
 }

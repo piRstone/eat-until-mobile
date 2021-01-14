@@ -10,10 +10,10 @@ import { withTranslation } from 'react-i18next';
 
 const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
   const dateFormat = i18n.language === 'fr' ? 'DD/MM/YYYY' : 'YYYY-MM-DD';
-  const expireDaysInputRef = useRef(null);
+  const expirationDateInputRef = useRef(null);
   const notifyDaysInputRef = useRef(null);
   const [name, setName] = useState('');
-  const [expireDays, setExpireDays] = useState(moment().format(dateFormat));
+  const [expirationDate, setExpirationDate] = useState(moment().format(dateFormat));
   const [notifyDays, setNotifyDays] = useState('2');
   const [inputErrors, setInputErrors] = useState({});
   const [ean13, setEan13] = useState(undefined);
@@ -29,7 +29,7 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
   }, [navigation]);
 
   const handleDate = text => {
-    setExpireDays(text);
+    setExpirationDate(text);
 
     if (text.length === 5) {
       // Auto fill year after type day and month then go to next field
@@ -38,7 +38,7 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
         i18n.language === 'fr'
           ? `${text}/${currentYear}`
           : `${currentYear}-${text}`;
-      setExpireDays(completeDate);
+      setExpirationDate(completeDate);
       notifyDaysInputRef.current.focus();
     }
     if (text.length === 10) {
@@ -48,17 +48,17 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
   };
 
   const checkDate = () => {
-    const isValid = moment(expireDays, dateFormat).isValid();
-    setInputErrors({ ...inputErrors, expireDays: !isValid });
+    const isValid = moment(expirationDate, dateFormat).isValid();
+    setInputErrors({ ...inputErrors, expirationDate: !isValid });
   };
 
   const handleSubmit = () => {
-    if (name !== '' && expireDays !== '' && notifyDays !== '') {
+    if (name !== '' && expirationDate !== '' && notifyDays !== '') {
       setInputErrors({});
       onSubmit({
         name,
         expiresAt: moment()
-          .add(parseInt(expireDays, 10) + 1, 'd')
+          .add(parseInt(expirationDate, 10) + 1, 'd')
           .format('YYYY-MM-DD'),
         notifyBefore: notifyDays,
         ean13,
@@ -69,8 +69,8 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
       if (name === '') {
         errors.name = true;
       }
-      if (expireDays === '') {
-        errors.expireDays = true;
+      if (expirationDate === '') {
+        errors.expirationDate = true;
       }
       if (notifyDays === '') {
         errors.notifyDays = true;
@@ -81,7 +81,7 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
 
   const clearForm = useCallback(() => {
     setName('');
-    setExpireDays('5');
+    setExpirationDate(moment().format(dateFormat));
     setNotifyDays('2');
     setEan13(undefined);
     navigation.setParams({ OFFProduct: undefined });
@@ -100,7 +100,7 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
             value={name}
             invalid={inputErrors.name}
             onSubmitEditing={() =>
-              expireDaysInputRef.current.getElement().focus()
+              expirationDateInputRef.current.getElement().focus()
             }
           />
         </HeadLeftCol>
@@ -119,21 +119,21 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
       </HeadRow>
       <Row2>
         <DateCol
-          onPress={() => expireDaysInputRef.current.getElement().focus()}>
+          onPress={() => expirationDateInputRef.current.getElement().focus()}>
           <Label>{t('productForm:endsOn')}</Label>
           <Row>
             <StyledTextInputMask
-              ref={expireDaysInputRef}
+              ref={expirationDateInputRef}
               type="datetime"
               options={{
                 format: dateFormat,
               }}
               placeholder={t('productForm:datePlaceholder')}
-              value={expireDays}
+              value={expirationDate}
               onChangeText={handleDate}
               onBlur={checkDate}
               keyboardType="number-pad"
-              invalid={inputErrors.expireDays}
+              invalid={inputErrors.expirationDate}
               selectTextOnFocus
             />
           </Row>
@@ -156,7 +156,7 @@ const ProductForm = ({ t, i18n, onSubmit, navigation }) => {
           </Row>
         </DayCol>
       </Row2>
-      {inputErrors.expireDays && (
+      {inputErrors.expirationDate && (
         <Row>
           <ErrorText>{t('productForm:dateError')}</ErrorText>
         </Row>

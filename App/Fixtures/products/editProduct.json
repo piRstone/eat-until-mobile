@@ -3,8 +3,8 @@
   "modified": "2020-05-13T19:04:24.725874+02:00",
   "id": 10,
   "name": "Tomates cerise",
-  "expiration_date": "2020-04-29",
-  "notification_delay": 3,
+  "expirationDate": "2020-04-29",
+  "notificationDelay": 3,
   "inventory": 1,
   "ean13": "",
   "user": 1

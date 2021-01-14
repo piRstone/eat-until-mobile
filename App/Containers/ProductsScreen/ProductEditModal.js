@@ -63,11 +63,11 @@ function ProductEditModal({
     if (product) {
       setName(product.name);
 
-      const expDate = moment(product.expiration_date, 'YYYY-MM-DD').format(
+      const expDate = moment(product.expirationDate).format(
         dateFormat,
       );
       setExpirationDate(expDate);
-      setNotificationDelay(product.notification_delay.toString());
+      setNotificationDelay(product.notificationDelay.toString());
     }
   }, [product, dateFormat]);
 

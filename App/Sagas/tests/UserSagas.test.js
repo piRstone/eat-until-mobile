@@ -137,8 +137,8 @@ describe('register', () => {
 
   it('should call the register request', () => {
     const data = {
-      first_name: action.firstname,
-      last_name: action.lastname,
+      firstName: action.firstname,
+      lastName: action.lastname,
       email: action.email,
       password: action.password,
     };
@@ -190,8 +190,8 @@ describe('edit', () => {
 
   it('should call the register request', () => {
     const data = {
-      first_name: action.firstname,
-      last_name: action.lastname,
+      firstName: action.firstname,
+      lastName: action.lastname,
     };
     expect(generator.next().value).toEqual(
       call(FixtureApi.editUser, action.id, data),

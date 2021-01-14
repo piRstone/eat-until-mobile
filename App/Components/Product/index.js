@@ -7,11 +7,11 @@ import { withTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export function Product({ t, data, onEdit, onRemove, disabled }) {
-  const remainingDays = moment(data.expiration_date, 'YYYY-MM-DD').diff(
+  const remainingDays = moment(data.expirationDate).diff(
     moment(),
     'd',
   );
-  const remainingYears = moment(data.expiration_date, 'YYYY-MM-DD').diff(
+  const remainingYears = moment(data.expirationDate).diff(
     moment(),
     'y',
   );
@@ -76,12 +76,12 @@ export function Product({ t, data, onEdit, onRemove, disabled }) {
         <Name numberOfLines={1}>{data.name}</Name>
         <Row>
           <SecondaryText>
-            {moment(data.expiration_date, 'YYYY-MM-DD').format('DD/MM/YYYY')}
+            {moment(data.expirationDate).format('DD/MM/YYYY')}
           </SecondaryText>
           <Row>
             <StyledIcon name="bell" />
             <SecondaryText>
-              {t('product:days').toUpperCase()}-{data.notification_delay}
+              {t('product:days').toUpperCase()}-{data.notificationDelay}
             </SecondaryText>
           </Row>
         </Row>

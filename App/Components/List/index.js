@@ -11,8 +11,8 @@ function List({ t, list, onPress, disabled }) {
       <Col>
         <ListName>{list.name}</ListName>
         <ProductsCount>
-          {list.products_count
-            ? t('lists:productsCount', { count: list.products_count })
+          {list.productsCount
+            ? t('lists:productsCount', { count: list.productsCount })
             : t('lists:noProducts')}
         </ProductsCount>
       </Col>

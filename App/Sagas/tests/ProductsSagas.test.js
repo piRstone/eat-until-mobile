@@ -62,8 +62,8 @@ describe('createProduct', () => {
 
   const formattedProduct = {
     name: product.name,
-    expiration_date: product.expiresAt,
-    notification_delay: parseInt(product.notifyBefore, 10),
+    expirationDate: product.expiresAt,
+    notificationDelay: parseInt(product.notifyBefore, 10),
     inventory: product.inventoryId,
     ean13: product.ean13,
   };
@@ -127,8 +127,8 @@ describe('editProduct', () => {
   it('should call editProduct request', () => {
     const formattedProduct = {
       name: 'Tomatoes',
-      expiration_date: '2020-05-18',
-      notification_delay: '3',
+      expirationDate: '2020-05-18',
+      notificationDelay: '3',
     };
     expect(generator.next().value).toEqual(
       call(FixtureAPI.editProduct, id, formattedProduct),

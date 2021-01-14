@@ -3,8 +3,8 @@
   "user": {
     "id": 1,
     "email": "admin@test.com",
-    "first_name": "Admin",
-    "last_name": "Nistrateur",
+    "firstName": "Admin",
+    "lastName": "Nistrateur",
     "avatar_thumbnail_url": "http://localhost:8001/api/users/1/avatar_thumbnail"
   }
 }

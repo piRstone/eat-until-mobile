@@ -25,9 +25,9 @@ export function* createProduct(api, action) {
   const { name, expiresAt, notifyBefore, inventoryId, ean13 } = action.product;
   const product = {
     name,
-    expiration_date: expiresAt,
-    notification_delay: parseInt(notifyBefore, 10),
-    inventory: inventoryId,
+    expirationDate: expiresAt,
+    notificationDelay: parseInt(notifyBefore, 10),
+    inventoryId: inventoryId,
     ean13: ean13 || '',
   };
   const response = yield call(api.createProduct, product);
@@ -54,8 +54,8 @@ export function* createProduct(api, action) {
 export function* editProduct(api, { id, product, inventoryId }) {
   const data = {
     name: product.name,
-    expiration_date: product.expirationDate,
-    notification_delay: product.notificationDelay,
+    expirationDate: product.expirationDate,
+    notificationDelay: product.notificationDelay,
   };
   const response = yield call(api.editProduct, id, data);
 

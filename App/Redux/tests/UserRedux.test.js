@@ -108,16 +108,16 @@ describe('UserRedux', () => {
   test('editSuccess', () => {
     const initialState = Immutable({
       user: {
-        first_name: 'John',
-        last_name: 'Doe',
+        firstName: 'John',
+        lastName: 'Doe',
         email: 'john.doe@email.com',
       },
       isLoading: true,
     });
 
     const expectedUser = {
-      first_name: 'Paul',
-      last_name: 'Simons',
+      firstName: 'Paul',
+      lastName: 'Simons',
       email: 'psimon@email.com',
     };
 

@@ -33,7 +33,7 @@ export function ProfileScreen({ t, navigation, logout, user }) {
           }}>
           <View>
             <StyledName>
-              {user.first_name} {user.last_name}
+              {user.firstName} {user.lastName}
             </StyledName>
             <StyledEmail>{user.email}</StyledEmail>
             <LogoutWrapper onPress={logout}>

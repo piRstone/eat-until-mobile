@@ -19,6 +19,8 @@ export function* login(api, action) {
   } else {
     let errorMessage = i18n.t('login:anErrorOccurred');
     if (response.status === 400) {
+      console.log('=============');
+      console.log(response);
       errorMessage = i18n.t('login:wrongEmailOrPassword');
       yield put(
         NotificationActions.display(
@@ -48,8 +50,8 @@ export function* forgotPassword(api, { email }) {
 
 export function* register(api, { firstname, lastname, email, password }) {
   const response = yield call(api.register, {
-    first_name: firstname,
-    last_name: lastname,
+    firstName: firstname,
+    lastName: lastname,
     email,
     password,
   });
@@ -80,8 +82,8 @@ export function* register(api, { firstname, lastname, email, password }) {
 
 export function* edit(api, { id, firstname, lastname }) {
   const response = yield call(api.editUser, id, {
-    first_name: firstname,
-    last_name: lastname,
+    firstName: firstname,
+    lastName: lastname,
   });
 
   if (response.ok) {

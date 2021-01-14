@@ -3,8 +3,8 @@
   "modified": "2020-05-07T11:22:57.187724+02:00",
   "id": 34,
   "name": "Pain",
-  "expiration_date": "2020-05-21",
-  "notification_delay": 1,
+  "expirationDate": "2020-05-21",
+  "notificationDelay": 1,
   "inventory": 1,
   "ean13": "",
   "user": 1

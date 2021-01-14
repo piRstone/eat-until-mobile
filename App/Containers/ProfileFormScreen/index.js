@@ -21,8 +21,8 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
     const user = navigation.getParam('user');
     if (user) {
       setUserId(user.id);
-      setFirstname(user.first_name);
-      setLastname(user.last_name);
+      setFirstname(user.firstName);
+      setLastname(user.lastName);
     }
   }, [navigation]);
 
@@ -60,7 +60,6 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
                 value: lastname,
                 autoCorrect: false,
                 placeholder: t('profileForm:lastNamePlaceholder'),
-                autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: onSave,
               }}
