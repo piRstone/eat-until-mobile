@@ -22,6 +22,7 @@ export function* getProductData({ ean13 }) {
   const response = yield call(api.get, `/product/${ean13}.json`);
 
   if (response.data.status === 1) {
+    yield put(ProductsActions.offSuccess());
     yield put(
       NavigationActions.navigate({
         routeName: 'ProductsScreen',
