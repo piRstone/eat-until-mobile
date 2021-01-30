@@ -125,9 +125,6 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -140,7 +137,7 @@ android {
         applicationId "com.pirstone.eatuntil"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 4
         versionName "0.2.0"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
@@ -155,11 +152,11 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('RELEASE_STORE_FILE')) {
-                storeFile file(properties.getProperty('RELEASE_STORE_FILE'))
-                storePassword properties.getProperty('RELEASE_STORE_PASSWORD')
-                keyAlias properties.getProperty('RELEASE_KEY_ALIAS')
-                keyPassword properties.getProperty('RELEASE_KEY_PASSWORD')
+            if (project.hasProperty(EATUNTIL_RELEASE_STORE_FILE)) {
+                storeFile file(EATUNTIL_RELEASE_STORE_FILE)
+                storePassword EATUNTIL_RELEASE_STORE_PASSWORD
+                keyAlias EATUNTIL_RELEASE_KEY_ALIAS
+                keyPassword EATUNTIL_RELEASE_KEY_PASSWORD
             }
         }
     }

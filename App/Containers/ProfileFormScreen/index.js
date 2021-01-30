@@ -60,7 +60,6 @@ function ProfileFormScreen({ t, navigation, isLoading, save }) {
                 value: lastname,
                 autoCorrect: false,
                 placeholder: t('profileForm:lastNamePlaceholder'),
-                autoFocus: true,
                 returnKeyType: 'next',
                 onSubmitEditing: onSave,
               }}
